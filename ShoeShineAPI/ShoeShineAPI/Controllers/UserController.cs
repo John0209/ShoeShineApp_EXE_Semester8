@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ShoeShineAPI.Service.Service.IService;
 
 namespace ShoeShineAPI.Controllers
 {
@@ -7,8 +8,15 @@ namespace ShoeShineAPI.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
-		[HttpGet]
-		public IActionResult GetUser()
+		IUserService _user;
+
+		public UserController(IUserService user)
+		{
+			_user = user;
+		}
+
+		[HttpPost]
+		public IActionResult CheckLogin(string account, string password)
 		{
 			return Ok();
 		}

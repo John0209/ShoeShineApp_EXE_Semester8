@@ -1273,7 +1273,9 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.10",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.10"
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.10",
+          "ShoeShineAPI.Core": "1.0.0",
+          "ShoeShineAPI.Infracstructure": "1.0.0"
         },
         "compile": {
           "bin/placeholder/ShoeShineAPI.Service.dll": {}
@@ -3872,5 +3874,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

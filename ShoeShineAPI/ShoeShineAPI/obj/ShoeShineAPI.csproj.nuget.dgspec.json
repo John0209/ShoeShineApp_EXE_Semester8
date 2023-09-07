@@ -163,7 +163,14 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj": {
+                "projectPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj"
+              },
+              "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj": {
+                "projectPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

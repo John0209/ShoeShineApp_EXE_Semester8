@@ -11,7 +11,9 @@
           "Microsoft.EntityFrameworkCore": "7.0.10",
           "Microsoft.EntityFrameworkCore.Design": "7.0.10",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.10",
-          "Microsoft.EntityFrameworkCore.Tools": "7.0.10"
+          "Microsoft.EntityFrameworkCore.Tools": "7.0.10",
+          "ShoeShineAPI.Core": "1.0.0",
+          "ShoeShineAPI.Infracstructure": "1.0.0"
         },
         "runtime": {
           "ShoeShineAPI.Service.dll": {}
@@ -699,6 +701,21 @@
             "fileVersion": "5.0.20.51904"
           }
         }
+      },
+      "ShoeShineAPI.Core/1.0.0": {
+        "runtime": {
+          "ShoeShineAPI.Core.dll": {}
+        }
+      },
+      "ShoeShineAPI.Infracstructure/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.10",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.10",
+          "ShoeShineAPI.Core": "1.0.0"
+        },
+        "runtime": {
+          "ShoeShineAPI.Infracstructure.dll": {}
+        }
       }
     }
   },
@@ -1183,6 +1200,16 @@
       "sha512": "sha512-c1ho9WU9ZxMZawML+ssPKZfdnrg/OjR3pe0m9v8230z3acqphwvPJqzAkH54xRYm5ntZHGG1EPP3sux9H3qSPg==",
       "path": "system.windows.extensions/5.0.0",
       "hashPath": "system.windows.extensions.5.0.0.nupkg.sha512"
+    },
+    "ShoeShineAPI.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ShoeShineAPI.Infracstructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

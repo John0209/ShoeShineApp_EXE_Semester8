@@ -20,7 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Service\IService\" />
+    <ProjectReference Include="..\ShoeShineAPI.Core\ShoeShineAPI.Core.csproj" />
+    <ProjectReference Include="..\ShoeShineAPI.Infracstructure\ShoeShineAPI.Infracstructure.csproj" />
   </ItemGroup>
 
 </Project>
