@@ -1,4 +1,6 @@
-﻿using ShoeShineAPI.Core.IRepositories;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
+using ShoeShineAPI.Core.IRepositories;
 using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Service.Inheritance_Class;
 using ShoeShineAPI.Service.Service.IService;
@@ -13,10 +15,19 @@ namespace ShoeShineAPI.Service.Service
 	public class UserService : CommonAbstract<User>, IUserService
 	{
 		IUnitRepository _unit;
-
-		public UserService(IUnitRepository unit)
+		private readonly IConfiguration _configuration ;
+		private readonly IMemoryCache _memoryCache;
+		public UserService(IUnitRepository unit, IConfiguration configuration, IMemoryCache memoryCache)
 		{
 			_unit = unit;
+			_configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+			_memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
+			ProvideToken.Initialize(_configuration, _memoryCache);
+		}
+
+		public string CreateToken(Guid userId)
+		{
+			return ProvideToken.Instance.GenerateToken(userId);
 		}
 		public async Task<User?> CheckLogin(string account, string password)
 		{
@@ -26,6 +37,8 @@ namespace ShoeShineAPI.Service.Service
 			if(checkLogin != null) return checkLogin;
 			return null;
 		}
+
+		
 
 		protected override async Task<List<User>> GetAllData()
 		{

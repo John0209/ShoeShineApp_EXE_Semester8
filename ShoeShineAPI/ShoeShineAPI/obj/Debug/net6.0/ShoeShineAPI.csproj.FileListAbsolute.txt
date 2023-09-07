@@ -101,6 +101,7 @@ D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Debug\net6.0\Sh
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Debug\net6.0\Azure.Core.dll
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Debug\net6.0\Azure.Identity.dll
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Debug\net6.0\Humanizer.dll
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll

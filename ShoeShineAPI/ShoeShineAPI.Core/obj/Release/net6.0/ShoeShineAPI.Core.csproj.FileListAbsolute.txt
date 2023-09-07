@@ -10,3 +10,15 @@ D:\Code C#\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.d
 D:\Code C#\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\refint\ShoeShineAPI.Core.dll
 D:\Code C#\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.pdb
 D:\Code C#\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ref\ShoeShineAPI.Core.dll
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\bin\Release\net6.0\ShoeShineAPI.Core.deps.json
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\bin\Release\net6.0\ShoeShineAPI.Core.dll
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\bin\Release\net6.0\ShoeShineAPI.Core.pdb
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.csproj.AssemblyReference.cache
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.AssemblyInfoInputs.cache
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.AssemblyInfo.cs
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.csproj.CoreCompileInputs.cache
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.dll
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\refint\ShoeShineAPI.Core.dll
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.pdb
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ref\ShoeShineAPI.Core.dll
