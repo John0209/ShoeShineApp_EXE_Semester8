@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Code C#\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj",
+      "projectUniqueName": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj",
       "projectName": "ShoeShineAPI.Core",
-      "projectPath": "D:\\Code C#\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj",
+      "projectPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj",
       "packagesPath": "C:\\Users\\VU\\.nuget\\packages\\",
-      "outputPath": "D:\\Code C#\\ShoeShineAPI\\ShoeShineAPI.Core\\obj\\",
+      "outputPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\VU\\AppData\\Roaming\\NuGet\\NuGet.Config",

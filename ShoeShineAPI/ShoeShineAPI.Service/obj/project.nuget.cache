@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TIbDWoDwQM0u8favJZiMYBszrE1hOJcQhNoKQ5lnJERBQrWtGoO1f6ygQJ1J9Rld61xpQwKcuUtjioQMj5IcPw==",
+  "dgSpecHash": "yxbI2RT1O3cwmI+eMVU75pEb2u/4ivgccii3KKDAX687Q+YX3wLmhC5Oh0jbkrKQefu7LL+5aqthLvujCEAv2Q==",
   "success": true,
-  "projectFilePath": "D:\\Code C#\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj",
+  "projectFilePath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\VU\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\VU\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
