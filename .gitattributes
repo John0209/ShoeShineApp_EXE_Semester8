@@ -1,2 +1,116 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Binaries
+bin/
+obj/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Visual Studio code files
+.vscode/
+
+# Rider files
+.idea/
+
+# User-specific Visual Studio files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Packages
+packages/
+
+# MSBuild
+msbuild.log
+msbuild*.binlog
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Visual Studio for Mac
+.vscode/
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# JetBrains Rider
+.idea/
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/.name
+
+# User-specific files
+.idea/*workspace.xml
+.idea/*tasks.xml
+.idea/*.iml
+.idea/modules/*.iml
+.idea/*.html
+.idea/*.js
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio for Mac user-specific files
+.vscode/
+.idea/
+
+# Rider
+.idea/
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/.name
+.idea/.idea.*.sln.iml
+.idea/modules/*.iml
+.idea/*.sln.iml
+
+# User-specific files
+.idea/*workspace.xml
+.idea/*tasks.xml
+.idea/*.iml
+.idea/modules/*.iml
+.idea/*.html
+.idea/*.js
+# Ignore .vsidx files
+*.vsidx
