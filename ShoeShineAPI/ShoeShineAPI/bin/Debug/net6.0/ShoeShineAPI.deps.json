@@ -768,7 +768,9 @@
       "ShoeShineAPI.Service/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.10",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.10"
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.10",
+          "ShoeShineAPI.Core": "1.0.0",
+          "ShoeShineAPI.Infracstructure": "1.0.0"
         },
         "runtime": {
           "ShoeShineAPI.Service.dll": {}
