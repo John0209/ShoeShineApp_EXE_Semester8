@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Service.Inheritance_Class
 {
-	public abstract class CommonAbstract<T> where T : class
+	public abstract class CommonAbstract<T> where T : class 
 	{
 		protected abstract Task<List<T>> GetAllData();
+
 	}
 }
