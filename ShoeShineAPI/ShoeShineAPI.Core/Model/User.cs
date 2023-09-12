@@ -8,7 +8,7 @@ namespace ShoeShineAPI.Core.Model
 {
 	public class User
 	{
-		public Guid UserId { get; set; }
+		public Guid UserId { get; set; }// Primary Key
 		public string UserName { get; set; } = string.Empty;
 		public string UserPhone { get; set; } = string.Empty;
 		public string UserEmail { get; set; } = string.Empty;
@@ -18,6 +18,9 @@ namespace ShoeShineAPI.Core.Model
 		public bool IsUserStatus { get; set; } =true;
 		// Foreign Key
 		public int RoleId { get; set; } // Table Role
+		// Relationship
+		public ICollection<Comment>? Comments { get; set; }
+		public Role? Role { get; set; }
 
 	}
 }

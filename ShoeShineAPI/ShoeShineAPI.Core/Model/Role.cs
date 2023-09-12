@@ -8,7 +8,9 @@ namespace ShoeShineAPI.Core.Model
 {
 	public class Role
 	{
-		public int RoleId { get; set; }
+		public int RoleId { get; set; }// Primary Key
 		public string RoleName { get; set; } = string.Empty;
+		// Relationship
+		public ICollection<User>? Users { get; set; }
 	}
 }
