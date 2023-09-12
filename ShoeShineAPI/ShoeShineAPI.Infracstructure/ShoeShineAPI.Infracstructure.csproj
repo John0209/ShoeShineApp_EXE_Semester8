@@ -23,4 +23,8 @@
     <ProjectReference Include="..\ShoeShineAPI.Core\ShoeShineAPI.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

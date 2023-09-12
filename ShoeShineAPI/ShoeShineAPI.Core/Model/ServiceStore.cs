@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class Image
+	public class ServiceStore
 	{
-		public int ImageId { get; set; }// Primary Key
-		public string ImageURL { get; set; }= string.Empty;
+		public int ServiceStoreId { get; set; }// Primary Key
 		// Foreign Key
-		public int ProductId { get; set; } // Table Product
+		public int ServiceId { get; set; } // Table Service
 		public int StoreId { get; set; } // Table Store
 		// Relationship
 		public Store? Store { get; set; }
-		public Product? Product { get; set; }
+		public Service? Service { get; set; }
 	}
 }

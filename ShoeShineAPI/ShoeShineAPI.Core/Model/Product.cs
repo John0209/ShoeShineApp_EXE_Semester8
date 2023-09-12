@@ -8,7 +8,7 @@ namespace ShoeShineAPI.Core.Model
 {
 	public class Product
 	{
-		public int ProductId { get; set; }
+		public int ProductId { get; set; }// Primary Key
 		public string ProductName { get; set; } = string.Empty;
 		public string ProductDescription { get; set; } =string.Empty;
 		public int ProductQuantity { get; set; }
@@ -17,6 +17,9 @@ namespace ShoeShineAPI.Core.Model
 		public bool IsProductStatus { get; set; } = true;
 		// Foreign Key
 		public int CategoryId { get; set; } // Table Category
-		public int ImageId { get; set; } // Table Image
+		// Relationship
+		public ICollection<Comment>? Comments { get; set; }
+		public ICollection<Image>? Images { get; set; }
+		public Category? Category { get; set; }
 	}
 }
