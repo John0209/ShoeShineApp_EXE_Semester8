@@ -9,7 +9,7 @@ namespace ShoeShineAPI.Service.Inheritance_Class
 {
 	public abstract class CommonAbstract<T> where T : class 
 	{
-		protected abstract Task<List<T>> GetAllData();
+		protected abstract Task<IEnumerable<T>> GetAllData();
 
 	}
 }

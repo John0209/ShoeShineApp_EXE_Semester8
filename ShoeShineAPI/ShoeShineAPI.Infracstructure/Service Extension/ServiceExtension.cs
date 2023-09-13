@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShoeShineAPI.Core.IRepositories;
+using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Infracstructure.DatabaseConnect;
 using ShoeShineAPI.Infracstructure.Repositories;
 using System;
@@ -29,6 +30,10 @@ public static class ServiceExtension
 		services.AddScoped<IRoleRepository , RoleRepository>();
 		services.AddScoped<IStoreRepository, StoreRepository>();
 		services.AddScoped<IUserRepository, UserRepository>();
+		services.AddScoped<IServiceRepository, ServiceRepository>();
+		services.AddScoped<IServiceStoreRepository, ServiceStoreRepository>();
+		services.AddScoped<ICategoryStoreRepository, CategoryStoreRepository>();
+		services.AddScoped<IImageCommentRepository, ImageCommentRepository>();
 		return services;
 	}
 }

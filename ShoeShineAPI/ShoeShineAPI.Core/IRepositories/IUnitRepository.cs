@@ -15,6 +15,10 @@ namespace ShoeShineAPI.Core.IRepositories
 		IRoleRepository RoleRepository { get; }
 		IStoreRepository StoreRepository { get; }
 		IUserRepository UserRepository { get; }
+		IServiceRepository ServiceRepository { get; }
+		IServiceStoreRepository ServiceStoreRepository { get; }
+		IImageCommentRepository ImageCommentRepository { get; }
+		ICategoryStoreRepository CategoryStoreRepository { get; }
 		int Save();
 	}
 }
