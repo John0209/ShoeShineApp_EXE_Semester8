@@ -25,9 +25,16 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 
 		public IUserRepository UserRepository { get; }
 
-		public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository,
-			ICommentRepository commentRepository, IImageRepository imageRepository, IProductRepository productRepository, 
-			IRoleRepository roleRepository, IStoreRepository storeRepository, IUserRepository userRepository)
+		public IServiceRepository ServiceRepository { get; }
+		public IServiceStoreRepository ServiceStoreRepository { get; }
+		public IImageCommentRepository ImageCommentRepository { get; }
+		public ICategoryStoreRepository CategoryStoreRepository { get; }
+
+		public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository, 
+			ICommentRepository commentRepository, IImageRepository imageRepository, IProductRepository productRepository
+			, IRoleRepository roleRepository, IStoreRepository storeRepository, IUserRepository userRepository,
+			IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository, 
+			IImageCommentRepository imageCommentRepository, ICategoryStoreRepository categoryStoreRepository)
 		{
 			_dbContextClass = dbContextClass;
 			CategoryRepository = categoryRepository;
@@ -37,6 +44,10 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			RoleRepository = roleRepository;
 			StoreRepository = storeRepository;
 			UserRepository = userRepository;
+			ServiceRepository = serviceRepository;
+			ServiceStoreRepository = serviceStoreRepository;
+			ImageCommentRepository = imageCommentRepository;
+			CategoryStoreRepository = categoryStoreRepository;
 		}
 
 		public int Save()

@@ -10,9 +10,9 @@ namespace ShoeShineAPI.Core.IRepositories
 	{
 		Task<T> GetById(Guid id);
 		Task<T> GetById(int id);
-		Task<List<T>> GetAll();
+		Task<IEnumerable<T>> GetAll();
 		Task Add(T entity);
-		Task AddList(List<T> entities);
+		Task AddList(IEnumerable<T> entities);
 		void Remove(T entity);
 		void Update(T entity);
 	}

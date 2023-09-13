@@ -21,7 +21,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			await _dbContext.Set<T>().AddAsync(entity);
 		}
 
-		public async Task AddList(List<T> entities)
+		public async Task AddList(IEnumerable<T> entities)
 		{
 			await _dbContext.Set<T>().AddRangeAsync(entities);
 		}
@@ -31,7 +31,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			 _dbContext.Set<T>().Remove(entity);
 		}
 
-		public async Task<List<T>> GetAll()
+		public async Task<IEnumerable<T>> GetAll()
 		{
 			return await _dbContext.Set<T>().ToListAsync();
 		}
