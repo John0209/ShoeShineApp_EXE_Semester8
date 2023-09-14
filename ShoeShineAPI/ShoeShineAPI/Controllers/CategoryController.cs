@@ -20,7 +20,7 @@ namespace ShoeShineAPI.Controllers
 			_category = category;
 			_categoryStore = categoryStore;
 		}
-		[HttpGet("get-category-by-store-id")]
+		[HttpGet("get-category-of-store-by-id")]
 		public async Task<IActionResult> GetCategoryByStoreId(int storeId)
 		{
 			var _categoryStores = await _categoryStore.GetCategoriesStoreAsync();
