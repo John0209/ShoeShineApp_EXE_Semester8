@@ -21,7 +21,7 @@ namespace ShoeShineAPI.Controllers
 			_serviceStore = serviceStore;
 		}
 
-		[HttpGet("get-service-by-store-id")]
+		[HttpGet("get-service-of-store-by-id")]
 		public async Task<IActionResult> GetServiceByStoreId(int storeId)
 		{
 			var serviceStores= await _serviceStore.GetServiceStoreAsync();
