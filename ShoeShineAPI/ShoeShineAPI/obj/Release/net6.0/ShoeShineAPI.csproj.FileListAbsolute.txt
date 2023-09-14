@@ -185,3 +185,5 @@ D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\obj\Release\net6.0\
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\obj\Release\net6.0\ShoeShineAPI.pdb
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\obj\Release\net6.0\ShoeShineAPI.genruntimeconfig.cache
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\obj\Release\net6.0\ref\ShoeShineAPI.dll
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Release\net6.0\AutoMapper.dll
+D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI\bin\Release\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

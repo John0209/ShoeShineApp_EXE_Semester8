@@ -19,7 +19,13 @@ namespace ShoeShineAPI.Service.Service
 			_unit = unit;
 		}
 
-		protected override async Task<IEnumerable<Core.Model.Store>> GetAllData()
+		public async Task<IEnumerable<Store>> GetStoresAsync()
+		{
+			var stores= await GetAllDataAsync();
+			return stores;
+		}
+
+		protected override async Task<IEnumerable<Core.Model.Store>> GetAllDataAsync()
 		{
 			return await _unit.StoreRepository.GetAll();
 		}

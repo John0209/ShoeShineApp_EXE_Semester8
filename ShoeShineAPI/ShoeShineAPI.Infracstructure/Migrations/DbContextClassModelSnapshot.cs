@@ -216,6 +216,9 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
+                    b.Property<float>("ServicePrice")
+                        .HasColumnType("real");
+
                     b.HasKey("ServiceId");
 
                     b.ToTable("Service", (string)null);
@@ -258,6 +261,10 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Property<string>("StoreAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("StoreDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StoreName")
                         .IsRequired()

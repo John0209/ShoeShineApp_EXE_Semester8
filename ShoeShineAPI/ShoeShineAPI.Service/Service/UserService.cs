@@ -31,16 +31,14 @@ namespace ShoeShineAPI.Service.Service
 		}
 		public async Task<User?> CheckLogin(string account, string password)
 		{
-			IEnumerable<User> users =await GetAllData();
+			IEnumerable<User> users =await GetAllDataAsync();
 			var checkLogin= (from u in users where u.UserAccount== account && u.UserPassword==password select u)
 							.FirstOrDefault();
 			if(checkLogin != null) return checkLogin;
 			return null;
 		}
 
-		
-
-		protected override async Task<IEnumerable<User>> GetAllData()
+		protected override async Task<IEnumerable<User>> GetAllDataAsync()
 		{
 			return await _unit.UserRepository.GetAll();
 		}
