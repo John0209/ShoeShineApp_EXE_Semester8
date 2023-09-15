@@ -33,7 +33,7 @@ public class UserController : ControllerBase
 		}
 		return BadRequest("Login failed");
 	}
-	[HttpGet]
+	[HttpGet("get-new-guid")]
 	public IActionResult GetGuid()
 	{
 		var guid = Guid.NewGuid();

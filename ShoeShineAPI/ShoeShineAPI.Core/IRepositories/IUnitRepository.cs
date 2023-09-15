@@ -19,6 +19,8 @@ namespace ShoeShineAPI.Core.IRepositories
 		IServiceStoreRepository ServiceStoreRepository { get; }
 		IImageCommentRepository ImageCommentRepository { get; }
 		ICategoryStoreRepository CategoryStoreRepository { get; }
+		IRatingCommentRepository RatingCommentRepository { get; }
+		IRatingStoreRepository RatingStoreRepository { get; }
 		int Save();
 	}
 }

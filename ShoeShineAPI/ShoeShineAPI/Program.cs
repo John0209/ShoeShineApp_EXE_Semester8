@@ -4,9 +4,8 @@ using ShoeShineAPI.Service.Service.IService;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
-using Microsoft.Extensions.Configuration;
-using ShoeShineAPI.Core.IRepositories;
-using ShoeShineAPI.Infracstructure.Repositories;
+using AutoMapper;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +24,10 @@ builder.Services.AddScoped<ICategoryStoreService, CategoryStoreService>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceStoreService, ServiceStoreService>();
 builder.Services.AddScoped<IStoreService, StoreService>();
+builder.Services.AddScoped<IRatingStoreService, RatingStoreService>();
+builder.Services.AddScoped<IRatingCommentService, RatingCommentService>();
+// Mapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // Token
 var serect =builder.Configuration["AppSettings:SecretKey"];
 var key = Encoding.ASCII.GetBytes(serect);
