@@ -24,6 +24,8 @@ builder.Services.AddScoped<ICategoryStoreService, CategoryStoreService>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceStoreService, ServiceStoreService>();
 builder.Services.AddScoped<IStoreService, StoreService>();
+builder.Services.AddScoped<IRatingStoreService, RatingStoreService>();
+builder.Services.AddScoped<IRatingCommentService, RatingCommentService>();
 // Mapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // Token
