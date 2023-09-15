@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShoeShineAPI.Infracstructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDbInit : Migration
+    public partial class AddDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,6 +23,32 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RatingComment",
+                columns: table => new
+                {
+                    RatingCommentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RatingCommentScale = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RatingComment", x => x.RatingCommentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RatingStores",
+                columns: table => new
+                {
+                    RatingStoresId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RatingStoreScale = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RatingStores", x => x.RatingStoresId);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,26 +71,12 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     ServiceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ServiceName = table.Column<string>(type: "varchar(50)", nullable: false),
+                    ServicePrice = table.Column<float>(type: "real", nullable: false),
                     IsServiceStatus = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Service", x => x.ServiceId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Store",
-                columns: table => new
-                {
-                    StoreId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StoreName = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    StoreAddress = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    IsStoreStatus = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Store", x => x.StoreId);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,6 +101,29 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Store",
+                columns: table => new
+                {
+                    StoreId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StoreName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    StoreAddress = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    StoreDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsStoreStatus = table.Column<bool>(type: "bit", nullable: false),
+                    RatingStoresId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Store", x => x.StoreId);
+                    table.ForeignKey(
+                        name: "FK_Rating_Store",
+                        column: x => x.RatingStoresId,
+                        principalTable: "RatingStores",
+                        principalColumn: "RatingStoresId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -144,32 +179,6 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ServiceStore",
-                columns: table => new
-                {
-                    ServiceStoreId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ServiceId = table.Column<int>(type: "int", nullable: false),
-                    StoreId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ServiceStore", x => x.ServiceStoreId);
-                    table.ForeignKey(
-                        name: "FK_ServiceStore_Service_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Service",
-                        principalColumn: "ServiceId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ServiceStore_Store_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Store",
-                        principalColumn: "StoreId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Image",
                 columns: table => new
                 {
@@ -197,6 +206,32 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ServiceStore",
+                columns: table => new
+                {
+                    ServiceStoreId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    StoreId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceStore", x => x.ServiceStoreId);
+                    table.ForeignKey(
+                        name: "FK_ServiceStore_Service_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Service",
+                        principalColumn: "ServiceId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ServiceStore_Store_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "Store",
+                        principalColumn: "StoreId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comment",
                 columns: table => new
                 {
@@ -205,7 +240,8 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     Content = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    StoreId = table.Column<int>(type: "int", nullable: false)
+                    StoreId = table.Column<int>(type: "int", nullable: false),
+                    RatingCommentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -227,6 +263,12 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Rating_Comment",
+                        column: x => x.RatingCommentId,
+                        principalTable: "RatingComment",
+                        principalColumn: "RatingCommentId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -264,6 +306,12 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "IX_Comment_ProductId",
                 table: "Comment",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comment_RatingCommentId",
+                table: "Comment",
+                column: "RatingCommentId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_StoreId",
@@ -306,6 +354,12 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Store_RatingStoresId",
+                table: "Store",
+                column: "RatingStoresId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_RoleId",
                 table: "User",
                 column: "RoleId");
@@ -342,7 +396,13 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "User");
 
             migrationBuilder.DropTable(
+                name: "RatingComment");
+
+            migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "RatingStores");
 
             migrationBuilder.DropTable(
                 name: "Role");

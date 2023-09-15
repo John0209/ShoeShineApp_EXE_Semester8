@@ -11,13 +11,15 @@ namespace ShoeShineAPI.Core.Model
 		public int StoreId { get; set; }// Primary Key
 		public string StoreName { get; set; } =string.Empty;
 		public string StoreAddress { get; set; } =string.Empty;
+		public string StoreDescription { get; set; } = string.Empty;
 		public bool IsStoreStatus { get; set; } = true;
 		//Foreign Key
-
-		// Relationship
+		public int RatingStoresId { get; set; }// Table Rating
+											  // Relationship
 		public ICollection<Comment>? Comments { get; set; }
 		public ICollection<Image>? Images { get; set; }
 		public ICollection<ServiceStore>? ServiceStores { get; set; }
 		public ICollection<CategoryStore>? CategoryStores { get; set; }
+		public virtual RatingStores? RatingStores { get; set; }
 	}
 }

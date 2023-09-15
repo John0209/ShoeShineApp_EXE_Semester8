@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
+using ShoeShineAPI.Core.DTOs;
+using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Service.Service.IService;
 
 namespace ShoeShineAPI.Controllers;
@@ -11,10 +14,12 @@ namespace ShoeShineAPI.Controllers;
 public class UserController : ControllerBase
 {
 	IUserService _user;
+	IMapper _map;
 
-	public UserController(IUserService user)
+	public UserController(IUserService user, IMapper map)
 	{
 		_user = user;
+		_map = map;
 	}
 
 	[HttpPost("login")]
@@ -28,12 +33,23 @@ public class UserController : ControllerBase
 		}
 		return BadRequest("Login failed");
 	}
-	//[HttpGet]
-	//public IActionResult GetGuid()
-	//{
-	//	var guid = Guid.NewGuid();
-	//	return Ok(guid);
-	//}
+	[HttpGet]
+	public IActionResult GetGuid()
+	{
+		var guid = Guid.NewGuid();
+		return Ok(guid);
+	}
+	[HttpGet("get-all")]
+	public async Task<IActionResult> GetAll()
+	{
+		var users = await _user.GetUserAsnyc();
+		if (users.Any())
+		{
+			var userMapper = _map.Map<IEnumerable<UserDTO>>(users);
+			return Ok(userMapper);
+		}
+		return BadRequest("User Data Is Empty");
+	}
 }
 
 
