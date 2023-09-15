@@ -13,5 +13,7 @@ namespace ShoeShineAPI.Core.DTOs
 		public string StoreAddress { get; set; } = string.Empty;
 		public string StoreDescription { get; set; } = string.Empty;
 		public bool IsStoreStatus { get; set; } = true;
-	}
+        public string ImageUrl { get; set; } = string.Empty;
+        public int RatingStoreScale { get; set; }
+    }
 }
