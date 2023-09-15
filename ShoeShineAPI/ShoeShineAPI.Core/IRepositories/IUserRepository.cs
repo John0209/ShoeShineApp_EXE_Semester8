@@ -9,5 +9,6 @@ namespace ShoeShineAPI.Core.IRepositories
 {
 	public interface IUserRepository : IGenericRepository<User>
 	{
-	}
+        Task<User?> GetUserByEmailAsync(string email);
+    }
 }

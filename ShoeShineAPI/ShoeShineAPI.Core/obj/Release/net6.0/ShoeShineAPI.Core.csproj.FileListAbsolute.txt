@@ -22,3 +22,14 @@ D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\ne
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\refint\ShoeShineAPI.Core.dll
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.pdb
 D:\Code C#\ShoeShine_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ref\ShoeShineAPI.Core.dll
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\bin\Release\net6.0\ShoeShineAPI.Core.deps.json
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\bin\Release\net6.0\ShoeShineAPI.Core.dll
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\bin\Release\net6.0\ShoeShineAPI.Core.pdb
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.AssemblyInfoInputs.cache
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.AssemblyInfo.cs
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.csproj.CoreCompileInputs.cache
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.dll
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\refint\ShoeShineAPI.Core.dll
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ShoeShineAPI.Core.pdb
+C:\Users\nhant\OneDrive\Tài liệu\GitHub\ShoeShineApp_EXE_Semester8\ShoeShineAPI\ShoeShineAPI.Core\obj\Release\net6.0\ref\ShoeShineAPI.Core.dll

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj": {}
+    "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj": {}
   },
   "projects": {
-    "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj": {
+    "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj",
+        "projectUniqueName": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj",
         "projectName": "ShoeShineAPI.Core",
-        "projectPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj",
-        "packagesPath": "C:\\Users\\VU\\.nuget\\packages\\",
-        "outputPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\obj\\",
+        "projectPath": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj",
+        "packagesPath": "C:\\Users\\nhant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\VU\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nhant\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,21 +55,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj": {
+    "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj",
+        "projectUniqueName": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj",
         "projectName": "ShoeShineAPI.Infracstructure",
-        "projectPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj",
-        "packagesPath": "C:\\Users\\VU\\.nuget\\packages\\",
-        "outputPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\obj\\",
+        "projectPath": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj",
+        "packagesPath": "C:\\Users\\nhant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\VU\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nhant\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,8 +83,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj": {
-                "projectPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj"
+              "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj": {
+                "projectPath": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj"
               }
             }
           }
@@ -136,21 +136,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj": {
+    "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj",
+        "projectUniqueName": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj",
         "projectName": "ShoeShineAPI.Service",
-        "projectPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj",
-        "packagesPath": "C:\\Users\\VU\\.nuget\\packages\\",
-        "outputPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\obj\\",
+        "projectPath": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\ShoeShineAPI.Service.csproj",
+        "packagesPath": "C:\\Users\\nhant\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\VU\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nhant\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -164,11 +164,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj": {
-                "projectPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj"
+              "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj": {
+                "projectPath": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Core\\ShoeShineAPI.Core.csproj"
               },
-              "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj": {
-                "projectPath": "D:\\Code C#\\ShoeShine_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj"
+              "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj": {
+                "projectPath": "C:\\Users\\nhant\\OneDrive\\Tài liệu\\GitHub\\ShoeShineApp_EXE_Semester8\\ShoeShineAPI\\ShoeShineAPI.Infracstructure\\ShoeShineAPI.Infracstructure.csproj"
               }
             }
           }
@@ -232,7 +232,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
