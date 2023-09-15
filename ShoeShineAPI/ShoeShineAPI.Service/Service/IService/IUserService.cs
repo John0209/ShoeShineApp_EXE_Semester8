@@ -1,5 +1,4 @@
-﻿using ShoeShineAPI.Core.DTOs;
-using ShoeShineAPI.Core.Model;
+﻿using ShoeShineAPI.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,6 @@ namespace ShoeShineAPI.Service.Service.IService
 	public interface IUserService
 	{
 		public Task<User?> CheckLogin(string account, string password);
-        Task<UserDTO> RegisterUserAsync(UserRegistrationDTO userRegistrationDTO);
-        public string CreateToken(Guid userId);
+		public string CreateToken(Guid userId);
 	}
 }
