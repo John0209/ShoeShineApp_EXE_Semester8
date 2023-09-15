@@ -12,6 +12,7 @@ namespace ShoeShineAPI.Mapper
 			CreateMap<Store,StoreDTO>().ReverseMap();
 			CreateMap<ServiceDB, ServiceDTO>().ReverseMap();
 			CreateMap<Category, CategoryDTO>().ReverseMap();
+			CreateMap<User, UserDTO>().ReverseMap();
 		}
 	}
 }

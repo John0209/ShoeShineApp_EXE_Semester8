@@ -20,7 +20,7 @@ namespace ShoeShineAPI.Core.Model
 		public int RoleId { get; set; } // Table Role
 		// Relationship
 		public ICollection<Comment>? Comments { get; set; }
-		public Role? Role { get; set; }
+		public virtual Role? Role { get; set; }
 
 	}
 }

@@ -42,5 +42,11 @@ namespace ShoeShineAPI.Service.Service
 		{
 			return await _unit.UserRepository.GetAll();
 		}
+
+		public async Task<IEnumerable<User>> GetUserAsnyc()
+		{
+			var users= await GetAllDataAsync();
+			return users;
+		}
 	}
 }
