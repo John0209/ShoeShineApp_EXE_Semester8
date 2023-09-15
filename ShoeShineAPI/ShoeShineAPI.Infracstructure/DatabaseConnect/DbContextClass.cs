@@ -30,6 +30,8 @@ public class DbContextClass: DbContext
 	public DbSet<ImageComment> ImageComment { get; set; }
 	public DbSet<Service> Service { get; set; }
 	public DbSet<ServiceStore> ServiceStore { get; set; }
+	public DbSet<RatingComment> RatingComment { get; set; }
+	public DbSet<RatingStores> RatingStores { get; set; }
 	#endregion
 	protected override void OnModelCreating(ModelBuilder model)
 	{
@@ -64,6 +66,8 @@ public class DbContextClass: DbContext
 			e.HasOne(x=>x.User).WithMany(x=> x.Comments).HasForeignKey(x=>x.UserId);
 			e.HasOne(x => x.Store).WithMany(x => x.Comments).HasForeignKey(x => x.StoreId);
 			e.HasOne(x => x.Product).WithMany(x => x.Comments).HasForeignKey(x => x.ProductId);
+			e.HasOne(x => x.RatingComment).WithOne(x => x.Comment).HasForeignKey<Comment>(x => x.RatingCommentId)
+			.HasConstraintName("FK_Rating_Comment"); ;
 			e.Property(x => x.Content).HasColumnType("nvarchar(200)").IsRequired();
 		});
 		model.Entity<Image>(e =>
@@ -78,6 +82,8 @@ public class DbContextClass: DbContext
 		{
 			e.ToTable(nameof(Store));
 			e.HasKey(x => x.StoreId);
+			e.HasOne(x => x.RatingStores).WithOne(x => x.Store).HasForeignKey<Store>(x => x.RatingStoresId)
+			.HasConstraintName("FK_Rating_Store");
 			e.Property(x => x.StoreName).HasColumnType("nvarchar(50)").IsRequired();
 			e.Property(x => x.StoreAddress).HasColumnType("nvarchar(50)").IsRequired();
 		});
@@ -114,6 +120,16 @@ public class DbContextClass: DbContext
 			e.HasKey(x => x.ServiceStoreId);
 			e.HasOne(x => x.Service).WithMany(x => x.ServiceStores).HasForeignKey(x => x.ServiceId);
 			e.HasOne(x => x.Store).WithMany(x => x.ServiceStores).HasForeignKey(x => x.StoreId);
+		});
+		model.Entity<RatingStores>(e =>
+		{
+			e.ToTable(nameof(RatingStores));
+			e.HasKey(x => x.RatingStoresId);
+		});
+		model.Entity<RatingComment>(e =>
+		{
+			e.ToTable(nameof(RatingComment));
+			e.HasKey(x => x.RatingCommentId);
 		});
 	}
 

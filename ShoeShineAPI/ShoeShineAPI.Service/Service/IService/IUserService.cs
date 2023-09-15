@@ -11,5 +11,6 @@ namespace ShoeShineAPI.Service.Service.IService
 	{
 		public Task<User?> CheckLogin(string account, string password);
 		public string CreateToken(Guid userId);
+		public Task<IEnumerable<User>> GetUserAsnyc();
 	}
 }

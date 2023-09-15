@@ -13,7 +13,7 @@ namespace ShoeShineAPI.Core.Model
 		public int ServiceId { get; set; } // Table Service
 		public int StoreId { get; set; } // Table Store
 		// Relationship
-		public Store? Store { get; set; }
-		public Service? Service { get; set; }
+		public virtual Store? Store { get; set; }
+		public virtual Service? Service { get; set; }
 	}
 }
