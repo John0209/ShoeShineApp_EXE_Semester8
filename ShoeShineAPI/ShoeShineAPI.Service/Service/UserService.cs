@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using ShoeShineAPI.Core.DTOs;
 using ShoeShineAPI.Core.IRepositories;
 using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Service.Inheritance_Class;
@@ -37,8 +38,32 @@ namespace ShoeShineAPI.Service.Service
 			if(checkLogin != null) return checkLogin;
 			return null;
 		}
+        public async Task<bool> RegisterUser(RegistrationDTO registrationDTO)
+        {
+            if (await EmailExists(registrationDTO.UserEmail))
+            {
+                return false;
+            }
 
-		protected override async Task<IEnumerable<User>> GetAllDataAsync()
+            if (registrationDTO.UserPassword != registrationDTO.ConfirmPassword)
+            {
+                return false;
+            }
+
+            var newUser = new User
+            {
+                UserId = Guid.NewGuid(),
+                UserName = registrationDTO.UserName,
+                UserEmail = registrationDTO.UserEmail,
+                UserPassword = registrationDTO.UserPassword,
+            };
+
+            await _unit.UserRepository.Add(newUser);
+
+            return true;
+        }
+
+        protected override async Task<IEnumerable<User>> GetAllDataAsync()
 		{
 			return await _unit.UserRepository.GetAll();
 		}
@@ -48,5 +73,10 @@ namespace ShoeShineAPI.Service.Service
 			var users= await GetAllDataAsync();
 			return users;
 		}
-	}
+        private async Task<bool> EmailExists(string email)
+        {
+            IEnumerable<User> users = await GetAllDataAsync();
+            return users.Any(u => u.UserEmail == email);
+        }
+    }
 }

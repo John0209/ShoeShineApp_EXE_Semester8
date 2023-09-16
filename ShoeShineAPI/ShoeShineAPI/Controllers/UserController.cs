@@ -15,14 +15,17 @@ public class UserController : ControllerBase
 {
 	IUserService _user;
 	IMapper _map;
+    private readonly IMemoryCache _memoryCache;
 
-	public UserController(IUserService user, IMapper map)
-	{
-		_user = user;
-		_map = map;
-	}
+    public UserController(IUserService user, IMapper map, IMemoryCache memoryCache)
+    {
+        _user = user;
+        _map = map;
+        _memoryCache = memoryCache; // Tiêm IMemoryCache vào biến _memoryCache
+    }
 
-	[HttpPost("login")]
+
+    [HttpPost("login")]
 	public async Task<IActionResult> Login(string account, string password)
 	{
 		var user=await _user.CheckLogin(account,password);
@@ -39,17 +42,34 @@ public class UserController : ControllerBase
 		var guid = Guid.NewGuid();
 		return Ok(guid);
 	}
-	[HttpGet("get-all")]
-	public async Task<IActionResult> GetAll()
-	{
-		var users = await _user.GetUserAsnyc();
-		if (users.Any())
-		{
-			var userMapper = _map.Map<IEnumerable<UserDTO>>(users);
-			return Ok(userMapper);
-		}
-		return BadRequest("User Data Is Empty");
-	}
+    [HttpGet("get-all")]
+    public async Task<IActionResult> GetAll()
+    {
+        var users = await _user.GetUserAsnyc();
+        if (users != null)
+        {
+            var userMapper = _map.Map<IEnumerable<UserDTO>>(users);
+            if (userMapper.Any())
+            {
+                return Ok(userMapper);
+            }
+        }
+        return BadRequest("User Data Is Empty");
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegistrationDTO registrationDTO)
+    {
+        bool registrationResult = await _user.RegisterUser(registrationDTO);
+        if (registrationResult)
+        {
+            // Registration successful
+            var token = _user.CreateToken(Guid.NewGuid());
+			_memoryCache.Remove("UserCacheKey");
+            return Ok(new { Token = token, UserName = registrationDTO.UserName, UserEmail = registrationDTO.UserEmail, UserPassword = registrationDTO.UserPassword });
+        }
+        return BadRequest("Registration failed. Email already exists or passwords do not match.");
+    }
 }
 
 
