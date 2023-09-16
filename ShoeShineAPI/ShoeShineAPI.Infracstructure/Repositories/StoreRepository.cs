@@ -16,7 +16,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		{
 		}
 
-        public async Task<IEnumerable<Store>> GetAll()
+        public override async Task<IEnumerable<Store>> GetAll()
         {
             return await _dbContext.Set<Store>()
                 .Include(s => s.Images)

@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using SendGrid.Helpers.Errors.Model;
 using ShoeShineAPI.Core.DTOs;
 using ShoeShineAPI.Core.IRepositories;
 using ShoeShineAPI.Core.Model;
@@ -26,9 +28,10 @@ namespace ShoeShineAPI.Service.Service
             ProvideToken.Initialize(_configuration, _memoryCache);
         }
 
-        public string CreateToken(Guid userId)
+        public string CreateToken(Guid userId,string roles)
         {
-            return ProvideToken.Instance.GenerateToken(userId);
+
+            return ProvideToken.Instance.GenerateToken(userId,roles);
         }
 
         public async Task<User?> CheckLogin(string account, string password)
@@ -72,8 +75,7 @@ namespace ShoeShineAPI.Service.Service
 
         public async Task<IEnumerable<User>> GetUserAsnyc()
         {
-            var users = await GetAllDataAsync();
-            return users;
+			return await GetAllDataAsync();
         }
 
         private async Task<bool> EmailExists(string email)
@@ -81,5 +83,12 @@ namespace ShoeShineAPI.Service.Service
             IEnumerable<User> users = await GetAllDataAsync();
             return users.Any(u => u.UserEmail == email);
         }
-    }
+
+		public async Task<User> GetUserById(Guid userId)
+		{
+            var user=await _unit.UserRepository.GetById(userId);
+            if (user != null) return user;
+			throw new NotFoundException("User not found");
+		}
+	}
 }

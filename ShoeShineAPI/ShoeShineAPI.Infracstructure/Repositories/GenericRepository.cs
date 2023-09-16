@@ -31,7 +31,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			 _dbContext.Set<T>().Remove(entity);
 		}
 
-		public async Task<IEnumerable<T>> GetAll()
+		public virtual async Task<IEnumerable<T>> GetAll()
 		{
 			return await _dbContext.Set<T>().ToListAsync();
 		}

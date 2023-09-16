@@ -1,10 +1,12 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using ShoeShineAPI.Core.DTOs;
 using ShoeShineAPI.Core.Model;
+using ShoeShineAPI.Enums;
 using ShoeShineAPI.Service.Service.IService;
 using System;
 using System.Collections.Generic;
@@ -20,21 +22,24 @@ namespace ShoeShineAPI.Controllers
         private readonly IUserService _user;
         private readonly IMapper _map;
         private readonly IMemoryCache _memoryCache;
+        private readonly IRoleService _role;
 
-        public UserController(IUserService user, IMapper map, IMemoryCache memoryCache)
-        {
-            _user = user;
-            _map = map;
-            _memoryCache = memoryCache; 
-        }
+		public UserController(IUserService user, IMapper map, IMemoryCache memoryCache, IRoleService role)
+		{
+			_user = user;
+			_map = map;
+			_memoryCache = memoryCache;
+			_role = role;
+		}
 
-        [HttpPost("login")]
+		[HttpPost("login")]
         public async Task<IActionResult> Login(string account, string password)
         {
             var user = await _user.CheckLogin(account, password);
             if (user != null)
             {
-                var token = _user.CreateToken(user.UserId);
+                var role = await _role.GetRoleById(user.RoleId);
+                var token = _user.CreateToken(user.UserId,role.RoleName);
                 return Ok(token);
             }
             return BadRequest("Login failed");
@@ -46,8 +51,9 @@ namespace ShoeShineAPI.Controllers
             var guid = Guid.NewGuid();
             return Ok(guid);
         }
-
-        [HttpGet("get-all")]
+       
+		[Authorize(Roles = EnumClass.RoleNames.Admin)]
+		[HttpGet("get-all")]
         public async Task<IActionResult> GetAll()
         {
             var users = await _user.GetUserAsnyc();
@@ -68,12 +74,10 @@ namespace ShoeShineAPI.Controllers
             bool registrationResult = await _user.RegisterUser(registrationDTO);
             if (registrationResult)
             {
-                // Registration successful
-                var token = _user.CreateToken(Guid.NewGuid());
-                _memoryCache.Remove("UserCacheKey");
-                return Ok(new { Token = token, UserName = registrationDTO.UserName, UserEmail = registrationDTO.UserEmail, UserPassword = registrationDTO.UserPassword });
+                return Ok("Register Successfully");
             }
             return BadRequest("Registration failed. Email already exists or passwords do not match.");
         }
+
     }
 }
