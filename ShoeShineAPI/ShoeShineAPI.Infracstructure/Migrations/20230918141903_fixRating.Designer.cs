@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoeShineAPI.Infracstructure.DatabaseConnect;
 
@@ -11,9 +12,11 @@ using ShoeShineAPI.Infracstructure.DatabaseConnect;
 namespace ShoeShineAPI.Infracstructure.Migrations
 {
     [DbContext(typeof(DbContextClass))]
-    partial class DbContextClassModelSnapshot : ModelSnapshot
+    [Migration("20230918141903_fixRating")]
+    partial class fixRating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,6 +106,33 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("Comment", (string)null);
                 });
 
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Image", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
+
+                    b.Property<string>("ImageURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StoreId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ImageId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("StoreId");
+
+                    b.ToTable("Image", (string)null);
+                });
+
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ImageComment", b =>
                 {
                     b.Property<int>("ImageCommentId")
@@ -123,28 +153,6 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.HasIndex("CommentId");
 
                     b.ToTable("ImageComment", (string)null);
-                });
-
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.ImageStore", b =>
-                {
-                    b.Property<int>("ImageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
-
-                    b.Property<string>("ImageURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ImageId");
-
-                    b.HasIndex("StoreId");
-
-                    b.ToTable("ImageStore", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Product", b =>
@@ -412,6 +420,25 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Image", b =>
+                {
+                    b.HasOne("ShoeShineAPI.Core.Model.Product", "Product")
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShoeShineAPI.Core.Model.Store", "Store")
+                        .WithMany("Images")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Store");
+                });
+
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ImageComment", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Comment", null)
@@ -419,17 +446,6 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.ImageStore", b =>
-                {
-                    b.HasOne("ShoeShineAPI.Core.Model.Store", "Store")
-                        .WithMany("Images")
-                        .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Product", b =>
@@ -500,6 +516,8 @@ namespace ShoeShineAPI.Infracstructure.Migrations
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Product", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingComment", b =>

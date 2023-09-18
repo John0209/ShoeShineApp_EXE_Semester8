@@ -20,7 +20,7 @@ namespace ShoeShineAPI.Core.Model
 		//public int RatingId { get; set; }// Table Rating
 		// Relationship
 		public ICollection<Comment>? Comments { get; set; }
-		public ICollection<Image>? Images { get; set; }
+		//public ICollection<Image>? Images { get; set; }
 		public virtual Category? Category { get; set; }
 
 	}
