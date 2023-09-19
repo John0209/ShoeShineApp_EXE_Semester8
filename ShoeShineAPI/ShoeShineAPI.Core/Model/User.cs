@@ -19,7 +19,7 @@ namespace ShoeShineAPI.Core.Model
 		// Foreign Key
 		public int RoleId { get; set; } // Table Role
 		// Relationship
-		public ICollection<Comment>? Comments { get; set; }
+		public ICollection<CommentStore>? Comments { get; set; }
 		public virtual Role? Role { get; set; }
 
 	}

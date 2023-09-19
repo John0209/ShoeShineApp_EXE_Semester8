@@ -8,7 +8,7 @@ namespace ShoeShineAPI.Core.Model
 {
 	public class ImageStore
 	{
-		public int ImageId { get; set; }// Primary Key
+		public int ImageStoreId { get; set; }// Primary Key
 		public string ImageURL { get; set; }= string.Empty;
 		// Foreign Key
 		public int StoreId { get; set; } // Table Store

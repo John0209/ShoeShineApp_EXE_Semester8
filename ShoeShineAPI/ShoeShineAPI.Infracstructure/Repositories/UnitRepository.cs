@@ -13,7 +13,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		private readonly DbContextClass _dbContextClass;
 		public ICategoryRepository CategoryRepository { get; }
 
-		public ICommentRepository CommentRepository { get; }
+		public ICommentStoreRepository CommentRepository { get; }
 
 		public IImageStoreRepository ImageStoreRepository { get; }
 
@@ -35,7 +35,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		public IRatingStoreRepository RatingStoreRepository => throw new NotImplementedException();
 
 		public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository,
-			ICommentRepository commentRepository, IImageStoreRepository imageRepository, IProductRepository productRepository, 
+			ICommentStoreRepository commentRepository, IImageStoreRepository imageRepository, IProductRepository productRepository, 
 			IRoleRepository roleRepository, IStoreRepository storeRepository, IUserRepository userRepository, 
 			IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository, IImageCommentRepository 
 			imageCommentRepository, ICategoryStoreRepository categoryStoreRepository)

@@ -16,7 +16,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		{
 			_dbContext = context;
 		}
-		public async Task Add(T entity)
+		public virtual async Task Add(T entity)
 		{
 			await _dbContext.Set<T>().AddAsync(entity);
 		}
@@ -26,7 +26,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			await _dbContext.Set<T>().AddRangeAsync(entities);
 		}
 
-		public void Remove(T entity)
+		public virtual void Remove(T entity)
 		{
 			 _dbContext.Set<T>().Remove(entity);
 		}
@@ -36,7 +36,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			return await _dbContext.Set<T>().ToListAsync();
 		}
 
-		public async Task<T> GetById(Guid id)
+		public virtual async Task<T> GetById(Guid id)
 		{
 			T? entity = await _dbContext.Set<T>().FindAsync(id);
 			if (entity == null)
@@ -47,7 +47,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			return entity;
 		}
 
-		public async Task<T> GetById(int id)
+		public virtual async Task<T> GetById(int id)
 		{
 			T? entity = await _dbContext.Set<T>().FindAsync(id);
 			if (entity == null)
@@ -58,7 +58,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			return entity;
 		}
 
-		public void Update(T entity)
+		public virtual void Update(T entity)
 		{
 			_dbContext.Set<T>().Update(entity);
 		}

@@ -24,7 +24,7 @@ public static class ServiceExtension
 		});
 		services.AddScoped<IUnitRepository, UnitRepository>();
 		services.AddScoped<ICategoryRepository, CategoryRepository>();
-		services.AddScoped<ICommentRepository, CommentRepository>();
+		services.AddScoped<ICommentStoreRepository, CommentStoreRepository>();
 		services.AddScoped<IImageStoreRepository, ImageStoreRepository>();
 		services.AddScoped<IProductRepository, ProductRepository>();
 		services.AddScoped<IRoleRepository , RoleRepository>();

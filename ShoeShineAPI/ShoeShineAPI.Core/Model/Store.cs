@@ -16,7 +16,7 @@ namespace ShoeShineAPI.Core.Model
 		//Foreign Key
 		
 		// Relationship
-		public ICollection<Comment>? Comments { get; set; }
+		public ICollection<CommentStore>? Comments { get; set; }
 		public ICollection<ImageStore>? Images { get; set; }
 		public ICollection<ServiceStore>? ServiceStores { get; set; }
 		public ICollection<CategoryStore>? CategoryStores { get; set; }

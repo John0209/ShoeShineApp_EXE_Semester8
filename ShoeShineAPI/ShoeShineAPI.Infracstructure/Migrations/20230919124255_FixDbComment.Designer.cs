@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoeShineAPI.Infracstructure.DatabaseConnect;
 
@@ -11,9 +12,11 @@ using ShoeShineAPI.Infracstructure.DatabaseConnect;
 namespace ShoeShineAPI.Infracstructure.Migrations
 {
     [DbContext(typeof(DbContextClass))]
-    partial class DbContextClassModelSnapshot : ModelSnapshot
+    [Migration("20230919124255_FixDbComment")]
+    partial class FixDbComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,7 +109,10 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageCommentId"));
 
-                    b.Property<int>("CommentStoreId")
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CommentStoreId")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageCommentURL")
@@ -122,11 +128,11 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ImageStore", b =>
                 {
-                    b.Property<int>("ImageStoreId")
+                    b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageStoreId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
 
                     b.Property<string>("ImageURL")
                         .IsRequired()
@@ -135,7 +141,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Property<int>("StoreId")
                         .HasColumnType("int");
 
-                    b.HasKey("ImageStoreId");
+                    b.HasKey("ImageId");
 
                     b.HasIndex("StoreId");
 
@@ -403,9 +409,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.CommentStore", null)
                         .WithMany("ImageComments")
-                        .HasForeignKey("CommentStoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CommentStoreId");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ImageStore", b =>
