@@ -9,7 +9,8 @@ namespace ShoeShineAPI.Core.Model
 	public class RatingStores
 	{
 		public int RatingStoresId { get; set; } // Primary Key
-		public int RatingStoreScale { get; set; } 
+		public int RatingStoreScale { get; set; }
+		public int StoreId { get; set; }// Table Store
 		// Relationship
 		public virtual Store? Store { get; set; }
 	}

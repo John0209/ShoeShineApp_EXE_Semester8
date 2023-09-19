@@ -29,7 +29,7 @@ public class ProvideToken
 			_instance = new ProvideToken(configuration, memoryCache);
 	}
 
-	public virtual string GenerateToken(Guid userId)
+	public virtual string GenerateToken(Guid userId,string roles)
 	{
 		var tokenHandler = new JwtSecurityTokenHandler();
 		var secretKey = _configuration["AppSettings:SecretKey"];
@@ -45,12 +45,18 @@ public class ProvideToken
 			{
             // Thêm các claim cần thiết vào đây (ví dụ: UserId)
             new Claim(ClaimTypes.UserData, userId.ToString()),
+			new Claim(ClaimTypes.Role, roles),
 			}),
 			Expires = DateTime.UtcNow.AddMinutes(10), // Thời gian hiệu lực của token (vd: 30 phút)
 			SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 		};
 
 		var token = tokenHandler.CreateToken(tokenDescriptor);
-		return tokenHandler.WriteToken(token);
+		var tokenString	= tokenHandler.WriteToken(token);
+		
+		// Lưu trữ token trong bộ nhớ
+		_memoryCache.Set(userId.ToString(), tokenString, TimeSpan.FromMinutes(10));
+		
+		return tokenString;
 	}
 }

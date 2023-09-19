@@ -18,8 +18,8 @@ namespace ShoeShineAPI.Core.Context
 		}
 		protected User UserModel => instance.UserModel;
 		protected Category CategoryModel => instance.CategoryModel;
-		protected Comment CommentModel => instance.CommentModel;
-		protected Image ImageModel => instance.ImageModel;
+		protected CommentStore CommentModel => instance.CommentModel;
+		protected ImageStore ImageModel => instance.ImageModel;
 		protected Product ProductModel => instance.ProductModel;
 		protected Role RoleModel => instance.RoleModel;
 		protected Store StoreModel => instance.StoreModel;

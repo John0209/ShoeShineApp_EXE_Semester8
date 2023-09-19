@@ -24,8 +24,8 @@ public static class ServiceExtension
 		});
 		services.AddScoped<IUnitRepository, UnitRepository>();
 		services.AddScoped<ICategoryRepository, CategoryRepository>();
-		services.AddScoped<ICommentRepository, CommentRepository>();
-		services.AddScoped<IImageRepository, ImageRepository>();
+		services.AddScoped<ICommentStoreRepository, CommentStoreRepository>();
+		services.AddScoped<IImageStoreRepository, ImageStoreRepository>();
 		services.AddScoped<IProductRepository, ProductRepository>();
 		services.AddScoped<IRoleRepository , RoleRepository>();
 		services.AddScoped<IStoreRepository, StoreRepository>();
@@ -34,6 +34,8 @@ public static class ServiceExtension
 		services.AddScoped<IServiceStoreRepository, ServiceStoreRepository>();
 		services.AddScoped<ICategoryStoreRepository, CategoryStoreRepository>();
 		services.AddScoped<IImageCommentRepository, ImageCommentRepository>();
+		services.AddScoped<IRatingCommentRepository, RatingCommentRepository>();
+		services.AddScoped<IRatingStoreRepository, RatingStoreRepository>();
 		return services;
 	}
 }

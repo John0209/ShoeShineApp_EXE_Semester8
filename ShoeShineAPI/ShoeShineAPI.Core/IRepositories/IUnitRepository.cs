@@ -9,8 +9,8 @@ namespace ShoeShineAPI.Core.IRepositories
 	public interface IUnitRepository : IDisposable
 	{
 		ICategoryRepository CategoryRepository { get; }
-		ICommentRepository CommentRepository { get; }
-		IImageRepository ImageRepository { get; }
+		ICommentStoreRepository CommentRepository { get; }
+		IImageStoreRepository ImageStoreRepository { get; }
 		IProductRepository ProductRepository { get; }
 		IRoleRepository RoleRepository { get; }
 		IStoreRepository StoreRepository { get; }
@@ -19,6 +19,8 @@ namespace ShoeShineAPI.Core.IRepositories
 		IServiceStoreRepository ServiceStoreRepository { get; }
 		IImageCommentRepository ImageCommentRepository { get; }
 		ICategoryStoreRepository CategoryStoreRepository { get; }
+		IRatingCommentRepository RatingCommentRepository { get; }
+		IRatingStoreRepository RatingStoreRepository { get; }
 		int Save();
 	}
 }

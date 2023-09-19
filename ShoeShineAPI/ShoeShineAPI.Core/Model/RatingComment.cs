@@ -11,6 +11,6 @@ namespace ShoeShineAPI.Core.Model
 		public int RatingCommentId { get; set; } // Primary Key
 		public int RatingCommentScale { get; set; } 
 		// Relationship
-		public virtual Comment? Comment { get; set; }
+		public virtual CommentStore? Comment { get; set; }
 	}
 }

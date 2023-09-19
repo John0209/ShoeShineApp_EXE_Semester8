@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using AutoMapper;
-
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +14,34 @@ builder.Services.AddControllers();
 builder.Services.AddDIServices(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// cài đặt swagger set token
+builder.Services.AddSwaggerGen(c =>
+{
+	c.SwaggerDoc("v1", new OpenApiInfo { Title = "shoeshine", Version = "v1" });
+	// Cấu hình cho OAuth 2.0 (Bearer Token)
+	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+	{
+		Description = "Please Enter The Token To Authenticate The Role",
+		Name = "Authorization",
+		In = ParameterLocation.Header,
+		Type = SecuritySchemeType.Http,
+		Scheme = "Bearer"
+	});
+	c.AddSecurityRequirement(new OpenApiSecurityRequirement
+	{
+		{
+			new OpenApiSecurityScheme
+			{
+				Reference = new OpenApiReference
+				{
+					Type = ReferenceType.SecurityScheme,
+					Id = "Bearer"
+				}
+			},
+			new string[] { }
+		}
+	});
+});
 // Cấu hình Memory Cache
 builder.Services.AddMemoryCache();
 // Service
@@ -24,6 +51,10 @@ builder.Services.AddScoped<ICategoryStoreService, CategoryStoreService>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IServiceStoreService, ServiceStoreService>();
 builder.Services.AddScoped<IStoreService, StoreService>();
+builder.Services.AddScoped<IRatingStoreService, RatingStoreService>();
+builder.Services.AddScoped<IRatingCommentService, RatingCommentService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<ICommentStoreService, CommentStoreService>();
 // Mapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // Token

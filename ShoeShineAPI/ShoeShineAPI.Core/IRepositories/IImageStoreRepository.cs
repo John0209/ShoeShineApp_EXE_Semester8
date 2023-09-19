@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.IRepositories
 {
-	public interface ICommentRepository : IGenericRepository<Comment>
+	public interface IImageStoreRepository : IGenericRepository<ImageStore>
 	{
 	}
 }

@@ -13,9 +13,9 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		private readonly DbContextClass _dbContextClass;
 		public ICategoryRepository CategoryRepository { get; }
 
-		public ICommentRepository CommentRepository { get; }
+		public ICommentStoreRepository CommentRepository { get; }
 
-		public IImageRepository ImageRepository { get; }
+		public IImageStoreRepository ImageStoreRepository { get; }
 
 		public IProductRepository ProductRepository { get; }
 
@@ -30,16 +30,20 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		public IImageCommentRepository ImageCommentRepository { get; }
 		public ICategoryStoreRepository CategoryStoreRepository { get; }
 
-		public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository, 
-			ICommentRepository commentRepository, IImageRepository imageRepository, IProductRepository productRepository
-			, IRoleRepository roleRepository, IStoreRepository storeRepository, IUserRepository userRepository,
-			IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository, 
-			IImageCommentRepository imageCommentRepository, ICategoryStoreRepository categoryStoreRepository)
+		public IRatingCommentRepository RatingCommentRepository => throw new NotImplementedException();
+
+		public IRatingStoreRepository RatingStoreRepository => throw new NotImplementedException();
+
+		public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository,
+			ICommentStoreRepository commentRepository, IImageStoreRepository imageRepository, IProductRepository productRepository, 
+			IRoleRepository roleRepository, IStoreRepository storeRepository, IUserRepository userRepository, 
+			IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository, IImageCommentRepository 
+			imageCommentRepository, ICategoryStoreRepository categoryStoreRepository)
 		{
 			_dbContextClass = dbContextClass;
 			CategoryRepository = categoryRepository;
 			CommentRepository = commentRepository;
-			ImageRepository = imageRepository;
+			ImageStoreRepository = imageRepository;
 			ProductRepository = productRepository;
 			RoleRepository = roleRepository;
 			StoreRepository = storeRepository;
