@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class User
+	public class UserEntity
 	{
 		public Guid UserId { get; set; }// Primary Key
 		public string UserName { get; set; } = string.Empty;
@@ -17,10 +17,10 @@ namespace ShoeShineAPI.Core.Model
 		public string UserPassword { get; set; } = string.Empty;
 		public bool IsUserStatus { get; set; } =true;
 		// Foreign Key
-		public int RoleId { get; set; } // Table Role
+		public int RoleId { get; set; } // Table RoleEntity
 		// Relationship
-		public ICollection<CommentStore>? Comments { get; set; }
-		public virtual Role? Role { get; set; }
+		public ICollection<CommentStoreEntity>? Comments { get; set; }
+		public virtual RoleEntity? Role { get; set; }
 
 	}
 }

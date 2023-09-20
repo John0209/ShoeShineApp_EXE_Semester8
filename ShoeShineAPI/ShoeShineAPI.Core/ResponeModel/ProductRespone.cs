@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.DTOs
 {
-	internal class ImageCommentDTO
+	internal class ProductRespone
 	{
 	}
 }

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.IRepositories
 {
-	public interface ICommentStoreRepository : IGenericRepository<CommentStore>
+
+	public interface ICommentStoreRepository : IGenericRepository<CommentStoreEntity>
 	{
-		public Task<IEnumerable<CommentStore>> GetCommentByStoreId(int StoreId);
+		public Task<IEnumerable<CommentStoreEntity>> GetCommentByStoreId(int StoreId);
 	}
 }

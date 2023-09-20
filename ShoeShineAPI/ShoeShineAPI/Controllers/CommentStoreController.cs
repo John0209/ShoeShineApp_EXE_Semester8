@@ -25,7 +25,7 @@ namespace ShoeShineAPI.Controllers
 			var comment = await _comment.GetCommentByStoreId(storeId);
 			if (comment.Any())
 			{
-				var commentMap = _map.Map<IEnumerable<CommentStoreDTO>>(comment);
+				var commentMap = _map.Map<IEnumerable<CommentStoreRespone>>(comment);
 				return Ok(commentMap);
 			}
 			return BadRequest("Comment Data Is Empty !!!");
@@ -36,7 +36,7 @@ namespace ShoeShineAPI.Controllers
 			var comment = await _comment.GetCommentAsync();
 			if (comment.Any())
 			{
-				var commentMap = _map.Map<IEnumerable<CommentStoreDTO>>(comment);
+				var commentMap = _map.Map<IEnumerable<CommentStoreRespone>>(comment);
 				return Ok(commentMap);
 			}
 			return BadRequest("Comment Data Is Empty");

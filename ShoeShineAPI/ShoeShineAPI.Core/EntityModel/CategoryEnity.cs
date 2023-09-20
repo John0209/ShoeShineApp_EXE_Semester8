@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class Category
+	public class CategoryEntity
 	{
 		public int CategoryId { get; set; }// Primary Key
 		public string CategoryName { get; set; } = string.Empty;
 		public bool IsCategoryStatus { get; set; }
 		// Relationship
-		public ICollection<Product>? Products { get; set; }
-		public ICollection<CategoryStore>? CategoryStores { get; set; }
+		public ICollection<ProductEntity>? Products { get; set; }
+		public ICollection<CategoryStoreEntity>? CategoryStores { get; set; }
 	}
 }

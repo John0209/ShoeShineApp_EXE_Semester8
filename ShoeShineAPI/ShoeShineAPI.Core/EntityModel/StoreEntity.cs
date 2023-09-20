@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class Store
+	public class StoreEntity
 	{
 		public int StoreId { get; set; }// Primary Key
 		public string StoreName { get; set; } =string.Empty;
@@ -16,10 +16,10 @@ namespace ShoeShineAPI.Core.Model
 		//Foreign Key
 		
 		// Relationship
-		public ICollection<CommentStore>? Comments { get; set; }
-		public ICollection<ImageStore>? Images { get; set; }
-		public ICollection<ServiceStore>? ServiceStores { get; set; }
-		public ICollection<CategoryStore>? CategoryStores { get; set; }
-		public virtual RatingStores? RatingStores { get; set; }
+		public ICollection<CommentStoreEntity>? Comments { get; set; }
+		public ICollection<ImageStoreEntity>? Images { get; set; }
+		public ICollection<ServiceStoreEntity>? ServiceStores { get; set; }
+		public ICollection<CategoryStoreEntity>? CategoryStores { get; set; }
+		public virtual RatingStoresEntity? RatingStores { get; set; }
 	}
 }

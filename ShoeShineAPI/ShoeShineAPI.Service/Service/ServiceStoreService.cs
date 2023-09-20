@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Service.Service
 {
-	public class ServiceStoreService : CommonAbstract<ServiceStore>, IServiceStoreService
+	public class ServiceStoreService : CommonAbstract<ServiceStoreEntity>, IServiceStoreService
 	{
 		IUnitRepository _unit;
 
@@ -19,13 +19,13 @@ namespace ShoeShineAPI.Service.Service
 			_unit = unit;
 		}
 
-		public async Task<IEnumerable<ServiceStore>> GetServiceStoreAsync()
+		public async Task<IEnumerable<ServiceStoreEntity>> GetServiceStoreAsync()
 		{
 			var serviceStores= await GetAllDataAsync();
 			return serviceStores;
 		}
 
-		protected override async Task<IEnumerable<Core.Model.ServiceStore>> GetAllDataAsync()
+		protected override async Task<IEnumerable<Core.Model.ServiceStoreEntity>> GetAllDataAsync()
 		{
 			return await _unit.ServiceStoreRepository.GetAll();
 		}

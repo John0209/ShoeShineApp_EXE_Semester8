@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Service.Service
 {
-	public class CategoryService : CommonAbstract<Category>, ICategoryService
+	public class CategoryService : CommonAbstract<CategoryEntity>, ICategoryService
 	{
 		IUnitRepository _unit;
 
@@ -20,13 +20,13 @@ namespace ShoeShineAPI.Service.Service
 			_unit = unit;
 		}
 
-		public async Task<IEnumerable<Category>> GetCategoriesAsync()
+		public async Task<IEnumerable<CategoryEntity>> GetCategoriesAsync()
 		{
 			var categories = await GetAllDataAsync();
 			return categories;
 		}
 
-		public async Task<IEnumerable<Category>> GetCategoriesByStoreId(IEnumerable<CategoryStore> categoryStores, int storeId)
+		public async Task<IEnumerable<CategoryEntity>> GetCategoriesByStoreId(IEnumerable<CategoryStoreEntity> categoryStores, int storeId)
 		{
 			// lấy những categoryId có trong list categoryStores bằng storeId truyển vào
 			var matchingCategoryId = categoryStores.Where(x => x.StoreId == storeId).Select(x => x.CategoryId);
@@ -36,10 +36,10 @@ namespace ShoeShineAPI.Service.Service
 			if (categoriesOfStore != null)
 				return categoriesOfStore;
 			else
-				return Enumerable.Empty<Category>();
+				return Enumerable.Empty<CategoryEntity>();
 		}
 
-		protected override async Task<IEnumerable<Category>> GetAllDataAsync()
+		protected override async Task<IEnumerable<CategoryEntity>> GetAllDataAsync()
 		{
 			return await _unit.CategoryRepository.GetAll();
 		}

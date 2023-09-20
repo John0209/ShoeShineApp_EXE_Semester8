@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Infracstructure.Repositories
 {
-	public class StoreRepository : GenericRepository<Store>, IStoreRepository
+	public class StoreRepository : GenericRepository<StoreEntity>, IStoreRepository
 	{
 		public StoreRepository(DbContextClass context) : base(context)
 		{
 		}
 
-        public override async Task<IEnumerable<Store>> GetAll()
+        public override async Task<IEnumerable<StoreEntity>> GetAll()
         {
-            return await _dbContext.Set<Store>()
+            return await _dbContext.Set<StoreEntity>()
                 .Include(s => s.Images)
                 .Include(s => s.RatingStores)
                 .ToListAsync();

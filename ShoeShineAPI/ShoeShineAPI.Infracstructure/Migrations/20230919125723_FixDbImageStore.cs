@@ -20,7 +20,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "ImageId",
-                table: "ImageStore",
+                table: "ImageStoreEntity",
                 newName: "ImageStoreId");
 
             migrationBuilder.AlterColumn<int>(
@@ -37,7 +37,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "FK_ImageComment_CommentStore_CommentStoreId",
                 table: "ImageComment",
                 column: "CommentStoreId",
-                principalTable: "CommentStore",
+                principalTable: "CommentStoreEntity",
                 principalColumn: "CommentStoreId",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -51,7 +51,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "ImageStoreId",
-                table: "ImageStore",
+                table: "ImageStoreEntity",
                 newName: "ImageId");
 
             migrationBuilder.AlterColumn<int>(
@@ -73,7 +73,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "FK_ImageComment_CommentStore_CommentStoreId",
                 table: "ImageComment",
                 column: "CommentStoreId",
-                principalTable: "CommentStore",
+                principalTable: "CommentStoreEntity",
                 principalColumn: "CommentStoreId");
         }
     }

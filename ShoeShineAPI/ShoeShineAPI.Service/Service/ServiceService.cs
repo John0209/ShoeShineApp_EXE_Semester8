@@ -9,11 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ServiceDB = ShoeShineAPI.Core.Model.Service;
 
 namespace ShoeShineAPI.Service.Service;
 
-public class ServiceService : CommonAbstract<ServiceDB>, IServiceService
+public class ServiceService : CommonAbstract<ServiceEntity>, IServiceService
 {
 	IUnitRepository _unit;
 
@@ -21,24 +20,24 @@ public class ServiceService : CommonAbstract<ServiceDB>, IServiceService
 	{
 		_unit = unit;
 	}
-	public async Task<IEnumerable<ServiceDB>> GetServicesByStoreId(IEnumerable<ServiceStore> serviceStores, int storeId)
+	public async Task<IEnumerable<ServiceEntity>> GetServicesByStoreId(IEnumerable<ServiceStoreEntity> serviceStores, int storeId)
 	{
 		// lấy những serviceId có trong list serviceStores bằng storeId truyển vào
-		var matchingServiceId = serviceStores.Where(x => x.StoreId == storeId).Select(x => x.ServiceId);
+		var matchingServiceId = _unit.ServiceStoreRepository.GetServiceIdByStoreId(storeId);
 		// sau khi có list service Id lọc ra bởi storeId, ta lấy ra list service 
 		var services = await GetAllDataAsync();
 		var serviceOfStore = GetMatchingItems(matchingServiceId, services, x=> x.ServiceId);
 		if (serviceOfStore != null)
 			return serviceOfStore;
 		else
-			return Enumerable.Empty<ServiceDB>();
+			return Enumerable.Empty<ServiceEntity>();
 	}
-	protected override async Task<IEnumerable<ServiceDB>> GetAllDataAsync()
+	protected override async Task<IEnumerable<ServiceEntity>> GetAllDataAsync()
 	{
 		return await _unit.ServiceRepository.GetAll();
 	}
 
-	public async Task<IEnumerable<ServiceDB>> GetServicesAsync()
+	public async Task<IEnumerable<ServiceEntity>> GetServicesAsync()
 	{
 		var services = await GetAllDataAsync();
 		return services;

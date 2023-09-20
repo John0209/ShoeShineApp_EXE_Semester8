@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class ImageStore
+	public class ImageStoreEntity
 	{
 		public int ImageStoreId { get; set; }// Primary Key
 		public string ImageURL { get; set; }= string.Empty;
 		// Foreign Key
-		public int StoreId { get; set; } // Table Store
+		public int StoreId { get; set; } // Table StoreEntity
 		// Relationship
-		public virtual Store? Store { get; set; }
+		public virtual StoreEntity? Store { get; set; }
 	}
 }

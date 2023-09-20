@@ -59,17 +59,17 @@ namespace ShoeShineAPI.Controllers
             var users = await _user.GetUserAsnyc();
             if (users != null)
             {
-                var userMapper = _map.Map<IEnumerable<UserDTO>>(users);
+                var userMapper = _map.Map<IEnumerable<UserRespone>>(users);
                 if (userMapper.Any())
                 {
                     return Ok(userMapper);
                 }
             }
-            return BadRequest("User Data Is Empty");
+            return BadRequest("UserEntity Data Is Empty");
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegistrationDTO registrationDTO)
+        public async Task<IActionResult> Register([FromBody] RegistrationRespone registrationDTO)
         {
             bool registrationResult = await _user.RegisterUser(registrationDTO);
             if (registrationResult)

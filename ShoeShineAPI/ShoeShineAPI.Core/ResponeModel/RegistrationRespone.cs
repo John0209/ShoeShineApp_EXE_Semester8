@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.DTOs
 {
-    public class RegistrationDTO
+    public class RegistrationRespone
     {
         public string UserName { get; set; }
         public string UserEmail { get; set; }

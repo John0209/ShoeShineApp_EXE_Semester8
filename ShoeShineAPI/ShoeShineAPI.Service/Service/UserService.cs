@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Service.Service
 {
-    public class UserService : CommonAbstract<User>, IUserService
+    public class UserService : CommonAbstract<UserEntity>, IUserService
     {
         private IUnitRepository _unit;
         private readonly IConfiguration _configuration;
@@ -34,16 +34,16 @@ namespace ShoeShineAPI.Service.Service
             return ProvideToken.Instance.GenerateToken(userId,roles);
         }
 
-        public async Task<User?> CheckLogin(string account, string password)
+        public async Task<UserEntity?> CheckLogin(string account, string password)
         {
-            IEnumerable<User> users = await GetAllDataAsync();
+            IEnumerable<UserEntity> users = await GetAllDataAsync();
             var checkLogin = (from u in users where u.UserAccount == account && u.UserPassword == password select u)
                              .FirstOrDefault();
             if (checkLogin != null) return checkLogin;
             return null;
         }
 
-        public async Task<bool> RegisterUser(RegistrationDTO registrationDTO)
+        public async Task<bool> RegisterUser(RegistrationRespone registrationDTO)
         {
             if (await EmailExists(registrationDTO.UserEmail))
             {
@@ -55,7 +55,7 @@ namespace ShoeShineAPI.Service.Service
                 return false;
             }
 
-            var newUser = new User
+            var newUser = new UserEntity
             {
                 UserId = Guid.NewGuid(),
                 UserName = registrationDTO.UserName,
@@ -68,27 +68,27 @@ namespace ShoeShineAPI.Service.Service
             return true;
         }
 
-        protected override async Task<IEnumerable<User>> GetAllDataAsync()
+        protected override async Task<IEnumerable<UserEntity>> GetAllDataAsync()
         {
             return await _unit.UserRepository.GetAll();
         }
 
-        public async Task<IEnumerable<User>> GetUserAsnyc()
+        public async Task<IEnumerable<UserEntity>> GetUserAsnyc()
         {
 			return await GetAllDataAsync();
         }
 
         private async Task<bool> EmailExists(string email)
         {
-            IEnumerable<User> users = await GetAllDataAsync();
+            IEnumerable<UserEntity> users = await GetAllDataAsync();
             return users.Any(u => u.UserEmail == email);
         }
 
-		public async Task<User> GetUserById(Guid userId)
+		public async Task<UserEntity> GetUserById(Guid userId)
 		{
             var user=await _unit.UserRepository.GetById(userId);
             if (user != null) return user;
-			throw new NotFoundException("User not found");
+			throw new NotFoundException("UserEntity not found");
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace ShoeShineAPI.Service.Service.IService
 {
 	public interface ICategoryStoreService
 	{
-		public Task<IEnumerable<CategoryStore>> GetCategoriesStoreAsync();
+		public Task<IEnumerable<CategoryStoreEntity>> GetCategoriesStoreAsync();
 
 	}
 }

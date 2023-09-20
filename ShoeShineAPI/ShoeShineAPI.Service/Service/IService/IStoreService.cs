@@ -9,6 +9,6 @@ namespace ShoeShineAPI.Service.Service.IService
 {
 	public interface IStoreService
 	{
-		public Task<IEnumerable<Store>> GetStoresAsync();
+		public Task<IEnumerable<StoreEntity>> GetStoresAsync();
 	}
 }

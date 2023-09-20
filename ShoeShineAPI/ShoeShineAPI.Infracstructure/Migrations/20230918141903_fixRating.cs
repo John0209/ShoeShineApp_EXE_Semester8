@@ -12,34 +12,34 @@ namespace ShoeShineAPI.Infracstructure.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Rating_Store",
-                table: "Store");
+                table: "StoreEntity");
 
             migrationBuilder.DropIndex(
                 name: "IX_Store_RatingStoresId",
-                table: "Store");
+                table: "StoreEntity");
 
             migrationBuilder.DropColumn(
                 name: "RatingStoresId",
-                table: "Store");
+                table: "StoreEntity");
 
             migrationBuilder.AddColumn<int>(
                 name: "StoreId",
-                table: "RatingStores",
+                table: "RatingStoresEntity",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.CreateIndex(
                 name: "IX_RatingStores_StoreId",
-                table: "RatingStores",
+                table: "RatingStoresEntity",
                 column: "StoreId",
                 unique: true);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Rating_Store",
-                table: "RatingStores",
+                table: "RatingStoresEntity",
                 column: "StoreId",
-                principalTable: "Store",
+                principalTable: "StoreEntity",
                 principalColumn: "StoreId",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -49,34 +49,34 @@ namespace ShoeShineAPI.Infracstructure.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Rating_Store",
-                table: "RatingStores");
+                table: "RatingStoresEntity");
 
             migrationBuilder.DropIndex(
                 name: "IX_RatingStores_StoreId",
-                table: "RatingStores");
+                table: "RatingStoresEntity");
 
             migrationBuilder.DropColumn(
                 name: "StoreId",
-                table: "RatingStores");
+                table: "RatingStoresEntity");
 
             migrationBuilder.AddColumn<int>(
                 name: "RatingStoresId",
-                table: "Store",
+                table: "StoreEntity",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Store_RatingStoresId",
-                table: "Store",
+                table: "StoreEntity",
                 column: "RatingStoresId",
                 unique: true);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Rating_Store",
-                table: "Store",
+                table: "StoreEntity",
                 column: "RatingStoresId",
-                principalTable: "RatingStores",
+                principalTable: "RatingStoresEntity",
                 principalColumn: "RatingStoresId",
                 onDelete: ReferentialAction.Cascade);
         }
