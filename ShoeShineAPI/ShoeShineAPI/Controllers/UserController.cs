@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,12 +6,16 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using ShoeShineAPI.Core.DTOs;
 using ShoeShineAPI.Core.Model;
-using ShoeShineAPI.Enums;
+using ShoeShineAPI.Core.ResponeModel;
+using ShoeShineAPI.Enum;
+using ShoeShineAPI.Service.Service;
 using ShoeShineAPI.Service.Service.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ShoeShineAPI.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace ShoeShineAPI.Controllers
 {
@@ -78,6 +82,95 @@ namespace ShoeShineAPI.Controllers
             }
             return BadRequest("Registration failed. Email already exists or passwords do not match.");
         }
+
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUserProfile(Guid userId)
+        {
+            try
+            {
+                var user = await _user.GetUserById(userId);
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                EnumClass.Gender gender;
+                if (EnumClass.Gender.TryParse(user.UserGender, out gender))
+                {
+                    var userProfileDto = new UserProfileRespone
+                    {
+                        Name = user.UserName,
+                        Gender = gender,
+                        Birthday = user.UserBirthDay,
+                        Email = user.UserEmail,
+                        PhoneNumber = user.UserPhone,
+                        Password = user.UserPassword
+                    };
+
+                    return Ok(userProfileDto);
+                }
+                else
+                {
+                    return BadRequest("Invalid gender value");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPut("update/{userId}")]
+        public async Task<IActionResult> UpdateUserProfile(Guid userId, UpdateProfileRespone updateProfile)
+        {
+            try
+            {
+                var validationResult = await _user.UpdateUserProfile(userId, updateProfile);
+
+                if (validationResult == ValidationResult.Success)
+                {
+                    return Ok("User profile updated successfully");
+                }
+                else
+                {
+                    return BadRequest(validationResult.ErrorMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Internal server error: {ex.Message}");
+
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
+
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPut("{userId}/update-password")]
+        public async Task<IActionResult> UpdatePassword(Guid userId, ChangePassRespone changePass)
+        {
+            try
+            {
+                var validationResult = await _user.UpdatePassword(userId, changePass);
+
+                if (validationResult == ValidationResult.Success)
+                {
+                    return Ok("Password updated successfully");
+                }
+                else
+                {
+                    return BadRequest(validationResult.ErrorMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
 
     }
 }
