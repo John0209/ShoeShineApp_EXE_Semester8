@@ -25,7 +25,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryEntity", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("CategoryEntity", (string)null);
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryStoreEntity", b =>
@@ -226,7 +226,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("RatingStoresEntity", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RoleEntity", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Role", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
@@ -240,7 +240,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("RoleEntity", (string)null);
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Service", b =>
@@ -362,7 +362,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryStoreEntity", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.CategoryEntity", "CategoryEntity")
+                    b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("CategoryStores")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -374,7 +374,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CategoryEntity");
+                    b.Navigation("Category");
 
                     b.Navigation("StoreEntity");
                 });
@@ -437,13 +437,13 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ProductEntity", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.CategoryEntity", "CategoryEntity")
+                    b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CategoryEntity");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingStoresEntity", b =>
@@ -479,16 +479,16 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.UserEntity", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.RoleEntity", "RoleEntity")
+                    b.HasOne("ShoeShineAPI.Core.Model.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RoleEntity");
+                    b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryEntity", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
                 {
                     b.Navigation("CategoryStores");
 
@@ -510,7 +510,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Comment");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RoleEntity", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Role", b =>
                 {
                     b.Navigation("Users");
                 });

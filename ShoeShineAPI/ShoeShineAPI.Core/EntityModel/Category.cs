@@ -1,5 +1,4 @@
-﻿using ShoeShineAPI.Core.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,7 @@ namespace ShoeShineAPI.Core.Model
 		public string CategoryName { get; set; } = string.Empty;
 		public bool IsCategoryStatus { get; set; }
 		// Relationship
-		public ICollection<ProductEntity>? Products { get; set; }
-		public ICollection<CategoryStoreEntity>? CategoryStores { get; set; }
+		public ICollection<Product>? Products { get; set; }
+		public ICollection<CategoryStore>? CategoryStores { get; set; }
 	}
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Service.Service
 {
-	public class RoleService : CommonAbstract<RoleEntity>, IRoleService
+	public class RoleService : CommonAbstract<Role>, IRoleService
 	{
 		IUnitRepository _unit;
 
@@ -20,19 +20,19 @@ namespace ShoeShineAPI.Service.Service
 			_unit = unit;
 		}
 
-		public async Task<RoleEntity> GetRoleById(int roleId)
+		public async Task<Role> GetRoleById(int roleId)
 		{
 			var role= await _unit.RoleRepository.GetById(roleId);
 			if (role != null) return role;
 			throw new NotFoundException("role not found");
 		}
 
-		public async Task<IEnumerable<RoleEntity>> GetRolesAsync()
+		public async Task<IEnumerable<Role>> GetRolesAsync()
 		{
 			return await GetAllDataAsync();
 		}
 
-		protected override Task<IEnumerable<RoleEntity>> GetAllDataAsync()
+		protected override Task<IEnumerable<Role>> GetAllDataAsync()
 		{
 			return _unit.RoleRepository.GetAll();
 		}

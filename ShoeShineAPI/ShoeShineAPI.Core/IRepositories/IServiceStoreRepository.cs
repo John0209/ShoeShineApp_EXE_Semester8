@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.IRepositories
 {
-	public interface IServiceStoreRepository:IGenericRepository<ServiceStoreEntity>
+	public interface IServiceStoreRepository:IGenericRepository<ServiceStore>
 	{
 		public IEnumerable<int> GetServiceIdByStoreId(int storeId);
 	}

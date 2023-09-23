@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Service.Service;
 
-public class ServiceService : CommonAbstract<ServiceEntity>, IServiceService
+public class ServiceService : CommonAbstract<Core.Model.Service>, IServiceService
 {
 	IUnitRepository _unit;
 
@@ -20,7 +20,7 @@ public class ServiceService : CommonAbstract<ServiceEntity>, IServiceService
 	{
 		_unit = unit;
 	}
-	public async Task<IEnumerable<ServiceEntity>> GetServicesByStoreId(IEnumerable<ServiceStoreEntity> serviceStores, int storeId)
+	public async Task<IEnumerable<Core.Model.Service>> GetServicesByStoreId(IEnumerable<ServiceStore> serviceStores, int storeId)
 	{
 		// lấy những serviceId có trong list serviceStores bằng storeId truyển vào
 		var matchingServiceId = _unit.ServiceStoreRepository.GetServiceIdByStoreId(storeId);
@@ -30,14 +30,14 @@ public class ServiceService : CommonAbstract<ServiceEntity>, IServiceService
 		if (serviceOfStore != null)
 			return serviceOfStore;
 		else
-			return Enumerable.Empty<ServiceEntity>();
+			return Enumerable.Empty<Core.Model.Service>();
 	}
-	protected override async Task<IEnumerable<ServiceEntity>> GetAllDataAsync()
+	protected override async Task<IEnumerable<Core.Model.Service>> GetAllDataAsync()
 	{
 		return await _unit.ServiceRepository.GetAll();
 	}
 
-	public async Task<IEnumerable<ServiceEntity>> GetServicesAsync()
+	public async Task<IEnumerable<Core.Model.Service>> GetServicesAsync()
 	{
 		var services = await GetAllDataAsync();
 		return services;

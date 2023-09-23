@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Infracstructure.Repositories
 {
-	public class ImageCommentRepository : GenericRepository<ImageCommentEntity>, IImageCommentRepository
+	public class ImageCommentRepository : GenericRepository<ImageComment>, IImageCommentRepository
 	{
 		public ImageCommentRepository(DbContextClass context) : base(context)
 		{

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Infracstructure.Repositories
 {
-	public class ServiceStoreRepository : GenericRepository<ServiceStoreEntity>, IServiceStoreRepository
+	public class ServiceStoreRepository : GenericRepository<ServiceStore>, IServiceStoreRepository
 	{
 		public ServiceStoreRepository(DbContextClass context) : base(context)
 		{
@@ -17,7 +17,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 
 		public IEnumerable<int> GetServiceIdByStoreId(int storeId)
 		{
-			return _dbContext.Set<ServiceStoreEntity>().Where(x=> x.StoreId == storeId).Select(x=> x.ServiceId);
+			return _dbContext.Set<ServiceStore>().Where(x=> x.StoreId == storeId).Select(x=> x.ServiceId);
 		}
 	}
 }

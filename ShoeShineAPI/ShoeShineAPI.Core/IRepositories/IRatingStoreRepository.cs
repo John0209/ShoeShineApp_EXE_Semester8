@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.IRepositories
 {
-	public interface IRatingStoreRepository: IGenericRepository<RatingStoresEntity>
+	public interface IRatingStoreRepository: IGenericRepository<RatingStores>
 	{
 	}
 }

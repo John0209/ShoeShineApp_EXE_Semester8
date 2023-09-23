@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen(c =>
 	// Cấu hình cho OAuth 2.0 (Bearer Token)
 	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
-		Description = "Please Enter The Token To Authenticate The RoleEntity",
+		Description = "Please Enter The Token To Authenticate The Role",
 		Name = "Authorization",
 		In = ParameterLocation.Header,
 		Type = SecuritySchemeType.Http,

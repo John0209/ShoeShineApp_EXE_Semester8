@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class ServiceEntity
+	public class Service
 	{
 		public int ServiceId { get; set; }// Primary Key
 		public string ServiceName { get; set; } = string.Empty;
 		public float ServicePrice { get; set; }
 		public bool IsServiceStatus { get; set; }
 		// Relationship
-		public ICollection<ServiceStoreEntity>? ServiceStores { get; set; }
+		public ICollection<ServiceStore>? ServiceStores { get; set; }
 	}
 }

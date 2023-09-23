@@ -37,7 +37,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "FK_ImageComment_CommentStore_CommentStoreId",
                 table: "ImageComment",
                 column: "CommentStoreId",
-                principalTable: "CommentStoreEntity",
+                principalTable: "CommentStore",
                 principalColumn: "CommentStoreId",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -73,7 +73,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "FK_ImageComment_CommentStore_CommentStoreId",
                 table: "ImageComment",
                 column: "CommentStoreId",
-                principalTable: "CommentStoreEntity",
+                principalTable: "CommentStore",
                 principalColumn: "CommentStoreId");
         }
     }

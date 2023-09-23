@@ -26,7 +26,7 @@ namespace ShoeShineAPI.Service.Service
 			return categories;
 		}
 
-		public async Task<IEnumerable<CategoryEntity>> GetCategoriesByStoreId(IEnumerable<CategoryStoreEntity> categoryStores, int storeId)
+		public async Task<IEnumerable<CategoryEntity>> GetCategoriesByStoreId(IEnumerable<CategoryStore> categoryStores, int storeId)
 		{
 			// lấy những categoryId có trong list categoryStores bằng storeId truyển vào
 			var matchingCategoryId = categoryStores.Where(x => x.StoreId == storeId).Select(x => x.CategoryId);

@@ -10,7 +10,7 @@ namespace ShoeShineAPI.Service.Service.IService
 {
 	public interface ICommentStoreService
 	{
-		public Task<IEnumerable<CommentStoreEntity>> GetCommentByStoreId(int storeId);
-		public Task<IEnumerable<CommentStoreEntity>> GetCommentAsync();
+		public Task<IEnumerable<CommentStore>> GetCommentByStoreId(int storeId);
+		public Task<IEnumerable<CommentStore>> GetCommentAsync();
 	}
 }

@@ -9,7 +9,7 @@ namespace ShoeShineAPI.Service.Service.IService
 {
 	public interface IRoleService
 	{
-		public Task<RoleEntity> GetRoleById(int roleId);
-		public Task<IEnumerable<RoleEntity>> GetRolesAsync();
+		public Task<Role> GetRoleById(int roleId);
+		public Task<IEnumerable<Role>> GetRolesAsync();
 	}
 }

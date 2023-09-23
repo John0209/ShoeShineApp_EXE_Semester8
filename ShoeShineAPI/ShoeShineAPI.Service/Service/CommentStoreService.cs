@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Service.Service
 {
-	public class CommentStoreService :CommonAbstract<CommentStoreEntity>, ICommentStoreService
+	public class CommentStoreService :CommonAbstract<CommentStore>, ICommentStoreService
 	{
 		IUnitRepository _unit;
 
@@ -19,17 +19,17 @@ namespace ShoeShineAPI.Service.Service
 			_unit = unit;
 		}
 
-		public async Task<IEnumerable<CommentStoreEntity>> GetCommentAsync()
+		public async Task<IEnumerable<CommentStore>> GetCommentAsync()
 		{
 			return await GetAllDataAsync();
 		}
 
-		public async Task<IEnumerable<CommentStoreEntity>> GetCommentByStoreId(int storeId)
+		public async Task<IEnumerable<CommentStore>> GetCommentByStoreId(int storeId)
 		{
 			return await _unit.CommentRepository.GetCommentByStoreId(storeId);
 		}
 
-		protected override async Task<IEnumerable<CommentStoreEntity>> GetAllDataAsync()
+		protected override async Task<IEnumerable<CommentStore>> GetAllDataAsync()
 		{
 			return await _unit.CommentRepository.GetAll();
 		}

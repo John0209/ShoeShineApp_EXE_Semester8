@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class RoleEntity
+	public class Role
 	{
 		public int RoleId { get; set; }// Primary Key
 		public string RoleName { get; set; } = string.Empty;
 		// Relationship
-		public ICollection<UserEntity>? Users { get; set; }
+		public ICollection<User>? Users { get; set; }
 	}
 }

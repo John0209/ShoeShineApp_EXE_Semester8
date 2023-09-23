@@ -52,7 +52,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleEntity",
+                name: "Role",
                 columns: table => new
                 {
                     RoleId = table.Column<int>(type: "int", nullable: false)
@@ -147,7 +147,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_User_Role_RoleId",
                         column: x => x.RoleId,
-                        principalTable: "RoleEntity",
+                        principalTable: "Role",
                         principalColumn: "RoleId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -405,7 +405,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "RatingStoresEntity");
 
             migrationBuilder.DropTable(
-                name: "RoleEntity");
+                name: "Role");
         }
     }
 }

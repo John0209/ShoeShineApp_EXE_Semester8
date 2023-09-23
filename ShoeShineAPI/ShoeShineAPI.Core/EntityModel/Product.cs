@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class ProductEntity
+	public class Product
 	{
 		public int ProductId { get; set; }// Primary Key
 		public string ProductName { get; set; } = string.Empty;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.IRepositories
 {
-	public interface IServiceRepository:IGenericRepository<ServiceEntity>
+	public interface IServiceRepository:IGenericRepository<Service>
 	{
 		
 	}

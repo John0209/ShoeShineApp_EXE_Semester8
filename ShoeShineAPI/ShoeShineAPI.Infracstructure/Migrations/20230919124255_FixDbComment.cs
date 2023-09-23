@@ -29,7 +29,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 nullable: true);
 
             migrationBuilder.CreateTable(
-                name: "CommentStoreEntity",
+                name: "CommentStore",
                 columns: table => new
                 {
                     CommentStoreId = table.Column<int>(type: "int", nullable: false)
@@ -69,25 +69,25 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_CommentStore_RatingCommentId",
-                table: "CommentStoreEntity",
+                table: "CommentStore",
                 column: "RatingCommentId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_CommentStore_StoreId",
-                table: "CommentStoreEntity",
+                table: "CommentStore",
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CommentStore_UserId",
-                table: "CommentStoreEntity",
+                table: "CommentStore",
                 column: "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_ImageComment_CommentStore_CommentStoreId",
                 table: "ImageComment",
                 column: "CommentStoreId",
-                principalTable: "CommentStoreEntity",
+                principalTable: "CommentStore",
                 principalColumn: "CommentStoreId");
         }
 
@@ -99,7 +99,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 table: "ImageComment");
 
             migrationBuilder.DropTable(
-                name: "CommentStoreEntity");
+                name: "CommentStore");
 
             migrationBuilder.DropIndex(
                 name: "IX_ImageComment_CommentStoreId",

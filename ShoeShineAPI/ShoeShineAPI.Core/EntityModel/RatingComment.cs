@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class RatingCommentEntity
+	public class RatingComment
 	{
 		public int RatingCommentId { get; set; } // Primary Key
 		public int RatingCommentScale { get; set; } 
 		// Relationship
-		public virtual CommentStoreEntity? Comment { get; set; }
+		public virtual CommentStore? Comment { get; set; }
 	}
 }

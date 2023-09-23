@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.IRepositories
 {
-	public interface IUserRepository : IGenericRepository<UserEntity>
+	public interface IUserRepository : IGenericRepository<User>
 	{
 	}
 }
