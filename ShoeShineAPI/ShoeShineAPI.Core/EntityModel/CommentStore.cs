@@ -8,7 +8,7 @@ namespace ShoeShineAPI.Core.Model
 {
 	public class CommentStore
 	{
-		public int CommentStoreId { get; set; }// Primary Key
+		public Guid CommentStoreId { get; set; }// Primary Key
 		public string Content { get; set; } = string.Empty;
 		// Foreign Key
 		public Guid UserId { get; set; } // Table UserEntity

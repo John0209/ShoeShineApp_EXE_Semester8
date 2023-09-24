@@ -12,5 +12,10 @@ namespace ShoeShineAPI.Service.Service.IService
 	{
 		public Task<IEnumerable<CommentStore>> GetCommentByStoreId(int storeId);
 		public Task<IEnumerable<CommentStore>> GetCommentAsync();
-	}
+		public Task<CommentStore> GetCommentById(Guid id);
+		public Task CreateCommentAsync(CommentStore entity);
+		public Task UpdateCommentAsync(CommentStore entity);
+		public Task CreateImagesCommentAsync(IEnumerable<ImageComment> entities);
+        public Task DeleteImagesCommentByCommentStoreIdAsync(Guid commentStoreId);
+    }
 }

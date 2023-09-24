@@ -32,6 +32,32 @@ namespace ShoeShineAPI.Service.Service
 		protected override async Task<IEnumerable<CommentStore>> GetAllDataAsync()
 		{
 			return await _unit.CommentRepository.GetAll();
+        }
+
+		public async Task<CommentStore> GetCommentById(Guid id)
+		{
+			return await _unit.CommentRepository.GetById(id);
 		}
-	}
+
+        public async Task CreateCommentAsync(CommentStore entity)
+        {
+            await _unit.CommentRepository.Add(entity);
+        }
+
+        public async Task UpdateCommentAsync(CommentStore entity)
+        {
+            _unit.CommentRepository.Update(entity);
+            await _unit.CommentRepository.SaveChangesAsync();
+        }
+
+        public async Task CreateImagesCommentAsync(IEnumerable<ImageComment> entities)
+        {
+            await _unit.ImageCommentRepository.AddList(entities);
+        }
+
+        public async Task DeleteImagesCommentByCommentStoreIdAsync(Guid commentStoreId)
+        {
+            await _unit.ImageCommentRepository.RemoveImageCommentsByCommentStoreId(commentStoreId);
+        }
+    }
 }

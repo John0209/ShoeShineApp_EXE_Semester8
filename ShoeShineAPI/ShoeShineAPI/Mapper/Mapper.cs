@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ShoeShineAPI.Core.DTOs;
 using ShoeShineAPI.Core.Model;
+using ShoeShineAPI.Core.RequestModel;
 using ServiceDB = ShoeShineAPI.Core.Model.Service;
 
 namespace ShoeShineAPI.Mapper
@@ -28,7 +29,7 @@ namespace ShoeShineAPI.Mapper
 				.ForMember(dest => dest.StoreName,
 						otp => otp.MapFrom(src => src.Store != null ? src.Store.StoreName : string.Empty))
 				.ReverseMap();
-
+			CreateMap<CommentStoreRequest, CommentStore>().ReverseMap();
             CreateMap<ServiceDB, ServiceRespone>().ReverseMap();
 			CreateMap<CategoryEntity, CategoryRespone>().ReverseMap();
 			CreateMap<User, UserRespone>().ReverseMap();

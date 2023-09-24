@@ -34,5 +34,16 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 				.Include(s => s.Store)
 				.ToListAsync();
 		}
-	}
+
+        public override async Task<CommentStore> GetById(Guid id)
+        {
+            return await _dbContext.Set<CommentStore>()
+                .Where(x => x.CommentStoreId == id)
+                .Include(s => s.ImageComments)
+                .Include(s => s.RatingComment)
+                .Include(s => s.User)
+                .Include(s => s.Store)
+                .FirstOrDefaultAsync();
+        }
+    }
 }

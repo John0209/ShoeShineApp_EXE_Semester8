@@ -62,5 +62,10 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		{
 			_dbContext.Set<T>().Update(entity);
 		}
-	}
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+    }
 }

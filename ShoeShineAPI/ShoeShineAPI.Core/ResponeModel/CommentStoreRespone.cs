@@ -9,7 +9,7 @@ namespace ShoeShineAPI.Core.DTOs
 {
 	public class CommentStoreRespone
 	{
-		public int CommentStoreId { get; set; }// Primary Key
+		public Guid CommentStoreId { get; set; }// Primary Key
 		public string Content { get; set; } = string.Empty;
 		public string UserName { get; set; } = string.Empty; 
 		public string StoreName { get; set; } = string.Empty;

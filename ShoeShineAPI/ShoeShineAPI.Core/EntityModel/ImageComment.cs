@@ -8,10 +8,10 @@ namespace ShoeShineAPI.Core.Model
 {
 	public class ImageComment
 	{
-		public int ImageCommentId { get; set; }// Primary Key
+		public Guid ImageCommentId { get; set; }// Primary Key
 		public string ImageCommentURL { get; set; } = string.Empty;
 		// Foreign Key
-		public int CommentStoreId { get; set; } // Table Comment
+		public Guid CommentStoreId { get; set; } // Table Comment
 		// Relationship
 		public virtual CommentStore? CommentStore { get; set; }
 	}
