@@ -1,14 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using SendGrid.Helpers.Errors.Model;
 using ShoeShineAPI.Core.DTOs;
 using ShoeShineAPI.Core.IRepositories;
 using ShoeShineAPI.Core.Model;
+using ShoeShineAPI.Core.ResponeModel;
+using ShoeShineAPI.Enum;
+using ShoeShineAPI.Infracstructure.Repositories;
 using ShoeShineAPI.Service.Inheritance_Class;
 using ShoeShineAPI.Service.Service.IService;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -90,5 +96,60 @@ namespace ShoeShineAPI.Service.Service
             if (user != null) return user;
 			throw new NotFoundException("UserEntity not found");
 		}
-	}
+
+        public async Task<ValidationResult> UpdateUserProfile(Guid userId, UpdateProfileRespone updateProfile)
+        {
+            var user = await _unit.UserRepository.GetById(userId);
+            if (user == null)
+            {
+                return new ValidationResult("User not found");
+            }
+
+            var validationContext = new ValidationContext(updateProfile, null, null);
+            var validationResults = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(updateProfile, validationContext, validationResults, true))
+            {
+                return validationResults.First();
+            }
+
+            user.UserName = updateProfile.Name;
+            user.UserGender = updateProfile.Gender.ToString();
+            user.UserBirthDay = updateProfile.Birthday;
+            user.UserEmail = updateProfile.Email;
+            user.UserPhone = updateProfile.PhoneNumber;
+
+            _unit.UserRepository.Update(user);
+
+            _unit.Save();
+
+            return ValidationResult.Success; 
+        }
+
+        public async Task<ValidationResult> UpdatePassword(Guid userId, ChangePassRespone changePass)
+        {
+            var user = await _unit.UserRepository.GetById(userId);
+            if (user == null)
+            {
+                return new ValidationResult("User not found");
+            }
+
+            if (user.UserPassword != changePass.OldPassword)
+            {
+                return new ValidationResult("Oops! Your Password is Not Correct");
+            }
+
+            if (user.UserPassword == changePass.NewPassword)
+            {
+                return new ValidationResult("New password must be different from the old password");
+            }
+
+            user.UserPassword = changePass.NewPassword;
+
+            _unit.UserRepository.Update(user);
+
+             _unit.Save();
+
+            return ValidationResult.Success; // Password updated successfully
+        }
+    }
 }
