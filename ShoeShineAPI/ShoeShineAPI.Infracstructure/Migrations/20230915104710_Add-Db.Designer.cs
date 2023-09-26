@@ -45,7 +45,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("Category", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryStore", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryStoreEntity", b =>
                 {
                     b.Property<int>("CategoryStoreId")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.ToTable("CategoryStore", (string)null);
+                    b.ToTable("CategoryStoreEntity", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Comment", b =>
@@ -155,7 +155,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("ImageComment", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Product", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.ProductEntity", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -190,7 +190,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product", (string)null);
+                    b.ToTable("ProductEntity", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingComment", b =>
@@ -209,7 +209,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("RatingComment", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingStores", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingStoresEntity", b =>
                 {
                     b.Property<int>("RatingStoresId")
                         .ValueGeneratedOnAdd()
@@ -222,7 +222,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("RatingStoresId");
 
-                    b.ToTable("RatingStores", (string)null);
+                    b.ToTable("RatingStoresEntity", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Role", b =>
@@ -265,7 +265,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("Service", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.ServiceStore", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.ServiceStoreEntity", b =>
                 {
                     b.Property<int>("ServiceStoreId")
                         .ValueGeneratedOnAdd()
@@ -285,10 +285,10 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.ToTable("ServiceStore", (string)null);
+                    b.ToTable("ServiceStoreEntity", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Store", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.StoreEntity", b =>
                 {
                     b.Property<int>("StoreId")
                         .ValueGeneratedOnAdd()
@@ -319,10 +319,10 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.HasIndex("RatingStoresId")
                         .IsUnique();
 
-                    b.ToTable("Store", (string)null);
+                    b.ToTable("StoreEntity", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.User", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.UserEntity", b =>
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
@@ -362,10 +362,10 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("UserEntity", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryStore", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryStoreEntity", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("CategoryStores")
@@ -373,7 +373,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShoeShineAPI.Core.Model.Store", "Store")
+                    b.HasOne("ShoeShineAPI.Core.Model.StoreEntity", "StoreEntity")
                         .WithMany("CategoryStores")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -381,12 +381,12 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("Store");
+                    b.Navigation("StoreEntity");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Comment", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.Product", "Product")
+                    b.HasOne("ShoeShineAPI.Core.Model.ProductEntity", "ProductEntity")
                         .WithMany("Comments")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -399,44 +399,44 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Rating_Comment");
 
-                    b.HasOne("ShoeShineAPI.Core.Model.Store", "Store")
+                    b.HasOne("ShoeShineAPI.Core.Model.StoreEntity", "StoreEntity")
                         .WithMany("Comments")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShoeShineAPI.Core.Model.User", "User")
+                    b.HasOne("ShoeShineAPI.Core.Model.UserEntity", "UserEntity")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductEntity");
 
                     b.Navigation("RatingComment");
 
-                    b.Navigation("Store");
+                    b.Navigation("StoreEntity");
 
-                    b.Navigation("User");
+                    b.Navigation("UserEntity");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Image", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.Product", "Product")
+                    b.HasOne("ShoeShineAPI.Core.Model.ProductEntity", "ProductEntity")
                         .WithMany("Images")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShoeShineAPI.Core.Model.Store", "Store")
+                    b.HasOne("ShoeShineAPI.Core.Model.StoreEntity", "StoreEntity")
                         .WithMany("Images")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductEntity");
 
-                    b.Navigation("Store");
+                    b.Navigation("StoreEntity");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ImageComment", b =>
@@ -448,7 +448,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Product", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.ProductEntity", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("Products")
@@ -459,7 +459,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.ServiceStore", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.ServiceStoreEntity", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Service", "Service")
                         .WithMany("ServiceStores")
@@ -467,7 +467,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShoeShineAPI.Core.Model.Store", "Store")
+                    b.HasOne("ShoeShineAPI.Core.Model.StoreEntity", "StoreEntity")
                         .WithMany("ServiceStores")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -475,22 +475,22 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.Navigation("Service");
 
-                    b.Navigation("Store");
+                    b.Navigation("StoreEntity");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Store", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.StoreEntity", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.RatingStores", "RatingStores")
-                        .WithOne("Store")
-                        .HasForeignKey("ShoeShineAPI.Core.Model.Store", "RatingStoresId")
+                    b.HasOne("ShoeShineAPI.Core.Model.RatingStoresEntity", "RatingStoresEntity")
+                        .WithOne("StoreEntity")
+                        .HasForeignKey("ShoeShineAPI.Core.Model.StoreEntity", "RatingStoresId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Rating_Store");
 
-                    b.Navigation("RatingStores");
+                    b.Navigation("RatingStoresEntity");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.User", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.UserEntity", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Role", "Role")
                         .WithMany("Users")
@@ -513,7 +513,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("ImageComments");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Product", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.ProductEntity", b =>
                 {
                     b.Navigation("Comments");
 
@@ -525,9 +525,9 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Comment");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingStores", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingStoresEntity", b =>
                 {
-                    b.Navigation("Store");
+                    b.Navigation("StoreEntity");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Role", b =>
@@ -540,7 +540,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("ServiceStores");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Store", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.StoreEntity", b =>
                 {
                     b.Navigation("CategoryStores");
 
@@ -551,7 +551,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("ServiceStores");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.User", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.UserEntity", b =>
                 {
                     b.Navigation("Comments");
                 });

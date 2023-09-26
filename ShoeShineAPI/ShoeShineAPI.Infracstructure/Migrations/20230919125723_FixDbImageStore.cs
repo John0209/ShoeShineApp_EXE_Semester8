@@ -20,7 +20,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "ImageId",
-                table: "ImageStore",
+                table: "ImageStoreEntity",
                 newName: "ImageStoreId");
 
             migrationBuilder.AlterColumn<int>(
@@ -51,7 +51,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             migrationBuilder.RenameColumn(
                 name: "ImageStoreId",
-                table: "ImageStore",
+                table: "ImageStoreEntity",
                 newName: "ImageId");
 
             migrationBuilder.AlterColumn<int>(

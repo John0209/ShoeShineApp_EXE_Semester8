@@ -14,5 +14,10 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		public ServiceStoreRepository(DbContextClass context) : base(context)
 		{
 		}
+
+		public IEnumerable<int> GetServiceIdByStoreId(int storeId)
+		{
+			return _dbContext.Set<ServiceStore>().Where(x=> x.StoreId == storeId).Select(x=> x.ServiceId);
+		}
 	}
 }

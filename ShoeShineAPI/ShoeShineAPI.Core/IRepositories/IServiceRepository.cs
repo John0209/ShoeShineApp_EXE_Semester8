@@ -9,5 +9,6 @@ namespace ShoeShineAPI.Core.IRepositories
 {
 	public interface IServiceRepository:IGenericRepository<Service>
 	{
+		
 	}
 }

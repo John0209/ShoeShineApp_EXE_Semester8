@@ -22,7 +22,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryEntity", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -329,9 +329,16 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("UserBirthDay")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserEmail")
                         .IsRequired()
                         .HasColumnType("varchar(30)");
+
+                    b.Property<string>("UserGender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -354,7 +361,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryStore", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
+                    b.HasOne("ShoeShineAPI.Core.Model.CategoryEntity", "Category")
                         .WithMany("CategoryStores")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -401,11 +408,13 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ImageComment", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.CommentStore", null)
+                    b.HasOne("ShoeShineAPI.Core.Model.CommentStore", "CommentStore")
                         .WithMany("ImageComments")
                         .HasForeignKey("CommentStoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CommentStore");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ImageStore", b =>
@@ -421,7 +430,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Product", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
+                    b.HasOne("ShoeShineAPI.Core.Model.CategoryEntity", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -472,7 +481,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryEntity", b =>
                 {
                     b.Navigation("CategoryStores");
 

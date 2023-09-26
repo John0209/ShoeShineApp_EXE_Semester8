@@ -24,10 +24,10 @@ namespace ShoeShineAPI.Controllers
 			var stores=await _store.GetStoresAsync();
 			if (stores.Any())
 			{
-				var storesMapper = _map.Map<IEnumerable<StoreDTO>>(stores);
+				var storesMapper = _map.Map<IEnumerable<StoreRespone>>(stores);
 				return Ok(storesMapper);
 			}
-			return BadRequest("Store Data Is Empty");
+			return BadRequest("StoreEntity Data Is Empty");
 		}
 	}
 }

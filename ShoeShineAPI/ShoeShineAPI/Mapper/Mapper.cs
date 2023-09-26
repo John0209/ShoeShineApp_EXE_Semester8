@@ -9,7 +9,7 @@ namespace ShoeShineAPI.Mapper
 	{
 		public Mapper() 
 		{
-            CreateMap<Store, StoreDTO>()
+            CreateMap<Store, StoreRespone>()
                 .ForMember(dest => dest.ImageUrl,
                             opt => opt.MapFrom(src => src.Images != null && src.Images.Any() ?
                                                         src.Images.FirstOrDefault().ImageURL : string.Empty))
@@ -17,7 +17,7 @@ namespace ShoeShineAPI.Mapper
                             opt => opt.MapFrom(src => src.RatingStores != null ? src.RatingStores.RatingStoreScale : 0))
                 .ReverseMap();
 
-			CreateMap<CommentStore, CommentStoreDTO>().
+			CreateMap<CommentStore, CommentStoreRespone>().
 				ForMember(dest => dest.RatingComment,
 						otp => otp.MapFrom(src => src.RatingComment != null ? src.RatingComment.RatingCommentScale : 0))
 				.ForMember(dest => dest.ImageComments,
@@ -29,9 +29,9 @@ namespace ShoeShineAPI.Mapper
 						otp => otp.MapFrom(src => src.Store != null ? src.Store.StoreName : string.Empty))
 				.ReverseMap();
 
-            CreateMap<ServiceDB, ServiceDTO>().ReverseMap();
-			CreateMap<Category, CategoryDTO>().ReverseMap();
-			CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<ServiceDB, ServiceRespone>().ReverseMap();
+			CreateMap<CategoryEntity, CategoryRespone>().ReverseMap();
+			CreateMap<User, UserRespone>().ReverseMap();
 		}
 	}
 }

@@ -22,5 +22,6 @@ namespace ShoeShineAPI.Core.IRepositories
 		IRatingCommentRepository RatingCommentRepository { get; }
 		IRatingStoreRepository RatingStoreRepository { get; }
 		int Save();
-	}
+
+    }
 }

@@ -28,7 +28,7 @@ namespace ShoeShineAPI.Controllers
 			var services = await _service.GetServicesByStoreId(serviceStores,storeId);
 			if (services.Any())
 			{
-				var serviceMapper = _map.Map<IEnumerable<ServiceDTO>>(services);
+				var serviceMapper = _map.Map<IEnumerable<ServiceRespone>>(services);
 				return Ok(serviceMapper);
 			}
 			return BadRequest("Service Data Is Empty !!!");
@@ -39,7 +39,7 @@ namespace ShoeShineAPI.Controllers
 			var services = await _service.GetServicesAsync();
 			if (services.Any())
 			{
-				var serviceMapper = _map.Map<IEnumerable<ServiceDTO>>(services);
+				var serviceMapper = _map.Map<IEnumerable<ServiceRespone>>(services);
 				return Ok(serviceMapper);
 			}
 			return BadRequest("Service Data Is Empty");

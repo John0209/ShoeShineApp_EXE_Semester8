@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.DTOs
 {
-	public class StoreDTO
+	public class StoreRespone
 	{
 		public int StoreId { get; set; }// Primary Key
 		public string StoreName { get; set; } = string.Empty;

@@ -14,7 +14,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "Image");
 
             migrationBuilder.CreateTable(
-                name: "ImageStore",
+                name: "ImageStoreEntity",
                 columns: table => new
                 {
                     ImageId = table.Column<int>(type: "int", nullable: false)
@@ -28,14 +28,14 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_ImageStore_Store_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Store",
+                        principalTable: "StoreEntity",
                         principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ImageStore_StoreId",
-                table: "ImageStore",
+                table: "ImageStoreEntity",
                 column: "StoreId");
         }
 
@@ -43,7 +43,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ImageStore");
+                name: "ImageStoreEntity");
 
             migrationBuilder.CreateTable(
                 name: "Image",
@@ -61,13 +61,13 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_Image_Product_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Product",
+                        principalTable: "ProductEntity",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Image_Store_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Store",
+                        principalTable: "StoreEntity",
                         principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                 });

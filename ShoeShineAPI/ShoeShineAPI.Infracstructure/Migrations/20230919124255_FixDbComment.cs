@@ -45,13 +45,13 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_CommentStore_Store_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Store",
+                        principalTable: "StoreEntity",
                         principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CommentStore_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "UserEntity",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -127,19 +127,19 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_Comment_Product_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Product",
+                        principalTable: "ProductEntity",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comment_Store_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Store",
+                        principalTable: "StoreEntity",
                         principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comment_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "UserEntity",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(

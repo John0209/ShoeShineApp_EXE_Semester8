@@ -12,7 +12,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "CategoryEntity",
                 columns: table => new
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
@@ -39,7 +39,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RatingStores",
+                name: "RatingStoresEntity",
                 columns: table => new
                 {
                     RatingStoresId = table.Column<int>(type: "int", nullable: false)
@@ -80,7 +80,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "ProductEntity",
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
@@ -99,13 +99,13 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_Product_Category_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "CategoryEntity",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Store",
+                name: "StoreEntity",
                 columns: table => new
                 {
                     StoreId = table.Column<int>(type: "int", nullable: false)
@@ -122,13 +122,13 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_Rating_Store",
                         column: x => x.RatingStoresId,
-                        principalTable: "RatingStores",
+                        principalTable: "RatingStoresEntity",
                         principalColumn: "RatingStoresId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "UserEntity",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -153,7 +153,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoryStore",
+                name: "CategoryStoreEntity",
                 columns: table => new
                 {
                     CategoryStoreId = table.Column<int>(type: "int", nullable: false)
@@ -167,13 +167,13 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_CategoryStore_Category_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "CategoryEntity",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CategoryStore_Store_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Store",
+                        principalTable: "StoreEntity",
                         principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -194,19 +194,19 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_Image_Product_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Product",
+                        principalTable: "ProductEntity",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Image_Store_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Store",
+                        principalTable: "StoreEntity",
                         principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ServiceStore",
+                name: "ServiceStoreEntity",
                 columns: table => new
                 {
                     ServiceStoreId = table.Column<int>(type: "int", nullable: false)
@@ -226,7 +226,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_ServiceStore_Store_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Store",
+                        principalTable: "StoreEntity",
                         principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -249,19 +249,19 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_Comment_Product_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "Product",
+                        principalTable: "ProductEntity",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comment_Store_StoreId",
                         column: x => x.StoreId,
-                        principalTable: "Store",
+                        principalTable: "StoreEntity",
                         principalColumn: "StoreId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comment_User_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "UserEntity",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -294,12 +294,12 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoryStore_CategoryId",
-                table: "CategoryStore",
+                table: "CategoryStoreEntity",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoryStore_StoreId",
-                table: "CategoryStore",
+                table: "CategoryStoreEntity",
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
@@ -340,28 +340,28 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",
-                table: "Product",
+                table: "ProductEntity",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceStore_ServiceId",
-                table: "ServiceStore",
+                table: "ServiceStoreEntity",
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceStore_StoreId",
-                table: "ServiceStore",
+                table: "ServiceStoreEntity",
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Store_RatingStoresId",
-                table: "Store",
+                table: "StoreEntity",
                 column: "RatingStoresId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_RoleId",
-                table: "User",
+                table: "UserEntity",
                 column: "RoleId");
         }
 
@@ -369,7 +369,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CategoryStore");
+                name: "CategoryStoreEntity");
 
             migrationBuilder.DropTable(
                 name: "Image");
@@ -378,7 +378,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "ImageComment");
 
             migrationBuilder.DropTable(
-                name: "ServiceStore");
+                name: "ServiceStoreEntity");
 
             migrationBuilder.DropTable(
                 name: "Comment");
@@ -387,22 +387,22 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "Service");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "ProductEntity");
 
             migrationBuilder.DropTable(
-                name: "Store");
+                name: "StoreEntity");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "UserEntity");
 
             migrationBuilder.DropTable(
                 name: "RatingComment");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "CategoryEntity");
 
             migrationBuilder.DropTable(
-                name: "RatingStores");
+                name: "RatingStoresEntity");
 
             migrationBuilder.DropTable(
                 name: "Role");

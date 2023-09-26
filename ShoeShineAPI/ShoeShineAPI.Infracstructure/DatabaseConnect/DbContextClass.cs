@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoeShineAPI.Core.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Infracstructure.DatabaseConnect;
 
@@ -19,7 +14,7 @@ public class DbContextClass: DbContext
 
 	}
 	#region DbSet
-	public DbSet<Category> Category { get; set; }
+	public DbSet<CategoryEntity> Category { get; set; }
 	public DbSet<CategoryStore> CategoryStore { get; set; }
 	public DbSet<Product> Product { get; set; }
 	public DbSet<CommentStore> CommentStore { get; set; }
@@ -92,7 +87,7 @@ public class DbContextClass: DbContext
 			e.Property(x => x.ProductName).HasColumnType("nvarchar(50)").IsRequired();
 			e.Property(x => x.ProductDescription).HasColumnType("nvarchar(150)");
 		});
-		model.Entity<Category>(e =>
+		model.Entity<CategoryEntity>(e =>
 		{
 			e.ToTable(nameof(Category));
 			e.HasKey(x => x.CategoryId);

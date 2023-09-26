@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.IRepositories
 {
-	public interface ICategoryRepository:IGenericRepository<Category>
+	public interface ICategoryRepository:IGenericRepository<CategoryEntity>
 	{
 	}
 }

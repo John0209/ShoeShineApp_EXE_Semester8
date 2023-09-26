@@ -27,10 +27,10 @@ namespace ShoeShineAPI.Controllers
 			var category = await _category.GetCategoriesByStoreId(_categoryStores, storeId);
 			if (category.Any())
 			{
-				var categoryMapper = _map.Map<IEnumerable<CategoryDTO>>(category);
+				var categoryMapper = _map.Map<IEnumerable<CategoryRespone>>(category);
 				return Ok(categoryMapper);
 			}
-			return BadRequest("Category Data Is Empty !!!");
+			return BadRequest("CategoryEntity Data Is Empty !!!");
 		}
 		[HttpGet("get-all")]
 		public async Task<IActionResult> GetAll()
@@ -38,10 +38,10 @@ namespace ShoeShineAPI.Controllers
 			var category = await _category.GetCategoriesAsync();
 			if (category.Any())
 			{
-				var categoryMapper = _map.Map<IEnumerable<CategoryDTO>>(category);
+				var categoryMapper = _map.Map<IEnumerable<CategoryRespone>>(category);
 				return Ok(categoryMapper);
 			}
-			return BadRequest("Category Data Is Empty");
+			return BadRequest("CategoryEntity Data Is Empty");
 		}
 	}
 }
