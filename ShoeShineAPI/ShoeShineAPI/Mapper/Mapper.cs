@@ -30,7 +30,7 @@ namespace ShoeShineAPI.Mapper
 				.ReverseMap();
 
             CreateMap<ServiceDB, ServiceRespone>().ReverseMap();
-			CreateMap<CategoryEntity, CategoryRespone>().ReverseMap();
+			CreateMap<Category, CategoryRespone>().ReverseMap();
 			CreateMap<User, UserRespone>().ReverseMap();
 		}
 	}

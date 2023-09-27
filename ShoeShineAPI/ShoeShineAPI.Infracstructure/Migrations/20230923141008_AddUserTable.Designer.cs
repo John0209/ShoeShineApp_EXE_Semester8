@@ -25,7 +25,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryEntity", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -364,7 +364,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryStore", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.CategoryEntity", "Category")
+                    b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("CategoryStores")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -433,7 +433,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Product", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.CategoryEntity", "Category")
+                    b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -484,7 +484,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryEntity", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
                 {
                     b.Navigation("CategoryStores");
 

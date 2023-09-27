@@ -30,7 +30,7 @@ namespace ShoeShineAPI.Controllers
 				var categoryMapper = _map.Map<IEnumerable<CategoryRespone>>(category);
 				return Ok(categoryMapper);
 			}
-			return BadRequest("CategoryEntity Data Is Empty !!!");
+			return BadRequest("Category Data Is Empty !!!");
 		}
 		[HttpGet("get-all")]
 		public async Task<IActionResult> GetAll()
@@ -41,7 +41,7 @@ namespace ShoeShineAPI.Controllers
 				var categoryMapper = _map.Map<IEnumerable<CategoryRespone>>(category);
 				return Ok(categoryMapper);
 			}
-			return BadRequest("CategoryEntity Data Is Empty");
+			return BadRequest("Category Data Is Empty");
 		}
 	}
 }

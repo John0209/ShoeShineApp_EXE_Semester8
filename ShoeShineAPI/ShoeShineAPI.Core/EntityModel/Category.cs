@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoeShineAPI.Core.EntityModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.Model
 {
-	public class CategoryEntity
+	public class Category
 	{
 		public int CategoryId { get; set; }// Primary Key
 		public string CategoryName { get; set; } = string.Empty;
@@ -14,5 +15,6 @@ namespace ShoeShineAPI.Core.Model
 		// Relationship
 		public ICollection<Product>? Products { get; set; }
 		public ICollection<CategoryStore>? CategoryStores { get; set; }
-	}
+        public ICollection<Booking>? Bookings { get; set; }
+    }
 }

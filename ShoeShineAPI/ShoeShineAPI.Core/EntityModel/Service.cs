@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoeShineAPI.Core.EntityModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,6 @@ namespace ShoeShineAPI.Core.Model
 		public bool IsServiceStatus { get; set; }
 		// Relationship
 		public ICollection<ServiceStore>? ServiceStores { get; set; }
-	}
+        public ICollection<Booking>? Bookings { get; set; }
+    }
 }

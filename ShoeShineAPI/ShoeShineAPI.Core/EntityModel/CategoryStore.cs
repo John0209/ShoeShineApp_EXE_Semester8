@@ -10,10 +10,10 @@ namespace ShoeShineAPI.Core.Model
 	{
 		public int CategoryStoreId { get; set; } // Primary Key
 		// Foreign Key
-		public int CategoryId { get; set; } // Table CategoryEntity
+		public int CategoryId { get; set; } // Table Category
 		public int StoreId { get; set; } // Table StoreEntity
 		// Relationship
 		public virtual Store? Store { get; set; }
-		public virtual CategoryEntity? Category { get; set; }
+		public virtual Category? Category { get; set; }
 	}
 }

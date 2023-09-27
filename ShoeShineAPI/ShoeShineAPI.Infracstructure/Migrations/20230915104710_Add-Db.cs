@@ -12,7 +12,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CategoryEntity",
+                name: "Category",
                 columns: table => new
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
@@ -99,7 +99,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_Product_Category_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "CategoryEntity",
+                        principalTable: "Category",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -167,7 +167,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_CategoryStore_Category_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "CategoryEntity",
+                        principalTable: "Category",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -399,7 +399,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "RatingComment");
 
             migrationBuilder.DropTable(
-                name: "CategoryEntity");
+                name: "Category");
 
             migrationBuilder.DropTable(
                 name: "RatingStoresEntity");

@@ -16,12 +16,12 @@ namespace ShoeShineAPI.Core.Model
 		public float ProductAmount { get; set; }
 		public bool IsProductStatus { get; set; } = true;
 		// Foreign Key
-		public int CategoryId { get; set; } // Table CategoryEntity
+		public int CategoryId { get; set; } // Table Category
 		//public int RatingId { get; set; }// Table Rating
 		// Relationship
 		//public ICollection<Comment>? Comments { get; set; }
 		//public ICollection<Image>? Images { get; set; }
-		public virtual CategoryEntity? Category { get; set; }
+		public virtual Category? Category { get; set; }
 
 	}
 }

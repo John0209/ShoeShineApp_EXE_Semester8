@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoeShineAPI.Core.Model;
+using ShoeShineAPI.Core.EntityModel;
 
 namespace ShoeShineAPI.Infracstructure.DatabaseConnect;
 
@@ -14,7 +15,7 @@ public class DbContextClass: DbContext
 
 	}
 	#region DbSet
-	public DbSet<CategoryEntity> Category { get; set; }
+	public DbSet<Category> Category { get; set; }
 	public DbSet<CategoryStore> CategoryStore { get; set; }
 	public DbSet<Product> Product { get; set; }
 	public DbSet<CommentStore> CommentStore { get; set; }
@@ -27,8 +28,13 @@ public class DbContextClass: DbContext
 	public DbSet<ServiceStore> ServiceStore { get; set; }
 	public DbSet<RatingComment> RatingComment { get; set; }
 	public DbSet<RatingStores> RatingStores { get; set; }
-	#endregion
-	protected override void OnModelCreating(ModelBuilder model)
+    public DbSet<Payment> Payment { get; set; }
+    public DbSet<PaymentMethod> PaymentMethod { get; set; }
+    public DbSet<Order> Order { get; set; }
+    public DbSet<OrderDetail> OrderDetail { get; set; }
+    public DbSet<Booking> Booking { get; set; }
+    #endregion
+    protected override void OnModelCreating(ModelBuilder model)
 	{
 		model.Entity<Role>(e =>
 		{
@@ -87,7 +93,7 @@ public class DbContextClass: DbContext
 			e.Property(x => x.ProductName).HasColumnType("nvarchar(50)").IsRequired();
 			e.Property(x => x.ProductDescription).HasColumnType("nvarchar(150)");
 		});
-		model.Entity<CategoryEntity>(e =>
+		model.Entity<Category>(e =>
 		{
 			e.ToTable(nameof(Category));
 			e.HasKey(x => x.CategoryId);
@@ -125,6 +131,42 @@ public class DbContextClass: DbContext
 			e.ToTable(nameof(RatingComment));
 			e.HasKey(x => x.RatingCommentId);
 		});
-	}
+		//Payment - Order
+        model.Entity<PaymentMethod>(e =>
+        {
+            e.ToTable(nameof(PaymentMethod));
+            e.HasKey(x => x.PaymentMethodId);
+        });
+        model.Entity<Payment>(e =>
+        {
+            e.ToTable(nameof(Payment));
+            e.HasKey(x => x.PaymentId);
+			e.HasOne(x => x.PaymentMethod).WithMany(x => x.Payments).HasForeignKey(x => x.PaymentMethodId);
+        });
+        model.Entity<Order>(e =>
+        {
+            e.ToTable(nameof(Order));
+            e.HasKey(x => x.OrderId);
+            e.HasOne(x => x.Payment).WithMany(x => x.Orders).HasForeignKey(x => x.PaymentId);
+            e.HasOne(x => x.User).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
+        });
+        model.Entity<OrderDetail>(e =>
+        {
+            e.ToTable(nameof(OrderDetail));
+            e.HasKey(x => x.OrderDetailId);
+            e.HasOne(x => x.Order).WithOne(x => x.OrderDetail).HasForeignKey<OrderDetail>(x => x.OrderId);
+            e.HasOne(x => x.Booking).WithOne(x => x.OrderDetail).HasForeignKey<OrderDetail>(x => x.BookingId);
+        });
+        model.Entity<Booking>(e =>
+        {
+            e.ToTable(nameof(Booking));
+            e.HasKey(x => x.BookingId);
+            e.HasOne(x => x.Service).WithMany(x => x.Bookings).HasForeignKey(x => x.ServiceId);
+            e.HasOne(x => x.Store).WithMany(x => x.Bookings).HasForeignKey(x => x.StoreId);
+            e.HasOne(x => x.Category).WithMany(x => x.Bookings).HasForeignKey(x => x.CategoryId);
+        });
+
+
+    }
 
 	}
