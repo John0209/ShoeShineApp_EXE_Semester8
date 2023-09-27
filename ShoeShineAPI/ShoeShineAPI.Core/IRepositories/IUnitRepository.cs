@@ -21,6 +21,11 @@ namespace ShoeShineAPI.Core.IRepositories
 		ICategoryStoreRepository CategoryStoreRepository { get; }
 		IRatingCommentRepository RatingCommentRepository { get; }
 		IRatingStoreRepository RatingStoreRepository { get; }
+		IBookingRepository BookingRepository { get; }
+		IOrderRepository OrderRepository { get; }
+		IOrderDetailRepository OrderDetailRepository { get; }
+		IPaymentMethodRepository PaymentMethodRepository { get; }
+		IPaymentRepository PaymentRepository { get; }
 		int Save();
 
     }

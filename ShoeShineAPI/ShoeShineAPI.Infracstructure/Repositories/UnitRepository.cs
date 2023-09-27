@@ -30,31 +30,49 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		public IImageCommentRepository ImageCommentRepository { get; }
 		public ICategoryStoreRepository CategoryStoreRepository { get; }
 
-		public IRatingCommentRepository RatingCommentRepository => throw new NotImplementedException();
+		public IRatingCommentRepository RatingCommentRepository { get; }
 
-		public IRatingStoreRepository RatingStoreRepository => throw new NotImplementedException();
+        public IRatingStoreRepository RatingStoreRepository { get; }
 
-		public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository,
-			ICommentStoreRepository commentRepository, IImageStoreRepository imageRepository, IProductRepository productRepository, 
-			IRoleRepository roleRepository, IStoreRepository storeRepository, IUserRepository userRepository, 
-			IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository, IImageCommentRepository 
-			imageCommentRepository, ICategoryStoreRepository categoryStoreRepository)
-		{
-			_dbContextClass = dbContextClass;
-			CategoryRepository = categoryRepository;
-			CommentRepository = commentRepository;
-			ImageStoreRepository = imageRepository;
-			ProductRepository = productRepository;
-			RoleRepository = roleRepository;
-			StoreRepository = storeRepository;
-			UserRepository = userRepository;
-			ServiceRepository = serviceRepository;
-			ServiceStoreRepository = serviceStoreRepository;
-			ImageCommentRepository = imageCommentRepository;
-			CategoryStoreRepository = categoryStoreRepository;
-		}
+        public IBookingRepository BookingRepository { get; }
+        public IOrderRepository OrderRepository { get; }
+        public IOrderDetailRepository OrderDetailRepository { get; }
 
-		public int Save()
+        public IPaymentMethodRepository PaymentMethodRepository  { get; }
+
+    public IPaymentRepository PaymentRepository { get; }
+
+        public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository, 
+			ICommentStoreRepository commentRepository, IImageStoreRepository imageStoreRepository, 
+			IProductRepository productRepository, IRoleRepository roleRepository, IStoreRepository storeRepository, 
+			IUserRepository userRepository, IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository,
+			IImageCommentRepository imageCommentRepository, ICategoryStoreRepository categoryStoreRepository,
+			IRatingCommentRepository ratingCommentRepository, IRatingStoreRepository ratingStoreRepository, 
+			IBookingRepository bookingRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository,
+			IPaymentMethodRepository paymentMethodRepository, IPaymentRepository paymentRepository)
+        {
+            _dbContextClass = dbContextClass;
+            CategoryRepository = categoryRepository;
+            CommentRepository = commentRepository;
+            ImageStoreRepository = imageStoreRepository;
+            ProductRepository = productRepository;
+            RoleRepository = roleRepository;
+            StoreRepository = storeRepository;
+            UserRepository = userRepository;
+            ServiceRepository = serviceRepository;
+            ServiceStoreRepository = serviceStoreRepository;
+            ImageCommentRepository = imageCommentRepository;
+            CategoryStoreRepository = categoryStoreRepository;
+            RatingCommentRepository = ratingCommentRepository;
+            RatingStoreRepository = ratingStoreRepository;
+            BookingRepository = bookingRepository;
+            OrderRepository = orderRepository;
+            OrderDetailRepository = orderDetailRepository;
+            PaymentMethodRepository = paymentMethodRepository;
+            PaymentRepository = paymentRepository;
+        }
+
+        public int Save()
 		{
 			return _dbContextClass.SaveChanges();
 		}
