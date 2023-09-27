@@ -36,6 +36,11 @@ public static class ServiceExtension
 		services.AddScoped<IImageCommentRepository, ImageCommentRepository>();
 		services.AddScoped<IRatingCommentRepository, RatingCommentRepository>();
 		services.AddScoped<IRatingStoreRepository, RatingStoreRepository>();
-		return services;
+        services.AddScoped<IBookingRepository, BookingRepository>();
+        services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+        services.AddScoped<IPaymentRepository, PaymentRepository>();
+        services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        return services;
 	}
 }

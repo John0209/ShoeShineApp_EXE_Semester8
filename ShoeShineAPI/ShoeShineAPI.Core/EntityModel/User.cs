@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoeShineAPI.Core.EntityModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,6 @@ namespace ShoeShineAPI.Core.Model
 		// Relationship
 		public ICollection<CommentStore>? Comments { get; set; }
 		public virtual Role? Role { get; set; }
-
-	}
+        public ICollection<Order>? Orders { get; set; }
+    }
 }
