@@ -10,5 +10,9 @@ namespace ShoeShineAPI.Service.Service.IService
     public interface IBookingService
     {
         public Task<IEnumerable<Booking>> GetBookingAsync();
+        public Task<bool> CreateBooking(Booking booking);
+        public Task<int> GetBookingIdByStatus2();
+        public Task<Booking> GetBookingById(int bookingId);
+        public Task<bool> UpdateStatusBooking(int bookingId);
     }
 }
