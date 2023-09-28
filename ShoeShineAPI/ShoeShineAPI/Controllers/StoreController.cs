@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoeShineAPI.Core.DTOs;
+using ShoeShineAPI.Core.ResponeModel;
+using ShoeShineAPI.Service.Service;
 using ShoeShineAPI.Service.Service.IService;
 
 namespace ShoeShineAPI.Controllers
@@ -29,5 +31,24 @@ namespace ShoeShineAPI.Controllers
 			}
 			return BadRequest("StoreEntity Data Is Empty");
 		}
-	}
+
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterStore([FromBody] StoreRegistrationRespone storeDto)
+        {
+            var result = await _store.RegisterStoreAsync(storeDto);
+
+            if (result == "Store registration successful")
+            {
+                return Ok("Store registration successful");
+            }
+            else if (result == "StoreEmail already exists")
+            {
+                return Conflict("StoreEmail already exists");
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+    }
 }

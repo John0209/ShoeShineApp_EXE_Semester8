@@ -111,17 +111,24 @@ namespace ShoeShineAPI.Service.Service
                 return validationResults.First();
             }
 
-            user.UserName = updateProfile.Name;
-            user.UserGender = updateProfile.Gender.ToString();
-            user.UserBirthDay = updateProfile.Birthday;
-            user.UserEmail = updateProfile.Email;
-            user.UserPhone = updateProfile.PhoneNumber;
+            try
+            {
+                user.UserName = updateProfile.Name;
+                user.UserGender = updateProfile.Gender.ToString();
+                user.UserBirthDay = updateProfile.Birthday;
+                user.UserEmail = updateProfile.Email;
+                user.UserPhone = updateProfile.PhoneNumber;
 
-            _unit.UserRepository.Update(user);
+                _unit.UserRepository.Update(user);
+                _unit.Save();
 
-            _unit.Save();
-
-            return ValidationResult.Success; 
+                return ValidationResult.Success;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception here if needed
+                return new ValidationResult($"Internal server error: {ex.Message}");
+            }
         }
 
         public async Task<ValidationResult> UpdatePassword(Guid userId, ChangePassRespone changePass)
@@ -148,7 +155,7 @@ namespace ShoeShineAPI.Service.Service
 
              _unit.Save();
 
-            return ValidationResult.Success; // Password updated successfully
+            return ValidationResult.Success; 
         }
     }
 }
