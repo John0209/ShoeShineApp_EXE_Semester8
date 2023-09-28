@@ -35,7 +35,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "RatingStores");
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "ServiceStore");

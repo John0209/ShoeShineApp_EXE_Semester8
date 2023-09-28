@@ -30,9 +30,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		public IImageCommentRepository ImageCommentRepository { get; }
 		public ICategoryStoreRepository CategoryStoreRepository { get; }
 
-		public IRatingCommentRepository RatingCommentRepository { get; }
-
-        public IRatingStoreRepository RatingStoreRepository { get; }
+		public IRatingRepository RatingRepository { get; }
 
         public IBookingRepository BookingRepository { get; }
         public IOrderRepository OrderRepository { get; }
@@ -47,7 +45,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			IProductRepository productRepository, IRoleRepository roleRepository, IStoreRepository storeRepository, 
 			IUserRepository userRepository, IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository,
 			IImageCommentRepository imageCommentRepository, ICategoryStoreRepository categoryStoreRepository,
-			IRatingCommentRepository ratingCommentRepository, IRatingStoreRepository ratingStoreRepository, 
+			IRatingRepository ratingCommentRepository,
 			IBookingRepository bookingRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository,
 			IPaymentMethodRepository paymentMethodRepository, IPaymentRepository paymentRepository)
         {
@@ -63,8 +61,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
             ServiceStoreRepository = serviceStoreRepository;
             ImageCommentRepository = imageCommentRepository;
             CategoryStoreRepository = categoryStoreRepository;
-            RatingCommentRepository = ratingCommentRepository;
-            RatingStoreRepository = ratingStoreRepository;
+            RatingRepository = ratingCommentRepository;
             BookingRepository = bookingRepository;
             OrderRepository = orderRepository;
             OrderDetailRepository = orderDetailRepository;

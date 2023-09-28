@@ -26,8 +26,7 @@ public class DbContextClass: DbContext
 	public DbSet<ImageComment> ImageComment { get; set; }
 	public DbSet<Service> Service { get; set; }
 	public DbSet<ServiceStore> ServiceStore { get; set; }
-	public DbSet<RatingComment> RatingComment { get; set; }
-	public DbSet<RatingStores> RatingStores { get; set; }
+	public DbSet<Rating> Rating { get; set; }
     public DbSet<Payment> Payment { get; set; }
     public DbSet<PaymentMethod> PaymentMethod { get; set; }
     public DbSet<Order> Order { get; set; }
@@ -53,7 +52,8 @@ public class DbContextClass: DbContext
 			e.Property(x => x.UserAddress).HasColumnType("nvarchar(50)").IsRequired();
 			e.Property(x => x.UserAccount).HasColumnType("varchar(20)").IsRequired();
 			e.Property(x => x.UserPassword).HasColumnType("varchar(20)").IsRequired();
-		});
+            e.Property(x => x.UserGender).HasColumnType("varchar(15)").IsRequired();
+        });
 		model.Entity<ImageComment>(e =>
 		{
 			e.ToTable(nameof (ImageComment));
@@ -67,8 +67,7 @@ public class DbContextClass: DbContext
 			e.HasKey(x => x.CommentStoreId);
 			e.HasOne(x=>x.User).WithMany(x=> x.Comments).HasForeignKey(x=>x.UserId);
 			e.HasOne(x => x.Store).WithMany(x => x.Comments).HasForeignKey(x => x.StoreId);
-			e.HasOne(x => x.RatingComment).WithOne(x => x.Comment).HasForeignKey<CommentStore>(x => x.RatingCommentId)
-			.HasConstraintName("FK_Rating_Comment"); ;
+			e.HasOne(x => x.Ratings).WithMany(x => x.Comment).HasForeignKey(x => x.RatingId);
 			e.Property(x => x.Content).HasColumnType("nvarchar(200)").IsRequired();
 		});
 		model.Entity<ImageStore>(e =>
@@ -84,7 +83,8 @@ public class DbContextClass: DbContext
 			e.HasKey(x => x.StoreId);
 			e.Property(x => x.StoreName).HasColumnType("nvarchar(50)").IsRequired();
 			e.Property(x => x.StoreAddress).HasColumnType("nvarchar(50)").IsRequired();
-		});
+            e.HasOne(x => x.Ratings).WithMany(x => x.Stores).HasForeignKey(x => x.RatingId);
+        });
 		model.Entity<Product>(e =>
 		{
 			e.ToTable(nameof(Product));
@@ -119,17 +119,10 @@ public class DbContextClass: DbContext
 			e.HasOne(x => x.Service).WithMany(x => x.ServiceStores).HasForeignKey(x => x.ServiceId);
 			e.HasOne(x => x.Store).WithMany(x => x.ServiceStores).HasForeignKey(x => x.StoreId);
 		});
-		model.Entity<RatingStores>(e =>
+		model.Entity<Rating>(e =>
 		{
-			e.ToTable(nameof(RatingStores));
-			e.HasKey(x => x.RatingStoresId);
-			e.HasOne(x => x.Store).WithOne(x => x.RatingStores).HasForeignKey<RatingStores>(x => x.StoreId)
-			.HasConstraintName("FK_Rating_Store");
-		});
-		model.Entity<RatingComment>(e =>
-		{
-			e.ToTable(nameof(RatingComment));
-			e.HasKey(x => x.RatingCommentId);
+			e.ToTable(nameof(Rating));
+			e.HasKey(x => x.RatingId);
 		});
 		//Payment - Order
         model.Entity<PaymentMethod>(e =>

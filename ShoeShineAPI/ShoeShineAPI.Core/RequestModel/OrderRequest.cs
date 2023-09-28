@@ -15,5 +15,6 @@ namespace ShoeShineAPI.Core.RequestModel
         public string OrderCode { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public float TotalPrice { get; set; }
+        public int IsOrderStatus { get; set; }
     }
 }

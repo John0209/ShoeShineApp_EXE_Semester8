@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Infracstructure.Repositories
 {
-	public class RatingStoreRepository : GenericRepository<RatingStores>, IRatingStoreRepository
+	public class RatingRepository : GenericRepository<Rating>, IRatingRepository
 	{
-		public RatingStoreRepository(DbContextClass context) : base(context)
+		public RatingRepository(DbContextClass context) : base(context)
 		{
 		}
 	}

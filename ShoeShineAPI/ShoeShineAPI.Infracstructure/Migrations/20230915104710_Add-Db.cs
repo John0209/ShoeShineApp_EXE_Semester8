@@ -26,7 +26,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RatingComment",
+                name: "Ratings",
                 columns: table => new
                 {
                     RatingCommentId = table.Column<int>(type: "int", nullable: false)
@@ -267,8 +267,8 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_Rating_Comment",
                         column: x => x.RatingCommentId,
-                        principalTable: "RatingComment",
-                        principalColumn: "RatingCommentId",
+                        principalTable: "Ratings",
+                        principalColumn: "RatingId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -310,7 +310,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_RatingCommentId",
                 table: "Comment",
-                column: "RatingCommentId",
+                column: "RatingId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -396,7 +396,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "UserEntity");
 
             migrationBuilder.DropTable(
-                name: "RatingComment");
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "Category");

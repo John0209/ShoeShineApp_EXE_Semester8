@@ -19,7 +19,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		{
 			return await _dbContext.Set<CommentStore>()
 				.Include(s => s.ImageComments)
-				.Include(s => s.RatingComment)
+				.Include(s => s.Ratings)
 				.Include(s => s.User)
 				.Include(s => s.Store)
 				.ToListAsync();
@@ -29,7 +29,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			return await _dbContext.Set<CommentStore>()
 				.Where(x => x.StoreId == StoreId)
 				.Include(s => s.ImageComments)
-				.Include(s => s.RatingComment)
+				.Include(s => s.Ratings)
 				.Include(s => s.User)
 				.Include(s => s.Store)
 				.ToListAsync();

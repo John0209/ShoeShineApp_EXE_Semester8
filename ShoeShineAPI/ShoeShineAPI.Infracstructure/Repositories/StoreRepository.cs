@@ -20,7 +20,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
         {
             return await _dbContext.Set<Store>()
                 .Include(s => s.Images)
-                .Include(s => s.RatingStores)
+                .Include(s => s.Ratings)
                 .ToListAsync();
         }
     }

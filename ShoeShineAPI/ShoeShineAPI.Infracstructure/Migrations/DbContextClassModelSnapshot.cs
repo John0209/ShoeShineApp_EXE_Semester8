@@ -62,6 +62,9 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IsOrderStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("OrderCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -218,7 +221,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("RatingCommentId")
+                    b.Property<int>("RatingId")
                         .HasColumnType("int");
 
                     b.Property<int>("StoreId")
@@ -229,8 +232,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("CommentStoreId");
 
-                    b.HasIndex("RatingCommentId")
-                        .IsUnique();
+                    b.HasIndex("RatingId");
 
                     b.HasIndex("StoreId");
 
@@ -321,42 +323,20 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("Product", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingComment", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Rating", b =>
                 {
-                    b.Property<int>("RatingCommentId")
+                    b.Property<int>("RatingId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingCommentId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingId"));
 
-                    b.Property<int>("RatingCommentScale")
+                    b.Property<int>("RatingScale")
                         .HasColumnType("int");
 
-                    b.HasKey("RatingCommentId");
+                    b.HasKey("RatingId");
 
-                    b.ToTable("RatingComment", (string)null);
-                });
-
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingStores", b =>
-                {
-                    b.Property<int>("RatingStoresId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingStoresId"));
-
-                    b.Property<int>("RatingStoreScale")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RatingStoresId");
-
-                    b.HasIndex("StoreId")
-                        .IsUnique();
-
-                    b.ToTable("RatingStores", (string)null);
+                    b.ToTable("Rating", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Role", b =>
@@ -433,6 +413,9 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Property<bool>("IsStoreStatus")
                         .HasColumnType("bit");
 
+                    b.Property<int>("RatingId")
+                        .HasColumnType("int");
+
                     b.Property<string>("StoreAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
@@ -441,11 +424,21 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StoreEmal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("StoreName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("StorePhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("StoreId");
+
+                    b.HasIndex("RatingId");
 
                     b.ToTable("Store", (string)null);
                 });
@@ -479,7 +472,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.Property<string>("UserGender")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(15)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -597,12 +590,11 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.CommentStore", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.RatingComment", "RatingComment")
-                        .WithOne("Comment")
-                        .HasForeignKey("ShoeShineAPI.Core.Model.CommentStore", "RatingCommentId")
+                    b.HasOne("ShoeShineAPI.Core.Model.Rating", "Ratings")
+                        .WithMany("Comment")
+                        .HasForeignKey("RatingId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Rating_Comment");
+                        .IsRequired();
 
                     b.HasOne("ShoeShineAPI.Core.Model.Store", "Store")
                         .WithMany("Comments")
@@ -616,7 +608,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RatingComment");
+                    b.Navigation("Ratings");
 
                     b.Navigation("Store");
 
@@ -656,18 +648,6 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingStores", b =>
-                {
-                    b.HasOne("ShoeShineAPI.Core.Model.Store", "Store")
-                        .WithOne("RatingStores")
-                        .HasForeignKey("ShoeShineAPI.Core.Model.RatingStores", "StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Rating_Store");
-
-                    b.Navigation("Store");
-                });
-
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ServiceStore", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Service", "Service")
@@ -685,6 +665,17 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Service");
 
                     b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Store", b =>
+                {
+                    b.HasOne("ShoeShineAPI.Core.Model.Rating", "Ratings")
+                        .WithMany("Stores")
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ratings");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.User", b =>
@@ -732,9 +723,11 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("ImageComments");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingComment", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Rating", b =>
                 {
                     b.Navigation("Comment");
+
+                    b.Navigation("Stores");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Role", b =>
@@ -758,8 +751,6 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
-
-                    b.Navigation("RatingStores");
 
                     b.Navigation("ServiceStores");
                 });

@@ -14,12 +14,12 @@ namespace ShoeShineAPI.Core.Model
 		public Guid UserId { get; set; } // Table UserEntity
 		//public int ProductId { get; set; } // Table ProductEntity
 		public int StoreId { get; set; } // Table StoreEntity
-		public int RatingCommentId { get; set; }// Table Rating
+		public int RatingId { get; set; }// Table Ratings
 		// Relationship
 		public ICollection<ImageComment>? ImageComments { get; set; }
 		public virtual User? User { get; set; }
 		public virtual Store? Store { get; set; }
 		//public virtual ProductEntity? ProductEntity { get; set; }
-		public virtual RatingComment? RatingComment { get; set; }
+		public virtual Rating? Ratings { get; set; }
 	}
 }

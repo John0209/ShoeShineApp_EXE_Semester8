@@ -13,13 +13,13 @@ namespace ShoeShineAPI.Mapper
                 .ForMember(dest => dest.ImageUrl,
                             opt => opt.MapFrom(src => src.Images != null && src.Images.Any() ?
                                                         src.Images.FirstOrDefault().ImageURL : string.Empty))
-                .ForMember(dest => dest.RatingStoreScale,
-                            opt => opt.MapFrom(src => src.RatingStores != null ? src.RatingStores.RatingStoreScale : 0))
+                .ForMember(dest => dest.RatingScale,
+                            opt => opt.MapFrom(src => src.Ratings != null ? src.Ratings.RatingScale : 0))
                 .ReverseMap();
 
 			CreateMap<CommentStore, CommentStoreRespone>().
 				ForMember(dest => dest.RatingComment,
-						otp => otp.MapFrom(src => src.RatingComment != null ? src.RatingComment.RatingCommentScale : 0))
+						otp => otp.MapFrom(src => src.Ratings != null ? src.Ratings.RatingScale : 0))
 				.ForMember(dest => dest.ImageComments,
 						otp => otp.MapFrom(src => src.ImageComments != null && src.ImageComments.Any() ? src.ImageComments.
 						Select(x=> x.ImageCommentURL).ToList() : new List<string>() ))

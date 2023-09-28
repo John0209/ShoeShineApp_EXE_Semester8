@@ -17,7 +17,7 @@ namespace ShoeShineAPI.Core.Model
 		public bool IsProductStatus { get; set; } = true;
 		// Foreign Key
 		public int CategoryId { get; set; } // Table Category
-		//public int RatingId { get; set; }// Table Rating
+		//public int RatingId { get; set; }// Table Ratings
 		// Relationship
 		//public ICollection<Comment>? Comments { get; set; }
 		//public ICollection<Image>? Images { get; set; }

@@ -83,7 +83,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RatingCommentId")
+                    b.Property<int>("RatingId")
                         .HasColumnType("int");
 
                     b.Property<int>("StoreId")
@@ -96,7 +96,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("RatingCommentId")
+                    b.HasIndex("RatingId")
                         .IsUnique();
 
                     b.HasIndex("StoreId");
@@ -193,20 +193,20 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("ProductEntity", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingComment", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Ratings", b =>
                 {
-                    b.Property<int>("RatingCommentId")
+                    b.Property<int>("RatingId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingCommentId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingId"));
 
-                    b.Property<int>("RatingCommentScale")
+                    b.Property<int>("RatingScale")
                         .HasColumnType("int");
 
-                    b.HasKey("RatingCommentId");
+                    b.HasKey("RatingId");
 
-                    b.ToTable("RatingComment", (string)null);
+                    b.ToTable("Ratings", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingStoresEntity", b =>
@@ -217,7 +217,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingStoresId"));
 
-                    b.Property<int>("RatingStoreScale")
+                    b.Property<int>("RatingScale")
                         .HasColumnType("int");
 
                     b.Property<int>("StoreId")
@@ -392,9 +392,9 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShoeShineAPI.Core.Model.RatingComment", "RatingComment")
+                    b.HasOne("ShoeShineAPI.Core.Model.Ratings", "Ratings")
                         .WithOne("Comment")
-                        .HasForeignKey("ShoeShineAPI.Core.Model.Comment", "RatingCommentId")
+                        .HasForeignKey("ShoeShineAPI.Core.Model.Comment", "RatingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Rating_Comment");
@@ -413,7 +413,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.Navigation("ProductEntity");
 
-                    b.Navigation("RatingComment");
+                    b.Navigation("Ratings");
 
                     b.Navigation("StoreEntity");
 
@@ -520,7 +520,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Images");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.RatingComment", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Ratings", b =>
                 {
                     b.Navigation("Comment");
                 });
