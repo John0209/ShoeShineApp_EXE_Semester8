@@ -14,12 +14,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ShoeShineAPI.Enum;
 using System.ComponentModel.DataAnnotations;
 
 namespace ShoeShineAPI.Controllers
 {
-    [Route("api/user")]
+    [Route("api/users")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -56,8 +55,8 @@ namespace ShoeShineAPI.Controllers
             return Ok(guid);
         }
        
-		[Authorize(Roles = EnumClass.RoleNames.Admin)]
-		[HttpGet("get-all")]
+		//[Authorize(Roles = EnumClass.RoleNames.Admin)]
+		[HttpGet()]
         public async Task<IActionResult> GetAll()
         {
             var users = await _user.GetUserAsnyc();

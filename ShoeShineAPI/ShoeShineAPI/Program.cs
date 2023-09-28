@@ -56,6 +56,9 @@ builder.Services.AddScoped<IRatingCommentService, RatingCommentService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ICommentStoreService, CommentStoreService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+
 // Mapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // Token

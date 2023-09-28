@@ -14,6 +14,7 @@ namespace ShoeShineAPI.Core.EntityModel
         public int ServiceId { get; set; }
         public int StoreId { get; set; }
         public int CategoryId { get; set; }
+        public int IsBookingStatus { get; set; }
         // Relationship
         public Service? Service { get; set; }
         public Store? Store { get; set; }

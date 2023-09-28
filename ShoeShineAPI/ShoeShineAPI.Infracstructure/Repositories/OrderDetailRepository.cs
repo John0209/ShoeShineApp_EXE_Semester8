@@ -1,4 +1,5 @@
-﻿using ShoeShineAPI.Core.EntityModel;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoeShineAPI.Core.EntityModel;
 using ShoeShineAPI.Core.IRepositories;
 using ShoeShineAPI.Infracstructure.DatabaseConnect;
 using System;
@@ -13,6 +14,13 @@ namespace ShoeShineAPI.Infracstructure.Repositories
     {
         public OrderDetailRepository(DbContextClass context) : base(context)
         {
+        }
+        public override async Task<IEnumerable<OrderDetail>> GetAll()
+        {
+            return await _dbContext.Set<OrderDetail>()
+                .Include(x=> x.Booking.Service)
+                .Include(x=> x.Booking.Category)
+                .Include(x => x.Booking.Store).ToListAsync();
         }
     }
 }

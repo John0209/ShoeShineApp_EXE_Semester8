@@ -9,5 +9,6 @@ namespace ShoeShineAPI.Core.IRepositories
 {
     public interface IBookingRepository:IGenericRepository<Booking>
     {
+        public Task<int> GetBookingJustCreate();
     }
 }

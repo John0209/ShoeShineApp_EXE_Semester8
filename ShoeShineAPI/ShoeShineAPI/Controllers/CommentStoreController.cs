@@ -7,7 +7,7 @@ using ShoeShineAPI.Service.Service.IService;
 
 namespace ShoeShineAPI.Controllers
 {
-	[Route("api/comment-store")]
+	[Route("api/comment-stores")]
 	[ApiController]
 	public class CommentStoreController : Controller
 	{
