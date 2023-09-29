@@ -22,9 +22,9 @@
 
         public enum Gender
         {
-            Nam,
-            Nữ,
-            Khác
+            Nam = 1,
+            Nữ = 2 ,
+            Khác = 3 
         }
     }
 }

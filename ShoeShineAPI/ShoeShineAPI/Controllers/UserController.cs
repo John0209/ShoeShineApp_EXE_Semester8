@@ -122,29 +122,15 @@ namespace ShoeShineAPI.Controllers
         [HttpPut("update/{userId}")]
         public async Task<IActionResult> UpdateUserProfile(Guid userId, UpdateProfileRespone updateProfile)
         {
-            try
-            {
-                var validationResult = await _user.UpdateUserProfile(userId, updateProfile);
+            var validationResult = await _user.UpdateUserProfile(userId, updateProfile);
 
-                if (validationResult == ValidationResult.Success)
-                {
-                    return Ok("User profile updated successfully");
-                }
-                else
-                {
-                    return BadRequest(validationResult.ErrorMessage);
-                }
+            if (validationResult == ValidationResult.Success)
+            {
+                return Ok("User profile updated successfully");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Internal server error: {ex.Message}");
-
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-                }
-
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest(validationResult.ErrorMessage);
             }
         }
 
