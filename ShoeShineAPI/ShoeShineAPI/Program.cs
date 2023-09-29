@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using AutoMapper;
 using Microsoft.OpenApi.Models;
+using ShoeShineAPI.Gateway.Config;
+using ShoeShineAPI.Gateway.IConfig;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,7 +60,10 @@ builder.Services.AddScoped<ICommentStoreService, CommentStoreService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
-
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IMomoConfig,MomoConfig>();
+//Gateway
+builder.Services.Configure<MomoConfig>(builder.Configuration.GetSection(MomoConfig.ConfigName));
 // Mapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // Token
