@@ -54,6 +54,7 @@ namespace ShoeShineAPI.Mapper
 			CreateMap<Order, OrderRequest>().ReverseMap();
             CreateMap<OrderDetail, OrderDetailRequest>().ReverseMap();
             CreateMap<Booking, BookingRequest>().ReverseMap();
+            CreateMap<CommentStoreRequest, CommentStore>().ReverseMap();
             #endregion Mapper-Request
         }
     }

@@ -33,5 +33,35 @@ namespace ShoeShineAPI.Service.Service
 		{
 			return await _unit.CommentRepository.GetAll();
 		}
-	}
+
+        public async Task<CommentStore> GetCommentById(int id)
+        {
+            return await _unit.CommentRepository.GetById(id);
+        }
+
+        public async Task<int> CreateCommentAsync(CommentStore entity)
+        {
+            await _unit.CommentRepository.Add(entity);
+            _unit.Save();
+            return entity.CommentStoreId;
+        }
+
+        public async Task UpdateCommentAsync(CommentStore entity)
+        {
+            _unit.CommentRepository.Update(entity);
+            _unit.Save();
+        }
+
+        public async Task CreateImagesCommentAsync(IEnumerable<ImageComment> entities)
+        {
+            await _unit.ImageCommentRepository.AddList(entities);
+            _unit.Save();
+        }
+
+        public async Task DeleteImagesCommentByCommentStoreIdAsync(int commentStoreId)
+        {
+            await _unit.ImageCommentRepository.RemoveImageCommentsByCommentStoreId(commentStoreId);
+            _unit.Save();
+        }
+    }
 }

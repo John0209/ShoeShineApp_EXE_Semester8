@@ -9,5 +9,6 @@ namespace ShoeShineAPI.Core.IRepositories
 {
 	public interface IImageCommentRepository:IGenericRepository<ImageComment>
 	{
-	}
+        Task RemoveImageCommentsByCommentStoreId(int commentStoreId);
+    }
 }

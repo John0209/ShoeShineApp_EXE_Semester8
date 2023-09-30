@@ -14,5 +14,19 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		public ImageCommentRepository(DbContextClass context) : base(context)
 		{
 		}
-	}
+
+        public Task RemoveImageCommentsByCommentStoreId(int commentStoreId)
+        {
+            var imageComments = _dbContext.Set<ImageComment>()
+                .Where(i => i.CommentStoreId == commentStoreId)
+                .ToList();
+
+            if (imageComments.Any())
+            {
+                _dbContext.Set<ImageComment>().RemoveRange(imageComments);
+            }
+
+            return Task.CompletedTask;
+        }
+    }
 }
