@@ -60,18 +60,22 @@ namespace ShoeShineAPI.Service.Service
                 return false;
             }
 
+            // Gán RoleId t? EnumClass.RoleEnum.Customer
             var newUser = new User
             {
                 UserId = Guid.NewGuid(),
                 UserName = registrationDTO.UserName,
                 UserEmail = registrationDTO.UserEmail,
                 UserPassword = registrationDTO.UserPassword,
+                RoleId = (int)EnumClass.RoleEnum.Customer
             };
 
             await _unit.UserRepository.Add(newUser);
+            _unit.Save();
 
             return true;
         }
+
 
         protected override async Task<IEnumerable<User>> GetAllDataAsync()
         {
