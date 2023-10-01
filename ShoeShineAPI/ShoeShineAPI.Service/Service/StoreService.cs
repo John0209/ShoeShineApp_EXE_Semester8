@@ -69,5 +69,10 @@ namespace ShoeShineAPI.Service.Service
             return stores.Any(s => s.StoreEmal == storeEmail);
         }
 
+        public async Task<Store> GetStoreById(int id)
+        {
+            var store = await _unit.StoreRepository.GetById(id);
+            return store;
+        }
     }
 }

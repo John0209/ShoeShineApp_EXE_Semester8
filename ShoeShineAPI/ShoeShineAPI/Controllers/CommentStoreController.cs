@@ -13,14 +13,21 @@ namespace ShoeShineAPI.Controllers
 	public class CommentStoreController : Controller
 	{
 		ICommentStoreService _comment;
+        IUserService _userService;
+        IStoreService _storeService;
+        IRatingCommentService _ratingService;
 		IMapper _map;
 
-		public CommentStoreController(ICommentStoreService comment, IMapper map)
-		{
-			_comment = comment;
-			_map = map;
-		}
-		[HttpGet("get-comment-of-by-store-id")]
+		public CommentStoreController(ICommentStoreService comment, IMapper map, 
+            IUserService userService, IStoreService storeService, IRatingCommentService ratingService)
+        {
+            _comment = comment;
+            _map = map;
+            _userService = userService;
+            _storeService = storeService;
+            _ratingService = ratingService;
+        }
+        [HttpGet("get-comment-of-by-store-id")]
 		public async Task<IActionResult> GetCommentByStoreId(int storeId)
 		{
 			var comment = await _comment.GetCommentByStoreId(storeId);
@@ -61,6 +68,25 @@ namespace ShoeShineAPI.Controllers
             {
                 return BadRequest();
             }
+
+            var user = await _userService.GetUserById(commentRequest.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var store = await _storeService.GetStoreById(commentRequest.StoreId);
+            if(store == null)
+            {
+                return NotFound();
+            }
+
+            var rating = await _ratingService.GetRatingCommentById(commentRequest.RatingId);
+            if(rating == null)
+            {
+                return NotFound();
+            }
+
             var comment = _map.Map<CommentStore>(commentRequest);
             int commentId = await _comment.CreateCommentAsync(comment);
             if (commentRequest.ImageLinks != null && commentRequest.ImageLinks.Any())
@@ -82,6 +108,24 @@ namespace ShoeShineAPI.Controllers
             if (commentRequest == null || id != commentRequest.CommentStoreId)
             {
                 return BadRequest();
+            }
+
+            var user = await _userService.GetUserById(commentRequest.UserId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var store = await _storeService.GetStoreById(commentRequest.StoreId);
+            if (store == null)
+            {
+                return NotFound();
+            }
+
+            var rating = await _ratingService.GetRatingCommentById(commentRequest.RatingId);
+            if (rating == null)
+            {
+                return NotFound();
             }
 
             var existingComment = await _comment.GetCommentById(id);

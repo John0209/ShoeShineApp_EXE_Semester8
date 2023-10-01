@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoeShineAPI.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace ShoeShineAPI.Service.Service.IService
 {
 	public interface IRatingCommentService
 	{
+		Task<Rating> GetRatingCommentById(int id);
 	}
 }

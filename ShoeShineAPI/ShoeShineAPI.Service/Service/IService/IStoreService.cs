@@ -13,5 +13,6 @@ namespace ShoeShineAPI.Service.Service.IService
 		public Task<IEnumerable<Store>> GetStoresAsync();
         Task<string> RegisterStoreAsync(StoreRegistrationRespone storeRegister);
         Task<bool> CheckStoreEmailExistsAsync(string storeEmail);
+        Task<Store> GetStoreById(int id);
     }
 }
