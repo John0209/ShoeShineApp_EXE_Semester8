@@ -50,5 +50,17 @@ namespace ShoeShineAPI.Controllers
                 return BadRequest(result);
             }
         }
+
+		[HttpGet("search/{storeName}")]
+		public async Task<IActionResult> GetStoresByName(string storeName)
+		{
+			var stores = await _store.GetStoreByName(storeName);
+			if(stores.Any())
+			{
+                var storesMapper = _map.Map<IEnumerable<StoreRespone>>(stores);
+                return Ok(storesMapper);
+            }
+			return NotFound("There is no such store!");
+		}
     }
 }

@@ -9,5 +9,6 @@ namespace ShoeShineAPI.Core.IRepositories
 {
 	public interface IStoreRepository : IGenericRepository<Store>
 	{
+		Task<IEnumerable<Store>> GetStoresByName(string storeName);
 	}
 }

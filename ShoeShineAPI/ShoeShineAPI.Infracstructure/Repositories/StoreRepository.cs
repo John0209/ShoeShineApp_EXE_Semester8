@@ -23,5 +23,14 @@ namespace ShoeShineAPI.Infracstructure.Repositories
                 .Include(s => s.Ratings)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Store>> GetStoresByName(string storeName)
+        {
+            return await _dbContext.Set<Store>()
+                .Include(s => s.Images)
+                .Include(s => s.Ratings)
+                .Where(s => s.StoreName.Contains(storeName))
+                .ToListAsync();
+        }
     }
 }

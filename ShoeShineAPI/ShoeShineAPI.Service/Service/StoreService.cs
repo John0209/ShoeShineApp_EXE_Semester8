@@ -74,5 +74,11 @@ namespace ShoeShineAPI.Service.Service
             var store = await _unit.StoreRepository.GetById(id);
             return store;
         }
+
+        public async Task<IEnumerable<Store>> GetStoreByName(string storeName)
+        {
+            var stores = await _unit.StoreRepository.GetStoresByName(storeName);
+            return stores;
+        }
     }
 }
