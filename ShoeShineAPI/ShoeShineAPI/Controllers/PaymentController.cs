@@ -23,7 +23,7 @@ namespace ShoeShineAPI.Controllers
         }
 
         [HttpPost("momo")]
-        public IActionResult CreatePaymentMomo(MomoPaymentRequest paymentRequest)
+        public IActionResult CreatePaymentMomo([FromBody] MomoPaymentRequest paymentRequest)
         {
             paymentRequest.redirectUrl = _momoConfig.ReturnUrl;
             paymentRequest.ipnUrl = _momoConfig.IpnUrl;

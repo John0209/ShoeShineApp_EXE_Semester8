@@ -13,21 +13,24 @@ namespace ShoeShineAPI.Core.RequestModel.PaymentRequest
     {
         [JsonIgnore]
         public string partnerCode { get; set; } = "";
-        public string requestId { get; set; } = string.Empty;
+        public string requestId { get; set; } = "A123";
         [JsonIgnore]
         public string ipnUrl { get; set; } = "";
-        public long amount { get; set; } = long.MaxValue;
+        public long amount { get; set; } = 150000;
         [RegularExpression(@"^[0-9a-zA-Z]([-_.]*[0-9a-zA-Z]+)*$", ErrorMessage = "orderId format is invalid")]
-        public string orderId { get; set; } = string.Empty;
-        public string orderInfo { get; set; } = string.Empty;
+        public string orderId { get; set; } = "A123";
+        public string orderInfo { get; set; } = "TH TrueMilk 123 Star";
         [JsonIgnore]
         public string redirectUrl { get; set; } = "";
-        public string requestType { get; set; } = string.Empty;
-        public string extraData { get; set; } = string.Empty;
         [JsonIgnore]
-        public string lang { get; set; } = "vi";
+        public string requestType { get; set; } = "captureWallet";
+        [JsonIgnore]
+        public string extraData { get; set; } = "eyJ1c2VybmFtZSI6ICJtb21vIn0=";
         [JsonIgnore]
         public string signature { get; set; } = "";
+        [JsonIgnore]
+        public string lang { get; set; } = "vi";
+       
        
     }
 }
