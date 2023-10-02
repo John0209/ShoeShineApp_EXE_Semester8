@@ -50,7 +50,7 @@ namespace ShoeShineAPI.Service.Service
             }
         }
 
-        public async Task<Order> GetOrderById(int orderId)
+        public async Task<Order?> GetOrderById(int orderId)
         {
             return await _unit.OrderRepository.GetById(orderId);
         }

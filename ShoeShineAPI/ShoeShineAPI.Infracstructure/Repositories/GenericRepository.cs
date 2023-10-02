@@ -36,25 +36,25 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			return await _dbContext.Set<T>().ToListAsync();
 		}
 
-		public virtual async Task<T> GetById(Guid id)
+		public virtual async Task<T?> GetById(Guid id)
 		{
 			T? entity = await _dbContext.Set<T>().FindAsync(id);
-			if (entity == null)
+			/*if (entity == null)
 			{
 				// Xử lý khi không tìm thấy đối tượng
 				throw new NullReferenceException();
-			}
+			}*/
 			return entity;
 		}
 
-		public virtual async Task<T> GetById(int id)
+		public virtual async Task<T?> GetById(int id)
 		{
 			T? entity = await _dbContext.Set<T>().FindAsync(id);
-			if (entity == null)
+			/*if (entity == null)
 			{
 				// Xử lý khi không tìm thấy đối tượng
 				throw new NullReferenceException();
-			}
+			}*/
 			return entity;
 		}
 

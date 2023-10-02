@@ -59,7 +59,7 @@ namespace ShoeShineAPI.Controllers
                 var commentMap = _map.Map<CommentStoreRespone>(comment);
                 return Ok(commentMap);
             }
-            return BadRequest("Comment Data Is not exist!");
+            return BadRequest("Comment Data not found!");
         }
         [HttpPost("create")]
         public async Task<IActionResult> CreateComment([FromBody] CommentStoreRequest commentRequest)
@@ -72,19 +72,19 @@ namespace ShoeShineAPI.Controllers
             var user = await _userService.GetUserById(commentRequest.UserId);
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User not found");
             }
 
             var store = await _storeService.GetStoreById(commentRequest.StoreId);
             if(store == null)
             {
-                return NotFound();
+                return NotFound("Store not found");
             }
 
             var rating = await _ratingService.GetRatingCommentById(commentRequest.RatingId);
             if(rating == null)
             {
-                return NotFound();
+                return NotFound("Rating not found");
             }
 
             var comment = _map.Map<CommentStore>(commentRequest);

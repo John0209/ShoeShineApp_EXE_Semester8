@@ -34,7 +34,7 @@ namespace ShoeShineAPI.Service.Service
 			return await _unit.CommentRepository.GetAll();
 		}
 
-        public async Task<CommentStore> GetCommentById(int id)
+        public async Task<CommentStore?> GetCommentById(int id)
         {
             return await _unit.CommentRepository.GetById(id);
         }

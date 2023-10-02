@@ -8,8 +8,8 @@ namespace ShoeShineAPI.Core.IRepositories
 {
 	public interface IGenericRepository<T> where T : class
 	{
-		Task<T> GetById(Guid id);
-		Task<T> GetById(int id);
+		Task<T?> GetById(Guid id);
+		Task<T?> GetById(int id);
 		Task<IEnumerable<T>> GetAll();
 		Task Add(T entity);
 		Task AddList(IEnumerable<T> entities);

@@ -93,11 +93,11 @@ namespace ShoeShineAPI.Service.Service
             return users.Any(u => u.UserEmail == email);
         }
 
-		public async Task<User> GetUserById(Guid userId)
+		public async Task<User?> GetUserById(Guid userId)
 		{
             var user=await _unit.UserRepository.GetById(userId);
-            if (user != null) return user;
-			throw new NotFoundException("UserEntity not found");
+            /*if (user != null)*/ return user;
+			/*throw new NotFoundException("UserEntity not found");*/
 		}
 
         public async Task<ValidationResult> UpdateUserProfile(Guid userId, UpdateProfileRespone updateProfile)

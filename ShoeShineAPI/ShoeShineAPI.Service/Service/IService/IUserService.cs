@@ -16,7 +16,7 @@ namespace ShoeShineAPI.Service.Service.IService
 		public string CreateToken(Guid userId, string roles);
 		public Task<IEnumerable<User>> GetUserAsnyc();
         Task<bool> RegisterUser(RegistrationRespone registrationDTO);
-		public Task<User> GetUserById(Guid userId);
+		public Task<User?> GetUserById(Guid userId);
         Task<ValidationResult> UpdateUserProfile(Guid userId, UpdateProfileRespone updateProfile);
 		public Task<ValidationResult> UpdatePassword(Guid userId, ChangePassRespone changePass);
     }

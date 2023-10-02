@@ -36,7 +36,7 @@ namespace ShoeShineAPI.Service.Service
             return await GetAllDataAsync();
         }
 
-        public async Task<Booking> GetBookingById(int bookingId)
+        public async Task<Booking?> GetBookingById(int bookingId)
         {
             return await _unit.BookingRepository.GetById(bookingId);
         }

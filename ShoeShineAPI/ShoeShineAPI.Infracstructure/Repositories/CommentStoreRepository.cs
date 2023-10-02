@@ -35,7 +35,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 				.ToListAsync();
 		}
 
-        public override async Task<CommentStore> GetById(int id)
+        public override async Task<CommentStore?> GetById(int id)
         {
             return await _dbContext.Set<CommentStore>()
                 .Where(x => x.CommentStoreId == id)

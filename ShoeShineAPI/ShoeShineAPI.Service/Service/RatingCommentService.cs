@@ -18,7 +18,7 @@ namespace ShoeShineAPI.Service.Service
             _unit = unit;
         }
 
-        public async Task<Rating> GetRatingCommentById(int id)
+        public async Task<Rating?> GetRatingCommentById(int id)
         {
             var rating = await _unit.RatingRepository.GetById(id);
             return rating;

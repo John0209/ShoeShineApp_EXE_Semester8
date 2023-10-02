@@ -9,6 +9,6 @@ namespace ShoeShineAPI.Service.Service.IService
 {
 	public interface IRatingCommentService
 	{
-		Task<Rating> GetRatingCommentById(int id);
+		Task<Rating?> GetRatingCommentById(int id);
 	}
 }

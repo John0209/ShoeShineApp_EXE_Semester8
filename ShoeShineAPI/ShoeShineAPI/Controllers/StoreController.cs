@@ -60,7 +60,7 @@ namespace ShoeShineAPI.Controllers
                 var storesMapper = _map.Map<IEnumerable<StoreRespone>>(stores);
                 return Ok(storesMapper);
             }
-			return NotFound("There is no such store!");
+			return NotFound("Store Data is empty!");
 		}
     }
 }
