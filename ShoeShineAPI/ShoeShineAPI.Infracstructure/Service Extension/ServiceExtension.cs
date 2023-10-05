@@ -40,6 +40,7 @@ public static class ServiceExtension
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IBookingCategoryRepository, BookingCategoryRepository>();
         return services;
 	}
 }

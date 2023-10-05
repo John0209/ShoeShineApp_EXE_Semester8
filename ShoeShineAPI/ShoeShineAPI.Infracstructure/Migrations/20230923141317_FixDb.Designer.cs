@@ -27,11 +27,11 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("CategoryIdArray")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryIdArray"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -40,7 +40,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Property<bool>("IsCategoryStatus")
                         .HasColumnType("bit");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("CategoryIdArray");
 
                     b.ToTable("Category", (string)null);
                 });
@@ -53,7 +53,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryStoreId"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("CategoryIdArray")
                         .HasColumnType("int");
 
                     b.Property<int>("StoreId")
@@ -61,7 +61,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("CategoryStoreId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryIdArray");
 
                     b.HasIndex("StoreId");
 
@@ -153,7 +153,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("CategoryIdArray")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsProductStatus")
@@ -178,7 +178,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryIdArray");
 
                     b.ToTable("Product", (string)null);
                 });
@@ -366,7 +366,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("CategoryStores")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("CategoryIdArray")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -435,7 +435,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("CategoryIdArray")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

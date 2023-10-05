@@ -21,5 +21,11 @@ namespace ShoeShineAPI.Infracstructure.Repositories
             return _dbContext.Set<Booking>().Where(x => x.IsBookingStatus == 1)
                 .Select(x => x.BookingId).FirstOrDefaultAsync();
         }
+        public override async Task<IEnumerable<Booking>> GetAll()
+        {
+            return await _dbContext.Set<Booking>().Include(x=> x.Service)
+                    .Include(x=> x.Store).Include(x=>x.BookingCategories).
+                    ThenInclude(x=> x.Category).ToListAsync();
+        }
     }
 }

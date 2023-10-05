@@ -40,14 +40,14 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 
 		public ITransactionRepository TransactionRepository { get; }
 
-        public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository, 
+        public IBookingCategoryRepository BookingCategoryRepository { get; }
+
+        public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository,
 			ICommentStoreRepository commentRepository, IImageStoreRepository imageStoreRepository, 
 			IProductRepository productRepository, IRoleRepository roleRepository, IStoreRepository storeRepository, 
-			IUserRepository userRepository, IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository,
-			IImageCommentRepository imageCommentRepository, ICategoryStoreRepository categoryStoreRepository,
-			IRatingRepository ratingCommentRepository,
-			IBookingRepository bookingRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository,
-			IPaymentMethodRepository paymentMethodRepository, ITransactionRepository paymentRepository)
+			IUserRepository userRepository, IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository
+			, IImageCommentRepository imageCommentRepository, ICategoryStoreRepository categoryStoreRepository, 
+			IRatingRepository ratingRepository, IBookingRepository bookingRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository, IPaymentMethodRepository paymentMethodRepository, ITransactionRepository transactionRepository, IBookingCategoryRepository bookingCategoryRepository)
         {
             _dbContextClass = dbContextClass;
             CategoryRepository = categoryRepository;
@@ -61,12 +61,13 @@ namespace ShoeShineAPI.Infracstructure.Repositories
             ServiceStoreRepository = serviceStoreRepository;
             ImageCommentRepository = imageCommentRepository;
             CategoryStoreRepository = categoryStoreRepository;
-            RatingRepository = ratingCommentRepository;
+            RatingRepository = ratingRepository;
             BookingRepository = bookingRepository;
             OrderRepository = orderRepository;
             OrderDetailRepository = orderDetailRepository;
             PaymentMethodRepository = paymentMethodRepository;
-            TransactionRepository = paymentRepository;
+            TransactionRepository = transactionRepository;
+            BookingCategoryRepository = bookingCategoryRepository;
         }
 
         public int Save()

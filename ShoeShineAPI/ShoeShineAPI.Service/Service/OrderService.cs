@@ -63,7 +63,7 @@ namespace ShoeShineAPI.Service.Service
         {
             while (true)
             {
-                string code = "O";
+                string code = "SSN-";
                 Random rd = new Random();
                 int number = rd.Next(1000, 9999);
                 code += number;

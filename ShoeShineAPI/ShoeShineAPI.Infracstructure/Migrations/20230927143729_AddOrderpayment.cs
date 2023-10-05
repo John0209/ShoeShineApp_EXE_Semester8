@@ -28,7 +28,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         name: "FK_Booking_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
-                        principalColumn: "CategoryId",
+                        principalColumn: "CategoryIdArray",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Booking_Service_ServiceId",
@@ -140,7 +140,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Booking_CategoryId",
                 table: "Booking",
-                column: "CategoryId");
+                column: "CategoryIdArray");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Booking_ServiceId",

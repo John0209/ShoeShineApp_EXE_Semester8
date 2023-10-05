@@ -18,9 +18,9 @@ namespace ShoeShineAPI.Infracstructure.Repositories
         public override async Task<IEnumerable<OrderDetail>> GetAll()
         {
             return await _dbContext.Set<OrderDetail>()
-                .Include(x=> x.Booking/*.Service*/)
-                /*.Include(x=> x.Booking.Category)
-                .Include(x => x.Booking.Store)*/.ToListAsync();
+                .Include(x=> x.Booking.Service)
+                
+                .Include(x => x.Booking.Store).ToListAsync();
         }
     }
 }

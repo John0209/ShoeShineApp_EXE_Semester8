@@ -67,7 +67,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         name: "FK_ProductEntity_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
-                        principalColumn: "CategoryId",
+                        principalColumn: "CategoryIdArray",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -128,7 +128,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         name: "FK_CategoryStoreEntity_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
-                        principalColumn: "CategoryId",
+                        principalColumn: "CategoryIdArray",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CategoryStoreEntity_StoreEntity_StoreId",
@@ -207,7 +207,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CategoryStoreEntity_CategoryId",
                 table: "CategoryStoreEntity",
-                column: "CategoryId");
+                column: "CategoryIdArray");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoryStoreEntity_StoreId",
@@ -222,7 +222,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ProductEntity_CategoryId",
                 table: "ProductEntity",
-                column: "CategoryId");
+                column: "CategoryIdArray");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RatingStoresEntity_StoreId",

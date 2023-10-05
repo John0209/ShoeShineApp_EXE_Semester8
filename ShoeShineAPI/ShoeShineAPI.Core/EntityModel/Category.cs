@@ -15,6 +15,6 @@ namespace ShoeShineAPI.Core.Model
 		// Relationship
 		public ICollection<Product>? Products { get; set; }
 		public ICollection<CategoryStore>? CategoryStores { get; set; }
-        public ICollection<Booking>? Bookings { get; set; }
+        public ICollection<BookingCategory>? BookingCategories { get; set; }
     }
 }

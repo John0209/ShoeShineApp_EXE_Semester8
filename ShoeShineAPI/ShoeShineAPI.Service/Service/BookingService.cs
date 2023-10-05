@@ -19,7 +19,7 @@ namespace ShoeShineAPI.Service.Service
             _unit = unit;
         }
 
-        public async Task<bool> CreateBooking(Booking booking)
+        public async Task<bool> CreateBooking(Booking booking, int[]? categoryIdArray)
         {
             var checkStatus = await GetBookingJustCreate();
             // xem thử có booking nào ở status create không,nếu có thì phải tạo orderdetail,không thể tạo thêm booking
@@ -27,7 +27,18 @@ namespace ShoeShineAPI.Service.Service
             {
                 await _unit.BookingRepository.Add(booking);
                 var result = _unit.Save();
-                if (result > 0) return true;
+                if (result > 0)
+                {
+                    foreach(var x in categoryIdArray)
+                    {
+                        var bookingcategory = new BookingCategory();
+                        bookingcategory.CategoryId = x;
+                        bookingcategory.BookingId = booking.BookingId;
+                        await _unit.BookingCategoryRepository.Add(bookingcategory);
+                        _unit.Save();
+                    }
+                    return true;
+                }
             }
             return false;
         }

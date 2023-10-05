@@ -26,10 +26,11 @@ namespace ShoeShineAPI.Controllers
             _momoConfig = momoConfig;
         }
 
-        [HttpPost("momo")]
+        [HttpGet("momo")]
         //[ProducesResponseType(link, 200)]
-        public async Task<IActionResult> CreatePaymentMomo([FromBody] MomoPaymentRequest paymentRequest)
+        public async Task<IActionResult> CreatePaymentMomo()
         {
+           var paymentRequest= new MomoPaymentRequest();
            var respone = await _payment.MapOrderInformation(paymentRequest);
            if(respone.Item1)
             {

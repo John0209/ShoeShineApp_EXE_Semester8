@@ -13,12 +13,12 @@ namespace ShoeShineAPI.Core.EntityModel
         // Foreign Key
         public int ServiceId { get; set; }
         public int StoreId { get; set; }
-        public int CategoryId { get; set; }
         public int IsBookingStatus { get; set; }// 1. JustCreate 2. Finish
         // Relationship
         public Service? Service { get; set; }
         public Store? Store { get; set; }
-        public Category? Category { get; set; }
         public OrderDetail? OrderDetail { get; set; }
+        public ICollection<BookingCategory>? BookingCategories { get; set; }
+
     }
 }

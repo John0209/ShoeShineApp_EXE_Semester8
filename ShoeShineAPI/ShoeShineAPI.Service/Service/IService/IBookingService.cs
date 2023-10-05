@@ -10,7 +10,7 @@ namespace ShoeShineAPI.Service.Service.IService
     public interface IBookingService
     {
         public Task<IEnumerable<Booking>> GetBookingAsync();
-        public Task<bool> CreateBooking(Booking booking);
+        public Task<bool> CreateBooking(Booking booking, int[]? categoryIdArray);
         public Task<int> GetBookingJustCreate();
         public Task<Booking?> GetBookingById(int bookingId);
         public Task<bool> UpdateStatusBooking(int bookingId);

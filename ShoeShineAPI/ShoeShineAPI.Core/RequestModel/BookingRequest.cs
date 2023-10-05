@@ -18,7 +18,7 @@ namespace ShoeShineAPI.Core.RequestModel
         [Required]
         public int StoreId { get; set; }
         [Required]
-        public int CategoryId { get; set; }
+        public int[]? CategoryIdArray { get; set; }
         [JsonIgnore]
         public int IsBookingStatus { get; set; } = 1;
     }
