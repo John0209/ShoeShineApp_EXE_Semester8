@@ -36,9 +36,9 @@ namespace ShoeShineAPI.Controllers
 		}
 
 		[HttpPost("login")]
-        public async Task<IActionResult> Login(string account, string password)
+        public async Task<IActionResult> Login(string email, string password)
         {
-            var user = await _user.CheckLogin(account, password);
+            var user = await _user.CheckLogin(email, password);
             if (user != null)
             {
                 var role = await _role.GetRoleById(user.RoleId);
@@ -55,7 +55,7 @@ namespace ShoeShineAPI.Controllers
             return Ok(guid);
         }
        
-		//[Authorize(Roles = EnumClass.RoleNames.Admin)]
+		[Authorize(Roles = EnumClass.RoleNames.Admin)]
 		[HttpGet()]
         public async Task<IActionResult> GetAll()
         {

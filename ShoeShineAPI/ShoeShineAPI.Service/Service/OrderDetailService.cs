@@ -32,7 +32,7 @@ namespace ShoeShineAPI.Service.Service
         {
             OrderDetail orderDetail = new OrderDetail();
             // nếu lấy đươc bookingid vừa tạo, thì update lại nó thành status 2, status 1 là just create
-            orderDetail.BookingId = await _booking.GetBookingIdByStatus2();
+            orderDetail.BookingId = await _booking.GetBookingJustCreate();
             if (orderDetail.BookingId > 0)
             {
                 await _booking.UpdateStatusBooking(orderDetail.BookingId);

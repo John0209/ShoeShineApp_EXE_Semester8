@@ -39,10 +39,10 @@ namespace ShoeShineAPI.Service.Service
             return ProvideToken.Instance.GenerateToken(userId,roles);
         }
 
-        public async Task<User?> CheckLogin(string account, string password)
+        public async Task<User?> CheckLogin(string email, string password)
         {
             IEnumerable<User> users = await GetAllDataAsync();
-            var checkLogin = (from u in users where u.UserAccount == account && u.UserPassword == password select u)
+            var checkLogin = (from u in users where u.UserEmail == email && u.UserPassword == password select u)
                              .FirstOrDefault();
             if (checkLogin != null) return checkLogin;
             return null;
@@ -67,7 +67,8 @@ namespace ShoeShineAPI.Service.Service
                 UserName = registrationDTO.UserName,
                 UserEmail = registrationDTO.UserEmail,
                 UserPassword = registrationDTO.UserPassword,
-                RoleId = (int)EnumClass.RoleEnum.Customer
+                //RoleId = (int)EnumClass.RoleEnum.Customer
+                RoleId = (int)EnumClass.RoleEnum.Admin
             };
 
             await _unit.UserRepository.Add(newUser);

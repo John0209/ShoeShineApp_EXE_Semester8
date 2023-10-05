@@ -10,7 +10,7 @@ namespace ShoeShineAPI.Core.ResponeModel
     {
         public int OrderId { get; set; }
         //FK
-        public int PaymentId { get; set; }
+        public int PaymentMethodId { get; set; }
         public string UserName { get; set; }
         public string OrderCode { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;

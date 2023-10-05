@@ -25,18 +25,40 @@ namespace ShoeShineAPI.Service.Service
 
         public async Task<bool> CreateOrder(Order order, OrderRequest request)
         {
-            var orders= await GetAllDataAsync();
-            order.OrderCode = GenerateOrderCode(orders);
-            await _unit.OrderRepository.Add(order);
-            int result= _unit.Save();
-            if (result > 0)
+            var checkOrder = await GetOrderStatusPayment();
+            // check xem có order nào ở status payment không, nếu có thì phải thanh toán xong mới được tạo típ order
+            if(checkOrder == null)
             {
-                request.OrderId = order.OrderId;
-                if(await _orderDetail.CreateOrderDetail(request)) return true;
+                var orders = await GetAllDataAsync();
+                order.OrderCode = GenerateOrderCode(orders);
+                order.IsOrderStatus = 0;
+               //order.OrderDate = DateTime.Now;
+                await _unit.OrderRepository.Add(order);
+                int result = _unit.Save();
+                if (result > 0)
+                {
+                    request.OrderId = order.OrderId;
+                    if (await _orderDetail.CreateOrderDetail(request)) return true;
+                }
             }
             return false;
         }
-
+        public async Task<Order?> GetOrderStatusPayment()
+        {
+          return await _unit.OrderRepository.GetOrderStatusPayment();
+        }
+        public async Task<bool> UpdateOrderAfterPaymentSuccess(string orderCode)
+        {
+            var order= await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
+            if (order != null)
+            {
+                order.IsOrderStatus = 1;
+                _unit.OrderRepository.Update(order);
+                var result = _unit.Save();
+                if (result > 0) return true;
+            }
+            return false;
+        }
         private string GenerateOrderCode(IEnumerable<Order> orders)
         {
             while (true)

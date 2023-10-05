@@ -1,0 +1,13 @@
+﻿using ShoeShineAPI.Core.RequestModel.PaymentRequest;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ShoeShineAPI.Core.ResponeModel.PaymentResponese
+{
+    public class MomoProcessReturn:MomoResultRequest
+    {
+    }
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,17 +10,21 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.RequestModel.PaymentRequest
 {
+    [BindProperties]
     public class MomoPaymentRequest
     {
         [JsonIgnore]
         public string partnerCode { get; set; } = "";
-        public string requestId { get; set; } = "A123";
+        
+        public string requestId { get; set; } = string.Empty;
         [JsonIgnore]
         public string ipnUrl { get; set; } = "";
-        public long amount { get; set; } = 150000;
-        [RegularExpression(@"^[0-9a-zA-Z]([-_.]*[0-9a-zA-Z]+)*$", ErrorMessage = "orderId format is invalid")]
-        public string orderId { get; set; } = "A123";
-        public string orderInfo { get; set; } = "TH TrueMilk 123 Star";
+        [JsonIgnore]
+        public long amount { get; set; } = 0;
+        [JsonIgnore]
+        public string orderId { get; set; } = string.Empty;
+        [JsonIgnore]
+        public string orderInfo { get; set; } ="ShoeShine Service";
         [JsonIgnore]
         public string redirectUrl { get; set; } = "";
         [JsonIgnore]

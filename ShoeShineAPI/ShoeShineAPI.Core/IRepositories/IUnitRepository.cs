@@ -24,7 +24,7 @@ namespace ShoeShineAPI.Core.IRepositories
 		IOrderRepository OrderRepository { get; }
 		IOrderDetailRepository OrderDetailRepository { get; }
 		IPaymentMethodRepository PaymentMethodRepository { get; }
-		IPaymentRepository PaymentRepository { get; }
+		ITransactionRepository TransactionRepository { get; }
 		int Save();
 
     }

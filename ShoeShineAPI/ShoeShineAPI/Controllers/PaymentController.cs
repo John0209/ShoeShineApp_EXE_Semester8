@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using ShoeShineAPI.Core.RequestModel.PaymentRequest;
 using ShoeShineAPI.Gateway.IConfig;
 using ShoeShineAPI.Service.Service.IService;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using ShoeShineAPI.Core.ResponeModel.PaymentResponese;
+using System.Transactions;
 
 namespace ShoeShineAPI.Controllers
 {
@@ -14,6 +17,7 @@ namespace ShoeShineAPI.Controllers
         IPaymentService _payment;
         IMapper _map;
         IMomoConfig _momoConfig;
+       
 
         public PaymentController(IPaymentService payment, IMapper map, IMomoConfig momoConfig)
         {
@@ -23,17 +27,34 @@ namespace ShoeShineAPI.Controllers
         }
 
         [HttpPost("momo")]
-        public IActionResult CreatePaymentMomo([FromBody] MomoPaymentRequest paymentRequest)
+        //[ProducesResponseType(link, 200)]
+        public async Task<IActionResult> CreatePaymentMomo([FromBody] MomoPaymentRequest paymentRequest)
         {
-            paymentRequest.redirectUrl = _momoConfig.ReturnUrl;
-            paymentRequest.ipnUrl = _momoConfig.IpnUrl;
-            paymentRequest.partnerCode = _momoConfig.PartnerCode;
-            paymentRequest.signature= _payment.MakeSignatureMomoPayment
+           var respone = await _payment.MapOrderInformation(paymentRequest);
+           if(respone.Item1)
+            {
+                paymentRequest = respone.Item2;
+                // lấy thuộc tính từ appsetting
+                paymentRequest.redirectUrl = _momoConfig.ReturnUrl;
+                paymentRequest.ipnUrl = _momoConfig.IpnUrl;
+                paymentRequest.partnerCode = _momoConfig.PartnerCode;
+                paymentRequest.signature = _payment.MakeSignatureMomoPayment
                 (_momoConfig.AccessKey, _momoConfig.SecretKey, paymentRequest);
-            // lấy link QR momo
-            var result= _payment.GetLinkGatewayMomo(_momoConfig.PaymentUrl, paymentRequest);
-            if (result.Item1) return Ok(result.Item2);
-            return BadRequest(result);
+                // lấy link QR momo
+                var result = _payment.GetLinkGatewayMomo(_momoConfig.PaymentUrl, paymentRequest);
+                if (result.Item1) return Ok(result.Item2);
+                return BadRequest(result.Item2);
+            }
+            return BadRequest("No Order Status Payment!");
         }
+        [HttpGet]
+        [Route("momo-return")]
+        public async Task<IActionResult> MomoReturn([FromQuery] MomoResultRequest resultRequest)
+        {
+            var result = await _payment.CreateTransaction(resultRequest);
+            if(result) return Ok("Payment Success!");
+            return BadRequest("Payment Fail!");
+        }
+
     }
 }

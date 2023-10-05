@@ -10,5 +10,7 @@ namespace ShoeShineAPI.Core.IRepositories
     public interface IOrderRepository:IGenericRepository<Order>
     {
         public bool CheckOrderCode(string orderCode,IEnumerable<Order> orders);
+        public Task<Order?> GetOrderStatusPayment();
+        public Task<Order?> GetOrderByOrderCode(string orderCode);
     }
 }

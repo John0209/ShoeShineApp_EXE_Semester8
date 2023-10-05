@@ -121,7 +121,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("OrderDetail", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Payment", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.PaymentMethod", b =>
                 {
                     b.Property<int>("PaymentId")
                         .ValueGeneratedOnAdd()
@@ -146,7 +146,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasIndex("PaymentMethodId");
 
-                    b.ToTable("Payment", (string)null);
+                    b.ToTable("PaymentMethod", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.PaymentMethod", b =>
@@ -542,7 +542,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Order", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.EntityModel.Payment", "Payment")
+                    b.HasOne("ShoeShineAPI.Core.EntityModel.PaymentMethod", "PaymentMethod")
                         .WithMany("Orders")
                         .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -554,7 +554,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Payment");
+                    b.Navigation("PaymentMethod");
 
                     b.Navigation("User");
                 });
@@ -578,7 +578,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Payment", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.PaymentMethod", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.EntityModel.PaymentMethod", "PaymentMethod")
                         .WithMany("Payments")
@@ -720,7 +720,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("OrderDetail");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Payment", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.PaymentMethod", b =>
                 {
                     b.Navigation("Orders");
                 });

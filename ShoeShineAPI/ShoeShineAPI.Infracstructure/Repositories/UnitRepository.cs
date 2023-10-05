@@ -38,7 +38,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 
         public IPaymentMethodRepository PaymentMethodRepository  { get; }
 
-    public IPaymentRepository PaymentRepository { get; }
+		public ITransactionRepository TransactionRepository { get; }
 
         public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository, 
 			ICommentStoreRepository commentRepository, IImageStoreRepository imageStoreRepository, 
@@ -47,7 +47,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 			IImageCommentRepository imageCommentRepository, ICategoryStoreRepository categoryStoreRepository,
 			IRatingRepository ratingCommentRepository,
 			IBookingRepository bookingRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository,
-			IPaymentMethodRepository paymentMethodRepository, IPaymentRepository paymentRepository)
+			IPaymentMethodRepository paymentMethodRepository, ITransactionRepository paymentRepository)
         {
             _dbContextClass = dbContextClass;
             CategoryRepository = categoryRepository;
@@ -66,7 +66,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
             OrderRepository = orderRepository;
             OrderDetailRepository = orderDetailRepository;
             PaymentMethodRepository = paymentMethodRepository;
-            PaymentRepository = paymentRepository;
+            TransactionRepository = paymentRepository;
         }
 
         public int Save()

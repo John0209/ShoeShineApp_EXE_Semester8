@@ -27,7 +27,7 @@ public class DbContextClass: DbContext
 	public DbSet<Service> Service { get; set; }
 	public DbSet<ServiceStore> ServiceStore { get; set; }
 	public DbSet<Rating> Rating { get; set; }
-    public DbSet<Payment> Payment { get; set; }
+    public DbSet<Transaction> Transaction { get; set; }
     public DbSet<PaymentMethod> PaymentMethod { get; set; }
     public DbSet<Order> Order { get; set; }
     public DbSet<OrderDetail> OrderDetail { get; set; }
@@ -124,23 +124,18 @@ public class DbContextClass: DbContext
 			e.ToTable(nameof(Rating));
 			e.HasKey(x => x.RatingId);
 		});
-		//Payment - Order
+		//PaymentMethod - Order
         model.Entity<PaymentMethod>(e =>
         {
             e.ToTable(nameof(PaymentMethod));
             e.HasKey(x => x.PaymentMethodId);
-        });
-        model.Entity<Payment>(e =>
-        {
-            e.ToTable(nameof(Payment));
-            e.HasKey(x => x.PaymentId);
-			e.HasOne(x => x.PaymentMethod).WithMany(x => x.Payments).HasForeignKey(x => x.PaymentMethodId);
+
         });
         model.Entity<Order>(e =>
         {
             e.ToTable(nameof(Order));
             e.HasKey(x => x.OrderId);
-            e.HasOne(x => x.Payment).WithMany(x => x.Orders).HasForeignKey(x => x.PaymentId);
+            e.HasOne(x => x.PaymentMethod).WithMany(x => x.Orders).HasForeignKey(x => x.PaymentMethodId);
             e.HasOne(x => x.User).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
         });
         model.Entity<OrderDetail>(e =>
@@ -158,7 +153,12 @@ public class DbContextClass: DbContext
             e.HasOne(x => x.Store).WithMany(x => x.Bookings).HasForeignKey(x => x.StoreId);
             e.HasOne(x => x.Category).WithMany(x => x.Bookings).HasForeignKey(x => x.CategoryId);
         });
-
+        model.Entity<Transaction>(e =>
+        {
+            e.ToTable(nameof(Transaction));
+            e.HasKey(x => x.TransactionId);
+            e.HasOne(x => x.Order).WithOne(x => x.Transaction).HasForeignKey<Transaction>(x => x.OrderId);
+        });
 
     }
 

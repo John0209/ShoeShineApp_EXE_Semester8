@@ -14,7 +14,7 @@ namespace ShoeShineAPI.Core.RequestModel
         public int OrderId { get; set; } = 0;
         //FK
         [Required]
-        public int PaymentId { get; set; }
+        public int PaymentMethodId { get; set; }
         [Required]
         public Guid UserId { get; set; }
         [JsonIgnore]

@@ -12,6 +12,6 @@ namespace ShoeShineAPI.Core.EntityModel
         public string MethodName { get; set; } = string.Empty;
         public bool IsStatusMethod { get; set; }
         // Relationship
-        public ICollection<Payment>? Payments { get; set; }
+        public ICollection<Order>? Orders { get; set; }
     }
 }

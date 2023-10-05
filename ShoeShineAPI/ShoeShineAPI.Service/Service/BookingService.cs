@@ -21,7 +21,8 @@ namespace ShoeShineAPI.Service.Service
 
         public async Task<bool> CreateBooking(Booking booking)
         {
-            var checkStatus = await GetBookingIdByStatus2();
+            var checkStatus = await GetBookingJustCreate();
+            // xem thử có booking nào ở status create không,nếu có thì phải tạo orderdetail,không thể tạo thêm booking
             if (checkStatus == 0)
             {
                 await _unit.BookingRepository.Add(booking);
@@ -41,7 +42,7 @@ namespace ShoeShineAPI.Service.Service
             return await _unit.BookingRepository.GetById(bookingId);
         }
 
-        public async Task<int> GetBookingIdByStatus2()
+        public async Task<int> GetBookingJustCreate()
         {
             return await _unit.BookingRepository.GetBookingJustCreate();
         }

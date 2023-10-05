@@ -59,7 +59,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payment",
+                name: "PaymentMethod",
                 columns: table => new
                 {
                     PaymentId = table.Column<int>(type: "int", nullable: false)
@@ -98,7 +98,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     table.ForeignKey(
                         name: "FK_Order_Payment_PaymentId",
                         column: x => x.PaymentId,
-                        principalTable: "Payment",
+                        principalTable: "PaymentMethod",
                         principalColumn: "PaymentId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -176,7 +176,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payment_PaymentMethodId",
-                table: "Payment",
+                table: "PaymentMethod",
                 column: "PaymentMethodId");
         }
 
@@ -193,7 +193,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 name: "Order");
 
             migrationBuilder.DropTable(
-                name: "Payment");
+                name: "PaymentMethod");
 
             migrationBuilder.DropTable(
                 name: "PaymentMethod");

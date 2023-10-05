@@ -16,15 +16,20 @@ namespace ShoeShineAPI.Infracstructure.Repositories
         {
         }
 
-        
-
+        public Task<Order?> GetOrderStatusPayment()
+        {
+            return _dbContext.Set<Order>().Where(x => x.IsOrderStatus == 0).FirstOrDefaultAsync();
+        }
         public bool CheckOrderCode(string orderCode, IEnumerable<Order> orders)
         {
            var result= orders.Where(x=> x.OrderCode.ToLower().CompareTo(orderCode.ToLower().Trim()) == 0).ToList();
             if (result.Count > 0) return false;
             return true;
         }
-
+        public Task<Order?> GetOrderByOrderCode(string orderCode)
+        {
+            return _dbContext.Set<Order>().Where(x => x.OrderCode == orderCode).FirstOrDefaultAsync();
+        }
         public override async Task<IEnumerable<Order>> GetAll()
         {
             return await _dbContext.Set<Order>().Include(x=> x.User).ToListAsync();
