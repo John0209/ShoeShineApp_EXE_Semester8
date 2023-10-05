@@ -15,7 +15,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		{
 		}
 
-        public Task RemoveImageCommentsByCommentStoreId(int commentStoreId)
+        public void RemoveImageCommentsByCommentStoreId(int commentStoreId)
         {
             var imageComments = _dbContext.Set<ImageComment>()
                 .Where(i => i.CommentStoreId == commentStoreId)
@@ -25,8 +25,6 @@ namespace ShoeShineAPI.Infracstructure.Repositories
             {
                 _dbContext.Set<ImageComment>().RemoveRange(imageComments);
             }
-
-            return Task.CompletedTask;
         }
     }
 }

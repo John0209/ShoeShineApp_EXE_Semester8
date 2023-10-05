@@ -48,8 +48,14 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 
         public override void Update(CommentStore entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Deleted;
-            _dbContext.Set<CommentStore>().Update(entity);
+			var existingComment = _dbContext.Set<CommentStore>().Find(entity.CommentStoreId);
+			if (existingComment != null)
+			{
+				existingComment.Content = entity.Content;
+				existingComment.UserId = entity.UserId;
+				existingComment.StoreId = entity.StoreId;
+				existingComment.RatingId = entity.RatingId;
+			}
         }
     }
 }

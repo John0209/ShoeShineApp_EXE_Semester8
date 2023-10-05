@@ -110,32 +110,30 @@ namespace ShoeShineAPI.Controllers
                 return BadRequest();
             }
 
-            var user = await _userService.GetUserById(commentRequest.UserId);
-            if (user == null)
+            var existingComment = await _comment.GetCommentById(id);
+            if (existingComment == null)
             {
-                return NotFound();
+                return NotFound("Comment not found");
             }
 
-            var store = await _storeService.GetStoreById(commentRequest.StoreId);
-            if (store == null)
+            if (existingComment.UserId != commentRequest.UserId)
             {
-                return NotFound();
+                return BadRequest("Wrong User or User not exist");
+            }
+
+            if (existingComment.StoreId != commentRequest.StoreId)
+            {
+                return BadRequest("Wrong Store or Store not exist");
             }
 
             var rating = await _ratingService.GetRatingCommentById(commentRequest.RatingId);
             if (rating == null)
             {
-                return NotFound();
-            }
-
-            var existingComment = await _comment.GetCommentById(id);
-            if (existingComment == null)
-            {
-                return NotFound();
+                return NotFound("Rating not found");
             }
 
             var comment = _map.Map<CommentStore>(commentRequest);
-            await _comment.UpdateCommentAsync(comment);
+            _comment.UpdateCommentAsync(comment);
             if (commentRequest.ImageLinks != null && commentRequest.ImageLinks.Any())
             {
                 var images = commentRequest.ImageLinks.Select(item => new ImageComment()
@@ -143,7 +141,7 @@ namespace ShoeShineAPI.Controllers
                     ImageCommentURL = item,
                     CommentStoreId = comment.CommentStoreId
                 }).ToList();
-                await _comment.DeleteImagesCommentByCommentStoreIdAsync(comment.CommentStoreId);
+                _comment.DeleteImagesCommentByCommentStoreIdAsync(comment.CommentStoreId);
                 await _comment.CreateImagesCommentAsync(images);
             }
 

@@ -46,7 +46,7 @@ namespace ShoeShineAPI.Service.Service
             return entity.CommentStoreId;
         }
 
-        public async Task UpdateCommentAsync(CommentStore entity)
+        public void UpdateCommentAsync(CommentStore entity)
         {
             _unit.CommentRepository.Update(entity);
             _unit.Save();
@@ -58,9 +58,9 @@ namespace ShoeShineAPI.Service.Service
             _unit.Save();
         }
 
-        public async Task DeleteImagesCommentByCommentStoreIdAsync(int commentStoreId)
+        public void DeleteImagesCommentByCommentStoreIdAsync(int commentStoreId)
         {
-            await _unit.ImageCommentRepository.RemoveImageCommentsByCommentStoreId(commentStoreId);
+            _unit.ImageCommentRepository.RemoveImageCommentsByCommentStoreId(commentStoreId);
             _unit.Save();
         }
     }
