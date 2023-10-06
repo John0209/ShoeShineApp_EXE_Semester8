@@ -10,7 +10,7 @@ namespace ShoeShineAPI.Core.ResponeModel
     public class UserProfileRespone
     {
         public string Name { get; set; }
-        public EnumClass.Gender Gender { get; set; }
+        public EnumClass.GenderEnum Gender { get; set; }
         public DateTime Birthday { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }

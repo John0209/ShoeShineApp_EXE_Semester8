@@ -29,5 +29,21 @@ namespace ShoeShineAPI.Service.Service
 		{
 			return await _unit.CategoryStoreRepository.GetAll();
 		}
-	}
+        public async Task<bool> CreateCategoriesStore(int storeId, int[] categoriesArray)
+        {
+            if (categoriesArray.Length > 0 && storeId > 0)
+            {
+                foreach (var categoryId in categoriesArray)
+                {
+                    var categoriesStore = new CategoryStore();
+                    categoriesStore.StoreId = storeId;
+                    categoriesStore.CategoryId = categoryId;
+                    await _unit.CategoryStoreRepository.Add(categoriesStore);
+                    _unit.Save();
+                }
+                return true;
+            }
+            return false;
+        }
+    }
 }

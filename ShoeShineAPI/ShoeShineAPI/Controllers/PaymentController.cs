@@ -53,7 +53,11 @@ namespace ShoeShineAPI.Controllers
         public async Task<IActionResult> MomoReturn([FromQuery] MomoResultRequest resultRequest)
         {
             var result = await _payment.CreateTransaction(resultRequest);
-            if(result) return Ok("Payment Success!");
+            if (result) return Ok(new
+            {
+                status= "Payment Success!",
+                result=resultRequest.resultCode
+            });
             return BadRequest("Payment Fail!");
         }
 

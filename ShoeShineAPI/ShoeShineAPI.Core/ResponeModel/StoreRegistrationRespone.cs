@@ -11,19 +11,19 @@ namespace ShoeShineAPI.Core.ResponeModel
     {
         [Required(ErrorMessage = "StoreName is required.")]
         [StringLength(100, ErrorMessage = "StoreName must not exceed 100 characters.")]
-        public string StoreName { get; set; }
+        public string? StoreName { get; set; }
 
         [Required(ErrorMessage = "StoreAddress is required.")]
         [StringLength(200, ErrorMessage = "StoreAddress must not exceed 200 characters.")]
-        public string StoreAddress { get; set; }
+        public string? StoreAddress { get; set; }
 
         [Required(ErrorMessage = "StorePhone is required.")]
         [RegularExpression(@"^\d{10}$", ErrorMessage = "StorePhone must be 10 digits.")]
-        public string StorePhone { get; set; }
+        public string? StorePhone { get; set; }
 
         [Required(ErrorMessage = "StoreEmail is required.")]
         [EmailAddress(ErrorMessage = "Invalid email format.")]
-        public string StoreEmail { get; set; }
-
+        public string? StoreEmail { get; set; }
+        
     }
 }

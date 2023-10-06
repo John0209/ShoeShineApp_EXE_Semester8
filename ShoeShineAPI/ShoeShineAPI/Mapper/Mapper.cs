@@ -55,6 +55,7 @@ namespace ShoeShineAPI.Mapper
                         otp => otp.MapFrom(src => src.Store != null ? src.Store.StoreName : string.Empty))
                 .ReverseMap();
 
+            CreateMap<Store, StoreRequest>().ReverseMap();
             CreateMap<ServiceDB, ServiceRespone>().ReverseMap();
 			CreateMap<Category, CategoryRespone>().ReverseMap();
 			CreateMap<User, UserRespone>().ReverseMap();

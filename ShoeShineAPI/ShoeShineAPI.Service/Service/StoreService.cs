@@ -1,5 +1,6 @@
 ﻿using ShoeShineAPI.Core.IRepositories;
 using ShoeShineAPI.Core.Model;
+using ShoeShineAPI.Core.RequestModel;
 using ShoeShineAPI.Core.ResponeModel;
 using ShoeShineAPI.Service.Inheritance_Class;
 using ShoeShineAPI.Service.Service.IService;
@@ -15,13 +16,20 @@ namespace ShoeShineAPI.Service.Service
 	public class StoreService : CommonAbstract<Store>, IStoreService
 	{
 		IUnitRepository _unit;
+        IServiceStoreService _service;
+        ICategoryStoreService _category;
+        IImageStoreService _image;
 
-		public StoreService(IUnitRepository unit)
-		{
-			_unit = unit;
-		}
+        public StoreService(IUnitRepository unit, IServiceStoreService service, ICategoryStoreService category, 
+            IImageStoreService image)
+        {
+            _unit = unit;
+            _service = service;
+            _category = category;
+            _image = image;
+        }
 
-		public async Task<IEnumerable<Store>> GetStoresAsync()
+        public async Task<IEnumerable<Store>> GetStoresAsync()
 		{
 			var stores= await GetAllDataAsync();
 			return stores;
@@ -31,35 +39,31 @@ namespace ShoeShineAPI.Service.Service
 		{
 			return await _unit.StoreRepository.GetAll();
 		}
-        public async Task<string> RegisterStoreAsync(StoreRegistrationRespone storeRegister)
+        public async Task<(bool,string)> RegisterStoreAsync(Store store,StoreRequest request)
         {
-            if (await CheckStoreEmailExistsAsync(storeRegister.StoreEmail))
+            if (await CheckStoreEmailExistsAsync(store.StoreEmal))
             {
-                return "StoreEmail already exists";
+                return (false, "StoreEmail already exists");
             }
-
-            var newRating = new Rating
-            {
-                RatingScale = 0
-            };
-
-            await _unit.RatingRepository.Add(newRating);
-             _unit.Save(); 
-
-            var newStore = new Store
-            {
-                StoreName = storeRegister.StoreName,
-                StoreAddress = storeRegister.StoreAddress,
-                StorePhone = storeRegister.StorePhone,
-                StoreEmal = storeRegister.StoreEmail,
-                RatingId = newRating.RatingId 
-            };
-
             // Save the new store to the database
-            await _unit.StoreRepository.Add(newStore);
-             _unit.Save(); // Assuming SaveAsync saves changes to the database
-
-            return "Store registration successful";
+            await _unit.StoreRepository.Add(store);
+            var result= _unit.Save();
+            if (result > 0)
+            {
+                if(await _category.CreateCategoriesStore(store.StoreId, request.CategoryArray))
+                {
+                   if(await _service.CreateServiceStore(store.StoreId, request.ServiceArray))
+                    {
+                        if(await _image.CraeteImageStore(store.StoreId, request.Url)){
+                            return (true, "Create Store Success");
+                        }
+                        return (false, "Create ImageStore Fail");
+                    }
+                   return (false, "Create ServiceStore Fail");
+                }
+                return (false, "Create CategoriesStore Fail");
+            }
+            return (false, "Create Store Fail");
         }
 
         public async Task<bool> CheckStoreEmailExistsAsync(string storeEmail)

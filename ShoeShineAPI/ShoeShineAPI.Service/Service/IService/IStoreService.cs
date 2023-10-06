@@ -1,4 +1,5 @@
 ﻿using ShoeShineAPI.Core.Model;
+using ShoeShineAPI.Core.RequestModel;
 using ShoeShineAPI.Core.ResponeModel;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace ShoeShineAPI.Service.Service.IService
 	public interface IStoreService
 	{
 		public Task<IEnumerable<Store>> GetStoresAsync();
-        Task<string> RegisterStoreAsync(StoreRegistrationRespone storeRegister);
+        public Task<(bool, string)> RegisterStoreAsync(Store store, StoreRequest request);
         Task<bool> CheckStoreEmailExistsAsync(string storeEmail);
         Task<Store?> GetStoreById(int id);
         Task<IEnumerable<Store>> GetStoreByName(string storeName);

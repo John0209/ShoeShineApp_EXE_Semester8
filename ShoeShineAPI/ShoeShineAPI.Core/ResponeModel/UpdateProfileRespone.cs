@@ -13,7 +13,7 @@ namespace ShoeShineAPI.Core.ResponeModel
         public string Name { get; set; }
 
         [Required]
-        public EnumClass.Gender Gender { get; set; }
+        public EnumClass.GenderEnum Gender { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }

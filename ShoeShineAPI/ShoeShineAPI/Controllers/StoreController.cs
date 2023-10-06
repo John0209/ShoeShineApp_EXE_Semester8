@@ -22,7 +22,7 @@ namespace ShoeShineAPI.Controllers
 			_store = store;
 			_map = map;
 		}
-		[HttpGet("get-all")]
+		[HttpGet()]
 		public async Task<IActionResult> GetAll()
 		{
 			var stores=await _store.GetStoresAsync();
@@ -31,29 +31,23 @@ namespace ShoeShineAPI.Controllers
 				var storesMapper = _map.Map<IEnumerable<StoreRespone>>(stores);
 				return Ok(storesMapper);
 			}
-			return BadRequest("StoreEntity Data Is Empty");
+			return NotFound("StoreEntity Data Is Empty");
 		}
 
-        [HttpPost("register")]
-        public async Task<IActionResult> RegisterStore([FromBody] StoreRegistrationRespone storeDto)
+        [HttpPost()]
+        public async Task<IActionResult> RegisterStore([FromBody] StoreRequest request)
         {
-            var result = await _store.RegisterStoreAsync(storeDto);
-
-            if (result == "Store registration successful")
-            {
-                return Ok("Store registration successful");
-            }
-            else if (result == "StoreEmail already exists")
-            {
-                return Conflict("StoreEmail already exists");
-            }
-            else
-            {
-                return BadRequest(result);
-            }
+			var store = _map.Map<Store>(request);
+            var result = await _store.RegisterStoreAsync(store,request);
+			if (!result.Item1)
+			{
+				if(result.Item2.Contains("Email")) return Conflict(result.Item2);
+				return BadRequest(result.Item2);
+			}
+			return Ok(result.Item2);
         }
 
-		[HttpGet("search/{storeName}")]
+		[HttpGet("{storeName}")]
 		public async Task<IActionResult> GetStoresByName(string storeName)
 		{
 			var stores = await _store.GetStoreByName(storeName);
@@ -63,25 +57,6 @@ namespace ShoeShineAPI.Controllers
                 return Ok(storesMapper);
             }
 			return NotFound("Store Data is empty!");
-		}
-
-		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateStore(int id, [FromBody] StoreRequest storeRequest)
-		{
-			if(storeRequest == null || id != storeRequest.StoreId)
-			{
-				return BadRequest();
-			}
-
-			var existingStore = await _store.GetStoreById(id);
-			if(existingStore == null)
-			{
-				return NotFound("Store not found");
-			}
-
-			var store = _map.Map<Store>(storeRequest);
-			_store.UpdateStore(store);
-			return NoContent();
 		}
     }
 }
