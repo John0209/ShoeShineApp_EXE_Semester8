@@ -32,5 +32,19 @@ namespace ShoeShineAPI.Infracstructure.Repositories
                 .Where(s => s.StoreName.Contains(storeName))
                 .ToListAsync();
         }
+
+        public override void Update(Store entity)
+        {
+            var existingStore = _dbContext.Set<Store>().Find(entity.StoreId);
+            if (existingStore != null)
+            {
+                existingStore.StoreName = entity.StoreName;
+                existingStore.StoreAddress = entity.StoreAddress;
+                existingStore.StoreDescription = entity.StoreDescription;
+                existingStore.StorePhone = entity.StorePhone;
+                existingStore.StoreEmal = entity.StoreEmal;
+                existingStore.IsStoreStatus = entity.IsStoreStatus;
+            }
+        }
     }
 }

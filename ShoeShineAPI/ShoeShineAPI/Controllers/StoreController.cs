@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoeShineAPI.Core.DTOs;
+using ShoeShineAPI.Core.Model;
+using ShoeShineAPI.Core.RequestModel;
 using ShoeShineAPI.Core.ResponeModel;
 using ShoeShineAPI.Service.Service;
 using ShoeShineAPI.Service.Service.IService;
@@ -61,6 +63,25 @@ namespace ShoeShineAPI.Controllers
                 return Ok(storesMapper);
             }
 			return NotFound("Store Data is empty!");
+		}
+
+		[HttpPut("{id}")]
+		public async Task<IActionResult> UpdateStore(int id, [FromBody] StoreRequest storeRequest)
+		{
+			if(storeRequest == null || id != storeRequest.StoreId)
+			{
+				return BadRequest();
+			}
+
+			var existingStore = await _store.GetStoreById(id);
+			if(existingStore == null)
+			{
+				return NotFound("Store not found");
+			}
+
+			var store = _map.Map<Store>(storeRequest);
+			_store.UpdateStore(store);
+			return NoContent();
 		}
     }
 }

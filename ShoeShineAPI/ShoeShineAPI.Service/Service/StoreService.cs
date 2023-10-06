@@ -80,5 +80,11 @@ namespace ShoeShineAPI.Service.Service
             var stores = await _unit.StoreRepository.GetStoresByName(storeName);
             return stores;
         }
+
+        public void UpdateStore(Store store)
+        {
+            _unit.StoreRepository.Update(store);
+            _unit.Save();
+        }
     }
 }
