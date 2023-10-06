@@ -29,5 +29,21 @@ namespace ShoeShineAPI.Service.Service
 		{
 			return await _unit.ServiceStoreRepository.GetAll();
 		}
+		public async Task<bool> CreateServiceStore(int storeId, int[] serviceArray)
+		{
+			if(serviceArray.Length >0 && storeId > 0)
+			{
+                foreach (var serviceId in serviceArray)
+                {
+                    var serviceStore = new ServiceStore();
+                    serviceStore.StoreId = storeId;
+                    serviceStore.ServiceId = serviceId;
+                    await _unit.ServiceStoreRepository.Add(serviceStore);
+                    _unit.Save();
+                }
+				return true;
+            }
+			return false;
+		}
 	}
 }

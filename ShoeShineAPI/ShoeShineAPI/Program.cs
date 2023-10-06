@@ -62,6 +62,7 @@ builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IMomoConfig,MomoConfig>();
+builder.Services.AddScoped<IImageStoreService, ImageStoreSevice>();
 //Gateway
 builder.Services.Configure<MomoConfig>(builder.Configuration.GetSection(MomoConfig.ConfigName));
 // Mapper

@@ -93,8 +93,8 @@ namespace ShoeShineAPI.Controllers
                     return NotFound("User not found");
                 }
 
-                EnumClass.Gender gender;
-                if (EnumClass.Gender.TryParse(user.UserGender, out gender))
+                EnumClass.GenderEnum gender;
+                if (EnumClass.GenderEnum.TryParse(user.UserGender, out gender))
                 {
                     var userProfileDto = new UserProfileRespone
                     {

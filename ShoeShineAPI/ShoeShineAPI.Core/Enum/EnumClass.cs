@@ -9,6 +9,14 @@
             Customer = 3,
 
         }
+        public enum RatingEnum
+        {
+            One_Star = 1,
+            Two_Star = 2,
+            Three_Star = 3,
+            Four_Star=4,
+            Five_Star=5
+        }
         //public static string ToEnumString(this Enum value)
         //{
         //	return Enum.GetName(value.GetType(), value);
@@ -20,11 +28,11 @@
             public const string Customer = "Customer";
         }
 
-        public enum Gender
+        public enum GenderEnum
         {
-            Nam = 1,
-            Nữ = 2 ,
-            Khác = 3 
+            Man = 1,
+            Woman = 2 ,
+            Other = 3 
         }
     }
 }
