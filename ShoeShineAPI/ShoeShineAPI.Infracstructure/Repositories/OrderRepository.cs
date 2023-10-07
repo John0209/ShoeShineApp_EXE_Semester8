@@ -20,9 +20,14 @@ namespace ShoeShineAPI.Infracstructure.Repositories
         {
             return _dbContext.Set<Order>().Where(x => x.IsOrderStatus == 0).FirstOrDefaultAsync();
         }
+        
+        public Task<Order?> GetOrderShippingPayment()
+        {
+            return _dbContext.Set<Order>().Where(x => x.IsOrderStatus == 2).FirstOrDefaultAsync();
+        }
         public bool CheckOrderCode(string orderCode, IEnumerable<Order> orders)
         {
-           var result= orders.Where(x=> x.OrderCode.ToLower().CompareTo(orderCode.ToLower().Trim()) == 0).ToList();
+            var result = orders.Where(x => x.OrderCode.ToLower().CompareTo(orderCode.ToLower().Trim()) == 0).ToList();
             if (result.Count > 0) return false;
             return true;
         }
@@ -32,7 +37,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
         }
         public override async Task<IEnumerable<Order>> GetAll()
         {
-            return await _dbContext.Set<Order>().Include(x=> x.User).ToListAsync();
+            return await _dbContext.Set<Order>().Include(x => x.User).ToListAsync();
         }
 
     }

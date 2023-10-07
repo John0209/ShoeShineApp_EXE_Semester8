@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace ShoeShineAPI.Core.EntityModel
 {
     public class Order
-    {
+     {
         public int OrderId { get; set; }
         //FK
         public int PaymentMethodId { get; set; }

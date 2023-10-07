@@ -15,5 +15,10 @@ namespace ShoeShineAPI.Service.Service.IService
         public Task<Order?> GetOrderById(int orderId);
         public Task<bool> UpdateOrderAfterPaymentSuccess(string orderId);
         public Task<Order?> GetOrderStatusPayment();
+        public Task<Order?> GetOrderShippingPayment();
+        Task<bool> UpdateOrderShippingStatus(string orderCode);
+        Task<bool> UpdateOrderStatusToReceived(string orderCode);
+        Task<bool> CancelOrder(string orderCode);
+
     }
 }

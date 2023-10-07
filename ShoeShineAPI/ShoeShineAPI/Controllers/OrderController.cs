@@ -23,7 +23,7 @@ namespace ShoeShineAPI.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetOrders()
         {
-            var orders=await _order.GetOrdersAsync();
+            var orders = await _order.GetOrdersAsync();
             if (orders.Any())
             {
                 var orderRespone = _map.Map<IEnumerable<OrderRespone>>(orders);
@@ -35,9 +35,42 @@ namespace ShoeShineAPI.Controllers
         public async Task<IActionResult> CreateOrder(OrderRequest request)
         {
             var _order = _map.Map<Order>(request);
-            var respone= await this._order.CreateOrder(_order,request);
+            var respone = await this._order.CreateOrder(_order, request);
             if (respone) return Ok("Create Order Success");
             return BadRequest("Create Order Fail");
         }
+
+        [HttpPost("shipping-status")]
+        public async Task<IActionResult> UpdateShippingStatus([FromBody] OrderRequest request)
+        {
+            if (await _order.UpdateOrderShippingStatus(request.OrderCode))
+            {
+                return Ok("Order has updated status Confirm to Shipping successfully.");
+            }
+
+            return BadRequest("Failed to update order shipping status.");
+        }
+        [HttpPost("received-status")]
+        public async Task<IActionResult> UpdateOrderStatusToReceived(OrderRequest request)
+        {
+            var success = await _order.UpdateOrderStatusToReceived(request.OrderCode);
+            if (success)
+            {
+                return Ok("Order status updated to 'Received' successfully.");
+            }
+            return BadRequest("Failed to update order status.");
+        }
+
+        [HttpPost("cancel-status")]
+        public async Task<IActionResult> CancelOrder(OrderRequest request)
+        {
+            var success = await _order.CancelOrder(request.OrderCode);
+            if (success)
+            {
+                return Ok("Order has been canceled successfully.");
+            }
+            return BadRequest("Failed to cancel the order.");
+        }
+
     }
 }

@@ -27,12 +27,12 @@ namespace ShoeShineAPI.Service.Service
         {
             var checkOrder = await GetOrderStatusPayment();
             // check xem có order nào ở status payment không, nếu có thì phải thanh toán xong mới được tạo típ order
-            if(checkOrder == null)
+            if (checkOrder == null)
             {
                 var orders = await GetAllDataAsync();
                 order.OrderCode = GenerateOrderCode(orders);
                 order.IsOrderStatus = 0;
-               //order.OrderDate = DateTime.Now;
+                //order.OrderDate = DateTime.Now;
                 await _unit.OrderRepository.Add(order);
                 int result = _unit.Save();
                 if (result > 0)
@@ -45,11 +45,11 @@ namespace ShoeShineAPI.Service.Service
         }
         public async Task<Order?> GetOrderStatusPayment()
         {
-          return await _unit.OrderRepository.GetOrderStatusPayment();
+            return await _unit.OrderRepository.GetOrderStatusPayment();
         }
         public async Task<bool> UpdateOrderAfterPaymentSuccess(string orderCode)
         {
-            var order= await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
+            var order = await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
             if (order != null)
             {
                 order.IsOrderStatus = 1;
@@ -59,6 +59,77 @@ namespace ShoeShineAPI.Service.Service
             }
             return false;
         }
+        public async Task<bool> UpdateOrderShippingStatus(string orderCode)
+        {
+            var order = await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
+
+            if (order != null)
+            {
+                if (order.IsOrderStatus == 1)
+                {
+                    order.IsOrderStatus = 2;
+
+                    _unit.OrderRepository.Update(order);
+                    var result = _unit.Save();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+        public async Task<bool> UpdateOrderStatusToReceived(string orderCode)
+        {
+            var order = await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
+
+            if (order != null)
+            {
+                if (order.IsOrderStatus == 2) // Check if the order is in the "Shipped" status.
+                {
+                    order.IsOrderStatus = 3; // Update the order status to "Received."
+
+                    _unit.OrderRepository.Update(order);
+                    var result = _unit.Save();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public async Task<bool> CancelOrder(string orderCode)
+        {
+            var order = await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
+
+            if (order != null)
+            {
+                if (order.IsOrderStatus == 0 || order.IsOrderStatus == 1)
+                {
+                    // Set the order status to "Canceled" for orders in "Await Payment" or "Confirmed" status.
+                    order.IsOrderStatus = 4; // Update the order status to "Canceled."
+
+                    _unit.OrderRepository.Update(order);
+                    var result = _unit.Save();
+
+                    if (result > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+
         private string GenerateOrderCode(IEnumerable<Order> orders)
         {
             while (true)
@@ -71,6 +142,10 @@ namespace ShoeShineAPI.Service.Service
                 if (result) return code;
             }
         }
+        public async Task<Order?> GetOrderShippingPayment()
+        {
+            return await _unit.OrderRepository.GetOrderShippingPayment();
+        }
 
         public async Task<Order?> GetOrderById(int orderId)
         {
@@ -82,7 +157,7 @@ namespace ShoeShineAPI.Service.Service
             return await GetAllDataAsync();
         }
 
-        protected  override async Task<IEnumerable<Order>> GetAllDataAsync()
+        protected override async Task<IEnumerable<Order>> GetAllDataAsync()
         {
             return await _unit.OrderRepository.GetAll();
         }
