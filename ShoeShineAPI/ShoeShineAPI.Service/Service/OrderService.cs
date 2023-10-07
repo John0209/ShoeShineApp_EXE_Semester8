@@ -161,5 +161,20 @@ namespace ShoeShineAPI.Service.Service
         {
             return await _unit.OrderRepository.GetAll();
         }
+
+        public async Task RemoveAllOrders()
+        {
+            var orders = await _unit.OrderRepository.GetAll();
+            if(orders != null && orders.Any())
+            {
+                var orderDetails = await _unit.OrderDetailRepository.GetAll();
+                if(orderDetails != null && orderDetails.Any())
+                {
+                    _unit.OrderDetailRepository.RemoveRange(orderDetails);
+                }
+                _unit.OrderRepository.RemoveRange(orders);
+                _unit.Save();
+            }
+        }
     }
 }

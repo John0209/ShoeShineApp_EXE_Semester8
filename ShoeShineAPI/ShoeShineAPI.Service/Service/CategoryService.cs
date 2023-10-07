@@ -43,5 +43,33 @@ namespace ShoeShineAPI.Service.Service
 		{
 			return await _unit.CategoryRepository.GetAll();
 		}
+
+		public async Task RemoveAllCategories()
+		{
+			var categories = await _unit.CategoryRepository.GetAll();
+			if(categories != null && categories.Any())
+			{
+				var bookingCategories = await _unit.BookingCategoryRepository.GetAll();
+				if(bookingCategories != null && bookingCategories.Any())
+				{
+					_unit.BookingCategoryRepository.RemoveRange(bookingCategories);
+				}
+
+				var categoryStore = await _unit.CategoryStoreRepository.GetAll();
+				if(categoryStore != null && categoryStore.Any())
+				{
+					_unit.CategoryStoreRepository.RemoveRange(categoryStore);
+				}
+
+				var products = await _unit.ProductRepository.GetAll();
+				if(products != null && products.Any())
+				{
+					_unit.ProductRepository.RemoveRange(products);
+				}
+
+				_unit.CategoryRepository.RemoveRange(categories);
+				_unit.Save();
+			}
+		}
 	}
 }

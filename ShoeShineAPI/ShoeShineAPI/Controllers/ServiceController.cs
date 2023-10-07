@@ -44,5 +44,12 @@ namespace ShoeShineAPI.Controllers
 			}
 			return BadRequest("Service Data Is Empty");
 		}
+
+		[HttpDelete]
+		public async Task<IActionResult> RemoveAllServices()
+		{
+			await _service.RemoveAllServices();
+			return NoContent();
+		}
 	}
 }

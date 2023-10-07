@@ -72,5 +72,11 @@ namespace ShoeShineAPI.Controllers
             return BadRequest("Failed to cancel the order.");
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> RemoveAllOrders()
+        {
+            await _order.RemoveAllOrders();
+            return NoContent();
+        }
     }
 }

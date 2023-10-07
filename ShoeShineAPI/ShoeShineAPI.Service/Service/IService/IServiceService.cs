@@ -12,5 +12,6 @@ namespace ShoeShineAPI.Service.Service.IService
 	{
 		public Task<IEnumerable<ServiceDB>> GetServicesByStoreId(IEnumerable<ServiceStore> serviceStores, int storeId);
 		public Task<IEnumerable<ServiceDB>> GetServicesAsync();
+		public Task RemoveAllServices();
 	}
 }

@@ -15,5 +15,6 @@ namespace ShoeShineAPI.Core.IRepositories
 		Task AddList(IEnumerable<T> entities);
 		void Remove(T entity);
 		void Update(T entity);
+		void RemoveRange(IEnumerable<T> entities);
 	}
 }

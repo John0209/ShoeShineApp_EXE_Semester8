@@ -156,6 +156,11 @@ namespace ShoeShineAPI.Controllers
             }
         }
 
-
+        [HttpDelete]
+        public async Task<IActionResult> RemoveAllUsers()
+        {
+            await _user.RemoveAllUsers();
+            return NoContent();
+        }
     }
 }

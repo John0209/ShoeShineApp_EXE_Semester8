@@ -17,5 +17,6 @@ namespace ShoeShineAPI.Service.Service.IService
         public void UpdateCommentAsync(CommentStore entity);
         public Task CreateImagesCommentAsync(IEnumerable<ImageComment> entities);
         public void DeleteImagesCommentByCommentStoreIdAsync(int commentStoreId);
+        public Task RemoveAllCommentStores();
     }
 }

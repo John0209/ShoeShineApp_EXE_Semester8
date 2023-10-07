@@ -19,6 +19,6 @@ namespace ShoeShineAPI.Service.Service.IService
         Task<bool> UpdateOrderShippingStatus(string orderCode);
         Task<bool> UpdateOrderStatusToReceived(string orderCode);
         Task<bool> CancelOrder(string orderCode);
-
+        public Task RemoveAllOrders();
     }
 }

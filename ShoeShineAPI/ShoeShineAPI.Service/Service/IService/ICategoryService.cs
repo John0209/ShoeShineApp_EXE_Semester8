@@ -11,5 +11,6 @@ namespace ShoeShineAPI.Service.Service.IService
 	{
 		public Task<IEnumerable<Category>> GetCategoriesByStoreId(IEnumerable<CategoryStore> categoryStores, int storeId);
 		public Task<IEnumerable<Category>> GetCategoriesAsync();
+		public Task RemoveAllCategories();
 	}
 }

@@ -19,5 +19,6 @@ namespace ShoeShineAPI.Service.Service.IService
 		public Task<User?> GetUserById(Guid userId);
         Task<ValidationResult> UpdateUserProfile(Guid userId, UpdateProfileRespone updateProfile);
 		public Task<ValidationResult> UpdatePassword(Guid userId, ChangePassRespone changePass);
+		public Task RemoveAllUsers();
     }
 }

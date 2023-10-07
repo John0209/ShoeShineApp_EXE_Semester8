@@ -42,4 +42,19 @@ public class ServiceService : CommonAbstract<Core.Model.Service>, IServiceServic
 		var services = await GetAllDataAsync();
 		return services;
 	}
+
+    public async Task RemoveAllServices()
+	{
+		var services = await _unit.ServiceRepository.GetAll();
+		if (services.Any())
+		{
+			var serviceStores = await _unit.ServiceStoreRepository.GetAll();
+			if (serviceStores.Any())
+			{
+				_unit.ServiceStoreRepository.RemoveRange(serviceStores);
+			}
+            _unit.ServiceRepository.RemoveRange(services);
+			_unit.Save();
+        }
+	}
 }

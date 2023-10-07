@@ -62,5 +62,10 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		{
 			_dbContext.Set<T>().Update(entity);
 		}
-	}
+
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
+        }
+    }
 }

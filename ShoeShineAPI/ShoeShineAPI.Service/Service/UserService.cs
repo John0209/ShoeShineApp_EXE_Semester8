@@ -162,5 +162,15 @@ namespace ShoeShineAPI.Service.Service
 
             return ValidationResult.Success; 
         }
+
+        public async Task RemoveAllUsers()
+        {
+            var users = await _unit.UserRepository.GetAll();
+            if(users != null && users.Any())
+            {
+                _unit.UserRepository.RemoveRange(users);
+                _unit.Save();
+            }
+        }
     }
 }

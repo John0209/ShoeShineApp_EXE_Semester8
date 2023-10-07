@@ -58,5 +58,12 @@ namespace ShoeShineAPI.Controllers
             }
 			return NotFound("Store Data is empty!");
 		}
+
+		[HttpDelete]
+		public async Task<IActionResult> RemoveAllStores()
+		{
+			await _store.RemoveAllStores();
+			return NoContent();
+		}
     }
 }

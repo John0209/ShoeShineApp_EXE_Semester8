@@ -14,5 +14,6 @@ namespace ShoeShineAPI.Service.Service.IService
         public Task<int> GetBookingJustCreate();
         public Task<Booking?> GetBookingById(int bookingId);
         public Task<bool> UpdateStatusBooking(int bookingId);
+        public Task RemoveAllBookings();
     }
 }

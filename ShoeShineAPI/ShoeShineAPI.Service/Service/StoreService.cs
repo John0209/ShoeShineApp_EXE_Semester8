@@ -90,5 +90,20 @@ namespace ShoeShineAPI.Service.Service
             _unit.StoreRepository.Update(store);
             _unit.Save();
         }
+
+        public async Task RemoveAllStores()
+        {
+            var stores = await _unit.StoreRepository.GetAll();
+            if (stores.Any())
+            {
+                var serviceStores = await _unit.ServiceStoreRepository.GetAll();
+                if (serviceStores.Any())
+                {
+                    _unit.ServiceStoreRepository.RemoveRange(serviceStores);
+                }
+                _unit.StoreRepository.RemoveRange(stores);
+                _unit.Save();
+            }
+        }
     }
 }

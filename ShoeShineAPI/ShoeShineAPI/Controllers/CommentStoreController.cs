@@ -147,5 +147,12 @@ namespace ShoeShineAPI.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveAllCommentStores()
+        {
+            await _comment.RemoveAllCommentStores();
+            return NoContent();
+        }
     }
 }

@@ -40,6 +40,11 @@ namespace ShoeShineAPI.Controllers
             return BadRequest("Create Booking Fail");
         }
 
-
+        [HttpDelete()]
+        public async Task<IActionResult> RemoveAllBookings()
+        {
+            await _booking.RemoveAllBookings();
+            return NoContent();
+        }
     }
 }

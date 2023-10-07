@@ -63,5 +63,20 @@ namespace ShoeShineAPI.Service.Service
             _unit.ImageCommentRepository.RemoveImageCommentsByCommentStoreId(commentStoreId);
             _unit.Save();
         }
+
+        public async Task RemoveAllCommentStores()
+        {
+            var commentStores = await _unit.CommentRepository.GetAll();
+            if(commentStores != null && commentStores.Any())
+            {
+                var imageComments = await _unit.ImageCommentRepository.GetAll();
+                if(imageComments != null && imageComments.Any())
+                {
+                    _unit.ImageCommentRepository.RemoveRange(imageComments);
+                }
+                _unit.CommentRepository.RemoveRange(commentStores);
+                _unit.Save();
+            }
+        }
     }
 }

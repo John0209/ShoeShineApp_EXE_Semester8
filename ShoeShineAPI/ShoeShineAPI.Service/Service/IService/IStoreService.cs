@@ -17,5 +17,6 @@ namespace ShoeShineAPI.Service.Service.IService
         Task<Store?> GetStoreById(int id);
         Task<IEnumerable<Store>> GetStoreByName(string storeName);
         void UpdateStore(Store store);
+        Task RemoveAllStores();
     }
 }
