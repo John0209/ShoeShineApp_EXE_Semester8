@@ -39,8 +39,9 @@ namespace ShoeShineAPI.Mapper
             CreateMap<OrderDetail, OrderDetailRespone>()
 				.ForMember(dest => dest.ServiceName,
                         otp => otp.MapFrom(src => src.Booking.Service != null ? src.Booking.Service.ServiceName : string.Empty))
-				//.ForMember(dest => dest.CategoryName,
-    //                    otp => otp.MapFrom(src => src.Booking.Category != null ? src.Booking.Category.CategoryName : string.Empty))
+				.ForMember(dest => dest.CategoryName,
+                        otp => otp.MapFrom(src => src.Booking.BookingCategories.Any() ? 
+                        src.Booking.BookingCategories.Select(x=> x.Category.CategoryName).ToList(): new List<string>()))
                 .ForMember(dest => dest.StoreName,
                         otp => otp.MapFrom(src => src.Booking.Store != null ? src.Booking.Store.StoreName : string.Empty))
                 .ReverseMap();
