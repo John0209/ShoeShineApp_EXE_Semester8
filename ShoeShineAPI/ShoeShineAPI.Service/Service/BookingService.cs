@@ -18,7 +18,7 @@ namespace ShoeShineAPI.Service.Service
         {
             _unit = unit;
         }
-
+        
         public async Task<bool> CreateBooking(Booking booking, int[]? categoryIdArray)
         {
             var checkStatus = await GetBookingJustCreate();

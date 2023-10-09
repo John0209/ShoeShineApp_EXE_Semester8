@@ -19,8 +19,8 @@ namespace ShoeShineAPI.Infracstructure.Repositories
         {
             return await _dbContext.Set<OrderDetail>()
                 .Include(x=> x.Booking.Service)
-                
-                .Include(x => x.Booking.Store).ToListAsync();
+                .Include(x => x.Booking.Store).Include(x=> x.Booking.BookingCategories).ThenInclude(x=> x.Category)
+                .ToListAsync();
         }
     }
 }

@@ -44,7 +44,7 @@ public class ProvideToken
 			Subject = new ClaimsIdentity(new Claim[]
 			{
             // Thêm các claim cần thiết vào đây (ví dụ: UserId)
-            new Claim(ClaimTypes.UserData, userId.ToString()),
+            new Claim("UserId", userId.ToString()),
 			new Claim(ClaimTypes.Role, roles),
 			}),
 			Expires = DateTime.UtcNow.AddMinutes(10), // Thời gian hiệu lực của token (vd: 30 phút)

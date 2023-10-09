@@ -12,7 +12,7 @@ namespace ShoeShineAPI.Core.ResponeModel
         //FK
         public string ServiceName { get; set; }=string.Empty;
         public string StoreName { get; set; } = string.Empty;
-        public string CategoryName { get; set; } = string.Empty;
+        public List<string> CategoryName { get; set; } = new List<string>();
         public int QuantityItem { get; set; }
         public float ShipFee { get; set; }
     }

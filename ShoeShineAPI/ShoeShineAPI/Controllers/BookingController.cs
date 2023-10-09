@@ -31,6 +31,16 @@ namespace ShoeShineAPI.Controllers
             }
             return BadRequest("Booking Empty!");
         }
+        [HttpPatch()]
+        public async Task<IActionResult> UpdateBooking()
+        {
+            var booking = await _booking.GetBookingJustCreate();
+            if (booking >0)
+            {
+                if (await _booking.UpdateStatusBooking(booking)) return Ok("Update Status Success");
+            }
+            return NotFound("No Status 0 Exist");
+        }
         [HttpPost()]
         public async Task<IActionResult> CreateBooking(BookingRequest request)
         {

@@ -20,6 +20,16 @@ namespace ShoeShineAPI.Controllers
             _order = order;
             _map = map;
         }
+        [HttpPatch()]
+        public async Task<IActionResult> UpdateOrder()
+        {
+            var order = await _order.GetOrderStatusPayment();
+            if (order != null)
+            {
+                if (await _order.UpdateOrderAfterPaymentSuccess(order.OrderCode)) return Ok("Update Status Success");
+            }
+            return NotFound("No Status 0 Exist");
+        }
         [HttpGet()]
         public async Task<IActionResult> GetOrders()
         {
