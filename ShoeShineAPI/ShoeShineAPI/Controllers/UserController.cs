@@ -162,5 +162,13 @@ namespace ShoeShineAPI.Controllers
             await _user.RemoveAllUsers();
             return NoContent();
         }
+
+        [HttpPatch("{userId}")]
+        public async Task<IActionResult> DeleteUserById(Guid userId)
+        {
+            var result = await _user.DeleteUserById(userId);
+            if (result) return Ok("Delete User successfully!");
+            return NotFound("User not found");
+        }
     }
 }

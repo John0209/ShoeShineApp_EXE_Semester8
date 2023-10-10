@@ -65,5 +65,13 @@ namespace ShoeShineAPI.Controllers
 			await _store.RemoveAllStores();
 			return NoContent();
 		}
+
+		[HttpPatch("{storeId}")]
+		public async Task<IActionResult> DeleteStoreById(int storeId)
+		{
+			var result = await _store.DeleteStoreById(storeId);
+			if(result) return Ok("Delete Store successfully!");
+			return NotFound("Store not found");
+		}
     }
 }

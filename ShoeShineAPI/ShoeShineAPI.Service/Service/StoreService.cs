@@ -105,5 +105,18 @@ namespace ShoeShineAPI.Service.Service
                 _unit.Save();
             }
         }
+
+        public async Task<bool> DeleteStoreById(int storeId)
+        {
+            var store = await _unit.StoreRepository.GetById(storeId);
+            if(store != null)
+            {
+                store.IsStoreStatus = false;
+                _unit.StoreRepository.Update(store);
+                var result = _unit.Save();
+                if (result > 0) return true;
+            }
+            return false;
+        }
     }
 }

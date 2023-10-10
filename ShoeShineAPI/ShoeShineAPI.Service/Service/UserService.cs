@@ -172,5 +172,18 @@ namespace ShoeShineAPI.Service.Service
                 _unit.Save();
             }
         }
+
+        public async Task<bool> DeleteUserById(Guid userId)
+        {
+            var user = await _unit.UserRepository.GetById(userId);
+            if (user != null)
+            {
+                user.IsUserStatus = false;
+                _unit.UserRepository.Update(user);
+                var result = _unit.Save();
+                if (result > 0) return true;
+            }
+            return false;
+        }
     }
 }
