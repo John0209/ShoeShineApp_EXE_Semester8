@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoeShineAPI.Core.EntityModel;
 using ShoeShineAPI.Core.IRepositories;
-using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Infracstructure.DatabaseConnect;
 using System;
 using System.Collections.Generic;
@@ -11,16 +10,14 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Infracstructure.Repositories
 {
-    public class TransactionRepository : GenericRepository<Transaction>, ITransactionRepository
+    public class ServicePriceRepository : GenericRepository<ServicePrice>, IServicePriceRepository
     {
-        public TransactionRepository(DbContextClass context) : base(context)
+        public ServicePriceRepository(DbContextClass context) : base(context)
         {
         }
-        public override async Task<IEnumerable<Transaction>> GetAll()
+        public override Task<ServicePrice?> GetById(int id)
         {
-            return await _dbContext.Set<Transaction>()
-                .Include(s => s.Order)
-                .ToListAsync();
+            return _dbContext.Set<ServicePrice>().Where(x=> x.ServiceStoreId == id).FirstOrDefaultAsync();
         }
     }
 }

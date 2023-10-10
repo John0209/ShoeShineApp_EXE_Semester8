@@ -8,6 +8,8 @@ using AutoMapper;
 using Microsoft.OpenApi.Models;
 using ShoeShineAPI.Gateway.Config;
 using ShoeShineAPI.Gateway.IConfig;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,8 +22,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
 	c.SwaggerDoc("v1", new OpenApiInfo { Title = "shoeshine", Version = "v1" });
-	// Cấu hình cho OAuth 2.0 (Bearer Token)
-	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    // document for api
+    //var programDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+    //var filePath = Path.Combine(programDirectory, "api-doc.xml");
+    //c.IncludeXmlComments(filePath); // Đường dẫn đến tệp YAML của bạn
+
+    // Cấu hình cho OAuth 2.0 (Bearer Token)
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
 		Description = "Please Enter The Token To Authenticate The Role",
 		Name = "Authorization",
@@ -63,6 +70,7 @@ builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IMomoConfig,MomoConfig>();
 builder.Services.AddScoped<IImageStoreService, ImageStoreSevice>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
 //Gateway
 builder.Services.Configure<MomoConfig>(builder.Configuration.GetSection(MomoConfig.ConfigName));
 // Mapper
@@ -70,7 +78,6 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // Token
 var serect =builder.Configuration["AppSettings:SecretKey"];
 var key = Encoding.ASCII.GetBytes(serect);
-
 builder.Services.AddAuthentication(x =>
 {
 	x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -101,7 +108,8 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
 	c.SwaggerEndpoint("/swagger/v1/swagger.json", "shoeshine");
-	c.RoutePrefix = string.Empty;
+    c.SwaggerEndpoint("/swagger/v1/swagger.yaml", "shoeshine");
+    c.RoutePrefix = string.Empty;
 
 });
 app.UseHttpsRedirection();

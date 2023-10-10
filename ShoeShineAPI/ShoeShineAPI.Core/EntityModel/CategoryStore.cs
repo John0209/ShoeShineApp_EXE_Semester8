@@ -12,8 +12,9 @@ namespace ShoeShineAPI.Core.Model
 		// Foreign Key
 		public int CategoryId { get; set; } // Table Category
 		public int StoreId { get; set; } // Table StoreEntity
-		// Relationship
-		public virtual Store? Store { get; set; }
+        public bool IsCategoryStoreStatus { get; set; }
+        // Relationship
+        public virtual Store? Store { get; set; }
 		public virtual Category? Category { get; set; }
 	}
 }

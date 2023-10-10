@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ShoeShineAPI.Core.DTOs;
 using ShoeShineAPI.Core.Model;
+using ShoeShineAPI.Core.RequestModel;
+using ShoeShineAPI.Core.ResponeModel;
 using ShoeShineAPI.Service.Service.IService;
 
 namespace ShoeShineAPI.Controllers
@@ -21,19 +23,20 @@ namespace ShoeShineAPI.Controllers
 			_serviceStore = serviceStore;
 		}
 
-		[HttpGet("get-service-of-by-store-id")]
-		public async Task<IActionResult> GetServiceByStoreId(int storeId)
+		[HttpGet("{storeId}")]
+        public async Task<IActionResult> GetServiceByStoreId(int storeId)
 		{
-			var serviceStores= await _serviceStore.GetServiceStoreAsync();
-			var services = await _service.GetServicesByStoreId(serviceStores,storeId);
-			if (services.Any())
+			//var serviceStores= await _serviceStore.GetServiceStoreAsync();
+			//var services = await _service.GetCategoryByStoreId(serviceStores,storeId);
+			var result= await _service.GetServicesByStoreId(storeId);
+			if (result.Any())
 			{
-				var serviceMapper = _map.Map<IEnumerable<ServiceRespone>>(services);
-				return Ok(serviceMapper);
+				var respones = _map.Map<List<ServiceStoreRespone>>(result);
+				return Ok(respones);
 			}
 			return BadRequest("Service Data Is Empty !!!");
 		}
-		[HttpGet("get-all")]
+		[HttpGet()]
 		public async Task<IActionResult> GetAll()
 		{
 			var services = await _service.GetServicesAsync();
@@ -51,5 +54,19 @@ namespace ShoeShineAPI.Controllers
 			await _service.RemoveAllServices();
 			return NoContent();
 		}
-	}
+		[HttpPost("/add-service-store")]
+        public async Task<IActionResult> AddServiceStore(ServiceStoreRequest request)
+		{
+			var result = await _serviceStore.AddServiceStore(request.StoreId, request.ServiceId,request.Price);
+			if (result.Item1) return Ok(result.Item2);
+            return Conflict(result.Item2);
+        }
+        [HttpPut("/cancel-service-store")]
+        public async Task<IActionResult> UpdateServiceStore(ServiceStoreRequest request)
+        {
+            var result = await _serviceStore.UpdateServiceStore(0,null,request.StoreId, request.ServiceId,false);
+            if (result) return Ok("Cancel Service Success");
+            return Conflict("Cancel Service Fail");
+        }
+    }
 }

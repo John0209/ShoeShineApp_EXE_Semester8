@@ -42,12 +42,9 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 
         public IBookingCategoryRepository BookingCategoryRepository { get; }
 
-        public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository,
-			ICommentStoreRepository commentRepository, IImageStoreRepository imageStoreRepository, 
-			IProductRepository productRepository, IRoleRepository roleRepository, IStoreRepository storeRepository, 
-			IUserRepository userRepository, IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository
-			, IImageCommentRepository imageCommentRepository, ICategoryStoreRepository categoryStoreRepository, 
-			IRatingRepository ratingRepository, IBookingRepository bookingRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository, IPaymentMethodRepository paymentMethodRepository, ITransactionRepository transactionRepository, IBookingCategoryRepository bookingCategoryRepository)
+        public IServicePriceRepository ServicePriceRepository { get; }
+
+        public UnitRepository(DbContextClass dbContextClass, ICategoryRepository categoryRepository, ICommentStoreRepository commentRepository, IImageStoreRepository imageStoreRepository, IProductRepository productRepository, IRoleRepository roleRepository, IStoreRepository storeRepository, IUserRepository userRepository, IServiceRepository serviceRepository, IServiceStoreRepository serviceStoreRepository, IImageCommentRepository imageCommentRepository, ICategoryStoreRepository categoryStoreRepository, IRatingRepository ratingRepository, IBookingRepository bookingRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository, IPaymentMethodRepository paymentMethodRepository, ITransactionRepository transactionRepository, IBookingCategoryRepository bookingCategoryRepository, IServicePriceRepository servicePriceRepository)
         {
             _dbContextClass = dbContextClass;
             CategoryRepository = categoryRepository;
@@ -68,6 +65,7 @@ namespace ShoeShineAPI.Infracstructure.Repositories
             PaymentMethodRepository = paymentMethodRepository;
             TransactionRepository = transactionRepository;
             BookingCategoryRepository = bookingCategoryRepository;
+            ServicePriceRepository = servicePriceRepository;
         }
 
         public int Save()

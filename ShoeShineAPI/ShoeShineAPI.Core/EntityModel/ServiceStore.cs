@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoeShineAPI.Core.EntityModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,10 @@ namespace ShoeShineAPI.Core.Model
 		// Foreign Key
 		public int ServiceId { get; set; } // Table Service
 		public int StoreId { get; set; } // Table StoreEntity
-		// Relationship
-		public virtual Store? Store { get; set; }
+		public bool IsServiceStoreStatus { get; set; }
+        // Relationship
+        public virtual Store? Store { get; set; }
 		public virtual Service? Service { get; set; }
-	}
+        public virtual ServicePrice? ServicePrice { get; set; }
+    }
 }

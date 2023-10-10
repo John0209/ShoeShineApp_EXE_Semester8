@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<api description="Shoeshine API documentation">
+  <info>
+    <title>Shoeshine API</title>
+    <version>1.0.0</version>
+  </info>
+  <paths>
+    <path path="/api/services/{storeId}" method="get">
+      <operation id="GetServiceByStoreId">
+        <description>Get service by store id</description>
+        <parameters>
+          <parameter name="storeId" type="integer" required="true"/>
+        </parameters>
+        <responses>
+          <response code="200">
+            <description>OK</description>
+            <content type="application/json">
+              <schema>
+                <type>array</type>
+                <items>
+                  <ref schema="#components/schemas/ServiceRespone"/>
+                </items>
+              </schema>
+            </content>
+          </response>
+          <response code="400">
+            <description>Bad Request</description>
+            <content type="application/json">
+              <schema>
+                <type>object</type>
+                <properties>
+                  <message type="string"/>
+                </properties>
+              </schema>
+            </content>
+          </response>
+        </responses>
+      </operation>
+    </path>
+  </paths>
+	
+	
+  <components>
+    <schemas>
+      <schema name="ServiceRespone">
+        <type>object</type>
+        <properties>
+          <id type="integer"/>
+          <name type="string"/>
+          <categoryId type="integer"/>
+          <price type="number"/>
+          <status type="string"/>
+        </properties>
+      </schema>
+    </schemas>
+  </components>
+</api>

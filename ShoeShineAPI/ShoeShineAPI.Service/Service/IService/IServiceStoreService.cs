@@ -10,7 +10,10 @@ namespace ShoeShineAPI.Service.Service.IService
 	public interface IServiceStoreService
 	{
 		public Task<IEnumerable<ServiceStore>> GetServiceStoreAsync();
-		public Task<bool> CreateServiceStore(int storeId, int[] serviceArray);
+		public  Task<ServiceStore?> GetServiceStoreById(int serviceStoreId);
+		public List<int> GetServiceStoreId(int storeId);
 
+        public Task<(bool, string)> AddServiceStore(int storeId, int[] serviceArray, float[] price);
+		public Task<bool> UpdateServiceStore(float price, ServiceStore? serviceStore, int storeId, int[] serviceArray, bool isCheck);
     }
 }

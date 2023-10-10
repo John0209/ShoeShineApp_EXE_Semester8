@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace ShoeShineAPI.Core.ResponeModel
 {
-    public class CategoryStoreRespone
+    public class ServiceStoreRespone
     {
-        public int CategoryId { get; set; } // Table Service
-        public string CategoryName { get; set; } = string.Empty;
+        public int ServiceId { get; set; } // Table Service
+        public string ServiceName { get; set; }=string.Empty;
         public int StoreId { get; set; } // Table StoreEntity
         public string StoreName { get; set; } = string.Empty;
-        public bool IsCategoryStoreStatus { get; set; }
+        public float ServicePrice { get; set; }
+        public bool IsServiceStoreStatus { get; set; }
     }
 }

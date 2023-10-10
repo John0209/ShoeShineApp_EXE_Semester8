@@ -9,6 +9,8 @@ namespace ShoeShineAPI.Core.IRepositories
 {
 	public interface IServiceStoreRepository:IGenericRepository<ServiceStore>
 	{
-		public IEnumerable<int> GetServiceIdByStoreId(int storeId);
-	}
+        public List<int> GetServiceStoreId(int storeId);
+        public Task<ServiceStore?> CheckServiceStoreExist(int storeId, int serviceId);
+
+    }
 }

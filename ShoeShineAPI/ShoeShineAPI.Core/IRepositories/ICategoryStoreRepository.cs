@@ -9,5 +9,7 @@ namespace ShoeShineAPI.Core.IRepositories
 {
 	public interface ICategoryStoreRepository:IGenericRepository<CategoryStore>
 	{
-	}
+        public Task<CategoryStore?> CheckCategoryStoreExist(int storeId, int categoryId);
+        public List<int> GetCategoryStoreId(int storeId);
+    }
 }

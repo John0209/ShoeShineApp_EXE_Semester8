@@ -10,8 +10,10 @@ namespace ShoeShineAPI.Service.Service.IService
 {
 	public interface IServiceService
 	{
-		public Task<IEnumerable<ServiceDB>> GetServicesByStoreId(IEnumerable<ServiceStore> serviceStores, int storeId);
-		public Task<IEnumerable<ServiceDB>> GetServicesAsync();
+		//public Task<IEnumerable<ServiceDB>> GetCategoryByStoreId(IEnumerable<ServiceStore> serviceStores, int storeId);
+		public  Task<List<ServiceStore>> GetServicesByStoreId(int storeId);
+
+        public Task<IEnumerable<ServiceDB>> GetServicesAsync();
 		public Task RemoveAllServices();
 	}
 }

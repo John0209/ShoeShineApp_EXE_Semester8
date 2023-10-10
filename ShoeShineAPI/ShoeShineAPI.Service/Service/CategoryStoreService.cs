@@ -29,21 +29,72 @@ namespace ShoeShineAPI.Service.Service
 		{
 			return await _unit.CategoryStoreRepository.GetAll();
 		}
-        public async Task<bool> CreateCategoriesStore(int storeId, int[] categoriesArray)
+        public async Task<(bool, string)> AddCategoryStore(int storeId, int[] categoryArray)
         {
-            if (categoriesArray.Length > 0 && storeId > 0)
+            if (categoryArray.Length > 0 && storeId > 0)
             {
-                foreach (var categoryId in categoriesArray)
+                foreach (var categoryId in categoryArray)
                 {
-                    var categoriesStore = new CategoryStore();
-                    categoriesStore.StoreId = storeId;
-                    categoriesStore.CategoryId = categoryId;
-                    await _unit.CategoryStoreRepository.Add(categoriesStore);
-                    _unit.Save();
+                    var checkStatus = await _unit.CategoryStoreRepository.CheckCategoryStoreExist(storeId, categoryId);
+                    if (checkStatus == null)
+                    {
+                        var categoryStore = new CategoryStore();
+                        categoryStore.StoreId = storeId;
+                        categoryStore.CategoryId = categoryId;
+                        categoryStore.IsCategoryStoreStatus = true;
+                        await _unit.CategoryStoreRepository.Add(categoryStore);
+                        if (_unit.Save() == 0) return (false, "Error When Add StoreId=" + storeId);
+                    }
+                    else
+                    {
+                        var result = await UpdateCategoryStore(checkStatus, 0, Array.Empty<int>(), true);
+                        if (!result) return (false, "Error When Update Status StoreId=" + storeId);
+                    }
                 }
-                return true;
+                return (true, "Add ServiceStore Success");
+            }
+            return (false, "Add ServiceStore Fail");
+        }
+        public async Task<bool> UpdateCategoryStore(CategoryStore? categoryStore, int storeId, int[] categoryArray, bool isCheck)
+        {
+            switch (isCheck)
+            {
+                case true:
+                    if (categoryStore != null)
+                    {
+                        categoryStore.IsCategoryStoreStatus = isCheck;
+                        _unit.CategoryStoreRepository.Update(categoryStore);
+                        if (_unit.Save() > 0)
+                            return true;
+                    }
+                    break;
+                case false:
+                    if (categoryArray.Length > 0 && storeId > 0)
+                    {
+                        foreach (var categoryId in categoryArray)
+                        {
+                            var _categoryStore = await _unit.CategoryStoreRepository.CheckCategoryStoreExist(storeId, categoryId);
+                            if (_categoryStore != null)
+                            {
+                                _categoryStore.IsCategoryStoreStatus = isCheck;
+                                _unit.CategoryStoreRepository.Update(_categoryStore);
+                                if (_unit.Save() == 0) return false;
+                            }
+                        }
+                        return true;
+                    }
+                    break;
             }
             return false;
         }
+        public List<int> GetCateogryStoreId(int storeId)
+        {
+            return _unit.CategoryStoreRepository.GetCategoryStoreId(storeId);
+        }
+        public async Task<CategoryStore?> GetCategoryStoreById(int categoryStoreId)
+        {
+            return await _unit.CategoryStoreRepository.GetById(categoryStoreId);
+        }
+
     }
 }

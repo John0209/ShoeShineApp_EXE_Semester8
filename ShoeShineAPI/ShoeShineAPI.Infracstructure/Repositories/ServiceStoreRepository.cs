@@ -1,4 +1,5 @@
-﻿using ShoeShineAPI.Core.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoeShineAPI.Core.IRepositories;
 using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Infracstructure.DatabaseConnect;
 using System;
@@ -15,9 +16,20 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		{
 		}
 
-		public IEnumerable<int> GetServiceIdByStoreId(int storeId)
+		public List<int> GetServiceStoreId(int storeId)
 		{
-			return _dbContext.Set<ServiceStore>().Where(x=> x.StoreId == storeId).Select(x=> x.ServiceId);
+			return _dbContext.Set<ServiceStore>().Where(x=> x.StoreId == storeId).Select(x=> x.ServiceStoreId).ToList();
 		}
+        public override Task<ServiceStore?> GetById(int id)
+        {
+            return _dbContext.Set<ServiceStore>().Where(x => x.ServiceStoreId == id)
+                            .Include(x => x.Service).Include(x => x.Store).Include(x=> x.ServicePrice).FirstOrDefaultAsync();
+        }
+        public Task<ServiceStore?> CheckServiceStoreExist(int storeId, int serviceId)
+		{
+			return _dbContext.Set<ServiceStore>().Where(x => x.StoreId == storeId && x.ServiceId==serviceId)
+				.FirstOrDefaultAsync();
+        }
+
 	}
 }

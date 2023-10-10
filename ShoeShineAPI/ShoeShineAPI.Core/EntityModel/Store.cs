@@ -15,6 +15,7 @@ namespace ShoeShineAPI.Core.Model
 		public string StoreDescription { get; set; } = string.Empty;
 		public string StorePhone { get; set; } = string.Empty;
         public string StoreEmal { get; set; } = string.Empty;
+		public DateTime StoreRegisterDate { get; set; }
         public bool IsStoreStatus { get; set; } = true;
         //Foreign Key
         public int RatingId { get; set; }

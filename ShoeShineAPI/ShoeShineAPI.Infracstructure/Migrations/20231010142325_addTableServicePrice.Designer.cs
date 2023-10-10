@@ -12,8 +12,8 @@ using ShoeShineAPI.Infracstructure.DatabaseConnect;
 namespace ShoeShineAPI.Infracstructure.Migrations
 {
     [DbContext(typeof(DbContextClass))]
-    [Migration("20230928051537_UpdateField")]
-    partial class UpdateField
+    [Migration("20231010142325_addTableServicePrice")]
+    partial class addTableServicePrice
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
 
-                    b.Property<int>("CategoryIdArray")
+                    b.Property<int>("IsBookingStatus")
                         .HasColumnType("int");
 
                     b.Property<int>("ServiceId")
@@ -44,13 +44,34 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("BookingId");
 
-                    b.HasIndex("CategoryIdArray");
-
                     b.HasIndex("ServiceId");
 
                     b.HasIndex("StoreId");
 
                     b.ToTable("Booking", (string)null);
+                });
+
+            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.BookingCategory", b =>
+                {
+                    b.Property<int>("BookingCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingCategoryId"));
+
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookingCategoryId");
+
+                    b.HasIndex("BookingId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("BookingCategory", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Order", b =>
@@ -72,7 +93,10 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PaymentId")
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
 
                     b.Property<float>("TotalPrice")
@@ -83,7 +107,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("PaymentId");
+                    b.HasIndex("PaymentMethodId");
 
                     b.HasIndex("UserId");
 
@@ -123,34 +147,6 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.PaymentMethod", b =>
                 {
-                    b.Property<int>("PaymentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
-
-                    b.Property<string>("AddInformation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PaymentMethodId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PaymentId");
-
-                    b.HasIndex("PaymentMethodId");
-
-                    b.ToTable("PaymentMethod", (string)null);
-                });
-
-            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.PaymentMethod", b =>
-                {
                     b.Property<int>("PaymentMethodId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
@@ -169,13 +165,66 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.ToTable("PaymentMethod", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.ServicePrice", b =>
                 {
-                    b.Property<int>("CategoryIdArray")
+                    b.Property<int>("ServicePriceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryIdArray"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServicePriceId"));
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<int>("ServiceStoreId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ServicePriceId");
+
+                    b.HasIndex("ServiceStoreId")
+                        .IsUnique();
+
+                    b.ToTable("ServicePrice", (string)null);
+                });
+
+            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Transaction", b =>
+                {
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PayType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionInfor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TransactionId");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Transaction", (string)null);
+                });
+
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -184,7 +233,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Property<bool>("IsCategoryStatus")
                         .HasColumnType("bit");
 
-                    b.HasKey("CategoryIdArray");
+                    b.HasKey("CategoryId");
 
                     b.ToTable("Category", (string)null);
                 });
@@ -197,15 +246,18 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryStoreId"));
 
-                    b.Property<int>("CategoryIdArray")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsCategoryStoreStatus")
+                        .HasColumnType("bit");
 
                     b.Property<int>("StoreId")
                         .HasColumnType("int");
 
                     b.HasKey("CategoryStoreId");
 
-                    b.HasIndex("CategoryIdArray");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("StoreId");
 
@@ -296,7 +348,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<int>("CategoryIdArray")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsProductStatus")
@@ -321,12 +373,12 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("CategoryIdArray");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Product", (string)null);
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Ratings", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Rating", b =>
                 {
                     b.Property<int>("RatingId")
                         .ValueGeneratedOnAdd()
@@ -339,29 +391,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     b.HasKey("RatingId");
 
-                    b.ToTable("Ratings", (string)null);
-                });
-
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Ratings", b =>
-                {
-                    b.Property<int>("RatingStoresId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingStoresId"));
-
-                    b.Property<int>("RatingScale")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RatingStoresId");
-
-                    b.HasIndex("StoreId")
-                        .IsUnique();
-
-                    b.ToTable("Ratings", (string)null);
+                    b.ToTable("Rating", (string)null);
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Role", b =>
@@ -412,6 +442,9 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceStoreId"));
 
+                    b.Property<bool>("IsServiceStoreStatus")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
@@ -438,6 +471,9 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Property<bool>("IsStoreStatus")
                         .HasColumnType("bit");
 
+                    b.Property<int>("RatingId")
+                        .HasColumnType("int");
+
                     b.Property<string>("StoreAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
@@ -446,7 +482,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StoreEmail")
+                    b.Property<string>("StoreEmal")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -458,7 +494,12 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("StoreRegisterDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("StoreId");
+
+                    b.HasIndex("RatingId");
 
                     b.ToTable("Store", (string)null);
                 });
@@ -506,6 +547,9 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(15)");
 
+                    b.Property<DateTime>("UserRegisterDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("UserId");
 
                     b.HasIndex("RoleId");
@@ -515,12 +559,6 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Booking", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
-                        .WithMany("Bookings")
-                        .HasForeignKey("CategoryIdArray")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ShoeShineAPI.Core.Model.Service", "Service")
                         .WithMany("Bookings")
                         .HasForeignKey("ServiceId")
@@ -533,18 +571,35 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-
                     b.Navigation("Service");
 
                     b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.BookingCategory", b =>
+                {
+                    b.HasOne("ShoeShineAPI.Core.EntityModel.Booking", "Booking")
+                        .WithMany("BookingCategories")
+                        .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
+                        .WithMany("BookingCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Order", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.EntityModel.PaymentMethod", "PaymentMethod")
                         .WithMany("Orders")
-                        .HasForeignKey("PaymentId")
+                        .HasForeignKey("PaymentMethodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -578,22 +633,33 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.PaymentMethod", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.ServicePrice", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.EntityModel.PaymentMethod", "PaymentMethod")
-                        .WithMany("Payments")
-                        .HasForeignKey("PaymentMethodId")
+                    b.HasOne("ShoeShineAPI.Core.Model.ServiceStore", "ServiceStore")
+                        .WithOne("ServicePrice")
+                        .HasForeignKey("ShoeShineAPI.Core.EntityModel.ServicePrice", "ServiceStoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PaymentMethod");
+                    b.Navigation("ServiceStore");
+                });
+
+            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Transaction", b =>
+                {
+                    b.HasOne("ShoeShineAPI.Core.EntityModel.Order", "Order")
+                        .WithOne("Transaction")
+                        .HasForeignKey("ShoeShineAPI.Core.EntityModel.Transaction", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.CategoryStore", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("CategoryStores")
-                        .HasForeignKey("CategoryIdArray")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -610,7 +676,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.CommentStore", b =>
                 {
-                    b.HasOne("ShoeShineAPI.Core.Model.Ratings", "Ratings")
+                    b.HasOne("ShoeShineAPI.Core.Model.Rating", "Ratings")
                         .WithMany("Comment")
                         .HasForeignKey("RatingId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -661,23 +727,11 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryIdArray")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Ratings", b =>
-                {
-                    b.HasOne("ShoeShineAPI.Core.Model.Store", "Store")
-                        .WithOne("Ratings")
-                        .HasForeignKey("ShoeShineAPI.Core.Model.Ratings", "StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Rating_Store");
-
-                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.ServiceStore", b =>
@@ -699,6 +753,17 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Store");
                 });
 
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Store", b =>
+                {
+                    b.HasOne("ShoeShineAPI.Core.Model.Rating", "Ratings")
+                        .WithMany("Stores")
+                        .HasForeignKey("RatingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ratings");
+                });
+
             modelBuilder.Entity("ShoeShineAPI.Core.Model.User", b =>
                 {
                     b.HasOne("ShoeShineAPI.Core.Model.Role", "Role")
@@ -712,12 +777,16 @@ namespace ShoeShineAPI.Infracstructure.Migrations
 
             modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Booking", b =>
                 {
+                    b.Navigation("BookingCategories");
+
                     b.Navigation("OrderDetail");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.Order", b =>
                 {
                     b.Navigation("OrderDetail");
+
+                    b.Navigation("Transaction");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.PaymentMethod", b =>
@@ -725,14 +794,9 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.EntityModel.PaymentMethod", b =>
-                {
-                    b.Navigation("Payments");
-                });
-
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Category", b =>
                 {
-                    b.Navigation("Bookings");
+                    b.Navigation("BookingCategories");
 
                     b.Navigation("CategoryStores");
 
@@ -744,9 +808,11 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("ImageComments");
                 });
 
-            modelBuilder.Entity("ShoeShineAPI.Core.Model.Ratings", b =>
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.Rating", b =>
                 {
                     b.Navigation("Comment");
+
+                    b.Navigation("Stores");
                 });
 
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Role", b =>
@@ -761,6 +827,11 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("ServiceStores");
                 });
 
+            modelBuilder.Entity("ShoeShineAPI.Core.Model.ServiceStore", b =>
+                {
+                    b.Navigation("ServicePrice");
+                });
+
             modelBuilder.Entity("ShoeShineAPI.Core.Model.Store", b =>
                 {
                     b.Navigation("Bookings");
@@ -770,8 +841,6 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
-
-                    b.Navigation("Ratings");
 
                     b.Navigation("ServiceStores");
                 });
