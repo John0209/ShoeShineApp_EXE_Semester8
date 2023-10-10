@@ -32,7 +32,7 @@ namespace ShoeShineAPI.Service.Service
                 var orders = await GetAllDataAsync();
                 order.OrderCode = GenerateOrderCode(orders);
                 order.IsOrderStatus = 0;
-                //order.OrderDate = DateTime.Now;
+                order.OrderDate = DateTime.Now;
                 await _unit.OrderRepository.Add(order);
                 int result = _unit.Save();
                 if (result > 0)
@@ -47,88 +47,44 @@ namespace ShoeShineAPI.Service.Service
         {
             return await _unit.OrderRepository.GetOrderStatusPayment();
         }
-        public async Task<bool> UpdateOrderAfterPaymentSuccess(string orderCode)
+        private async Task<bool> UpdateStatus(string orderCode, int statusCheck, int statusUpdate)
         {
             var order = await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
-            if (order != null)
+            if (order != null && order.IsOrderStatus==statusCheck)
             {
-                order.IsOrderStatus = 1;
+                order.IsOrderStatus = statusUpdate;
                 _unit.OrderRepository.Update(order);
                 var result = _unit.Save();
                 if (result > 0) return true;
             }
             return false;
         }
+        public async Task<bool> UpdateOrderAfterPaymentSuccess(string orderCode)
+        {
+            // Check if the order is in the "Payment-0" status, after update status "Confirm-1"
+            return await UpdateStatus(orderCode, 0, 1);
+        }
         public async Task<bool> UpdateOrderShippingStatus(string orderCode)
         {
-            var order = await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
-
-            if (order != null)
-            {
-                if (order.IsOrderStatus == 1)
-                {
-                    order.IsOrderStatus = 2;
-
-                    _unit.OrderRepository.Update(order);
-                    var result = _unit.Save();
-
-                    if (result > 0)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
+            // Check if the order is in the "Confirmed-1" status, after update status "Shipped-2"
+            return await UpdateStatus(orderCode, 1, 2);
         }
         public async Task<bool> UpdateOrderStatusToReceived(string orderCode)
         {
-            var order = await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
-
-            if (order != null)
-            {
-                if (order.IsOrderStatus == 2) // Check if the order is in the "Shipped" status.
-                {
-                    order.IsOrderStatus = 3; // Update the order status to "Received."
-
-                    _unit.OrderRepository.Update(order);
-                    var result = _unit.Save();
-
-                    if (result > 0)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
+            // Check if the order is in the "Shipped-2" status, after update status "Received-3"
+            return await UpdateStatus(orderCode, 2, 3);
         }
-
         public async Task<bool> CancelOrder(string orderCode)
         {
-            var order = await _unit.OrderRepository.GetOrderByOrderCode(orderCode);
-
-            if (order != null)
-            {
-                if (order.IsOrderStatus == 0 || order.IsOrderStatus == 1)
-                {
-                    // Set the order status to "Canceled" for orders in "Await Payment" or "Confirmed" status.
-                    order.IsOrderStatus = 4; // Update the order status to "Canceled."
-
-                    _unit.OrderRepository.Update(order);
-                    var result = _unit.Save();
-
-                    if (result > 0)
-                    {
-                        return true;
-                    }
-                }
+            // Check if the order is in the "Payment-0" or "Confirmed-1" status, after update status "Canceled-4"
+            if (!await UpdateStatus(orderCode, 0, 4)) 
+            { 
+                if(await UpdateStatus(orderCode, 1, 4)) 
+                    return true; 
+                return false;
             }
-
-            return false;
+            return true;
         }
-
-
 
         private string GenerateOrderCode(IEnumerable<Order> orders)
         {

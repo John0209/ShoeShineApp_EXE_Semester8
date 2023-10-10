@@ -454,7 +454,7 @@ namespace ShoeShineAPI.Infracstructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StoreEmal")
+                    b.Property<string>("StoreEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

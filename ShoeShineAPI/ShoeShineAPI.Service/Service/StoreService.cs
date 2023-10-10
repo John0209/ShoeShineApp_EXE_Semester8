@@ -46,26 +46,30 @@ namespace ShoeShineAPI.Service.Service
                 return (false, "StoreEmail already exists");
             }
             // Save the new store to the database
+            store.StoreRegisterDate= DateTime.Now;
             await _unit.StoreRepository.Add(store);
             var result= _unit.Save();
             if (result > 0)
             {
-                if(await _category.CreateCategoriesStore(store.StoreId, request.CategoryArray))
+                var result_1 = await _category.AddCategoryStore(store.StoreId, request.CategoryArray);
+                if (result_1.Item1)
                 {
-                   if(await _service.CreateServiceStore(store.StoreId, request.ServiceArray))
+                    var result_2 = await _service.AddServiceStore(store.StoreId, request.ServiceArray,request.ServicePrice);
+                    if (result_2.Item1)
                     {
-                        if(await _image.CraeteImageStore(store.StoreId, request.Url)){
+                        if (await _image.CraeteImageStore(store.StoreId, request.Url))
+                        {
                             return (true, "Create Store Success");
                         }
                         return (false, "Create ImageStore Fail");
                     }
-                   return (false, "Create ServiceStore Fail");
+                    return result_2;
                 }
-                return (false, "Create CategoriesStore Fail");
+                return result_1;
             }
             return (false, "Create Store Fail");
         }
-
+        
         public async Task<bool> CheckStoreEmailExistsAsync(string storeEmail)
         {
 

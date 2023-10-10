@@ -35,7 +35,6 @@ namespace ShoeShineAPI.Service.Service
 
         public string CreateToken(Guid userId,string roles)
         {
-
             return ProvideToken.Instance.GenerateToken(userId,roles);
         }
 
@@ -50,15 +49,9 @@ namespace ShoeShineAPI.Service.Service
 
         public async Task<bool> RegisterUser(RegistrationRespone registrationDTO)
         {
-            if (await EmailExists(registrationDTO.UserEmail))
-            {
-                return false;
-            }
+            if (await EmailExists(registrationDTO.UserEmail)) return false;
 
-            if (registrationDTO.UserPassword != registrationDTO.ConfirmPassword)
-            {
-                return false;
-            }
+            if (registrationDTO.UserPassword != registrationDTO.ConfirmPassword)return false;
 
             // Gán RoleId t? EnumClass.RoleEnum.Customer
             var newUser = new User
@@ -68,13 +61,13 @@ namespace ShoeShineAPI.Service.Service
                 UserEmail = registrationDTO.UserEmail,
                 UserPassword = registrationDTO.UserPassword,
                 //RoleId = (int)EnumClass.RoleEnum.Customer
-                RoleId = (int)EnumClass.RoleEnum.Admin
+                RoleId = (int)EnumClass.RoleEnum.Admin,
+                UserRegisterDate= DateTime.Now,
             };
-
             await _unit.UserRepository.Add(newUser);
-            _unit.Save();
-
-            return true;
+            if(_unit.Save() >0)
+                return true;
+            return false;
         }
 
 
@@ -123,7 +116,7 @@ namespace ShoeShineAPI.Service.Service
                 user.UserBirthDay = updateProfile.Birthday;
                 user.UserEmail = updateProfile.Email;
                 user.UserPhone = updateProfile.PhoneNumber;
-
+                user.UserRegisterDate=DateTime.Now;
                 _unit.UserRepository.Update(user);
                 _unit.Save();
 
@@ -172,5 +165,6 @@ namespace ShoeShineAPI.Service.Service
                 _unit.Save();
             }
         }
+        
     }
 }

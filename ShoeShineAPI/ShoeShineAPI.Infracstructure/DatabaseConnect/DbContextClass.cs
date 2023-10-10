@@ -33,6 +33,7 @@ public class DbContextClass: DbContext
     public DbSet<OrderDetail> OrderDetail { get; set; }
     public DbSet<Booking> Booking { get; set; }
     public DbSet<BookingCategory> BookingCategory { get; set; }
+    public DbSet<ServicePrice> ServicePrice { get; set; }
     #endregion
     protected override void OnModelCreating(ModelBuilder model)
 	{
@@ -165,6 +166,12 @@ public class DbContextClass: DbContext
             e.HasKey(x => x.BookingCategoryId);
             e.HasOne(x => x.Booking).WithMany(x => x.BookingCategories).HasForeignKey(x => x.BookingId);
             e.HasOne(x => x.Category).WithMany(x => x.BookingCategories).HasForeignKey(x => x.CategoryId);
+        });
+        model.Entity<ServicePrice>(e =>
+        {
+            e.ToTable(nameof(ServicePrice));
+            e.HasKey(x => x.ServicePriceId);
+            e.HasOne(x => x.ServiceStore).WithOne(x => x.ServicePrice).HasForeignKey<ServicePrice>(x => x.ServiceStoreId);
         });
 
     }

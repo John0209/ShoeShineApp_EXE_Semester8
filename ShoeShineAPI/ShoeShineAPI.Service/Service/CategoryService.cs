@@ -14,30 +14,32 @@ namespace ShoeShineAPI.Service.Service
 	public class CategoryService : CommonAbstract<Category>, ICategoryService
 	{
 		IUnitRepository _unit;
+		ICategoryStoreService _categoryStore;
 
-		public CategoryService(IUnitRepository unit)
-		{
-			_unit = unit;
-		}
+        public CategoryService(IUnitRepository unit, ICategoryStoreService categoryStore)
+        {
+            _unit = unit;
+            _categoryStore = categoryStore;
+        }
 
-		public async Task<IEnumerable<Category>> GetCategoriesAsync()
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
 		{
 			var categories = await GetAllDataAsync();
 			return categories;
 		}
 
-		public async Task<IEnumerable<Category>> GetCategoriesByStoreId(IEnumerable<CategoryStore> categoryStores, int storeId)
-		{
-			// lấy những categoryId có trong list categoryStores bằng storeId truyển vào
-			var matchingCategoryId = categoryStores.Where(x => x.StoreId == storeId).Select(x => x.CategoryId);
-			// sau khi có list categoryId lọc ra bởi storeId, ta lấy ra list category 
-			var categories = await GetAllDataAsync();
-			var categoriesOfStore = GetMatchingItems(matchingCategoryId, categories, x => x.CategoryId);
-			if (categoriesOfStore != null)
-				return categoriesOfStore;
-			else
-				return Enumerable.Empty<Category>();
-		}
+		//public async Task<IEnumerable<Category>> GetCategoriesByStoreId(IEnumerable<CategoryStore> categoryStores, int storeId)
+		//{
+		//	// lấy những categoryId có trong list categoryStores bằng storeId truyển vào
+		//	var matchingCategoryId = categoryStores.Where(x => x.StoreId == storeId).Select(x => x.CategoryId);
+		//	// sau khi có list categoryId lọc ra bởi storeId, ta lấy ra list category 
+		//	var categories = await GetAllDataAsync();
+		//	var categoriesOfStore = GetMatchingItems(matchingCategoryId, categories, x => x.CategoryId);
+		//	if (categoriesOfStore != null)
+		//		return categoriesOfStore;
+		//	else
+		//		return Enumerable.Empty<Category>();
+		//}
 
 		protected override async Task<IEnumerable<Category>> GetAllDataAsync()
 		{
@@ -71,5 +73,21 @@ namespace ShoeShineAPI.Service.Service
 				_unit.Save();
 			}
 		}
-	}
+        public async Task<List<CategoryStore>> GetCategoryByStoreId(int storeId)
+        {
+            List<CategoryStore> list = new List<CategoryStore>();
+            var categoryStoreIdList = _categoryStore.GetCateogryStoreId(storeId);
+            if (categoryStoreIdList.Any())
+            {
+                foreach (var x in categoryStoreIdList)
+                {
+                    var categoryStore = new CategoryStore();
+                    categoryStore = await _categoryStore.GetCategoryStoreById(x);
+                    if (categoryStore != null) list.Add(categoryStore);
+                }
+            }
+            return list;
+        }
+
+    }
 }

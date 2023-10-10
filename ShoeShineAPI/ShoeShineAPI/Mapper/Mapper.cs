@@ -56,6 +56,29 @@ namespace ShoeShineAPI.Mapper
                         otp => otp.MapFrom(src => src.Store != null ? src.Store.StoreName : string.Empty))
                 .ReverseMap();
 
+            CreateMap<Transaction, TransactionRespone>()
+                .ForMember(dest => dest.OrderCode,
+                        otp => otp.MapFrom(src => src.Order != null ? src.Order.OrderCode : string.Empty))
+                .ForMember(dest => dest.OrderDate,
+                        otp => otp.MapFrom(src => src.Order != null ? src.Order.OrderDate : default))
+                .ReverseMap();
+
+            CreateMap<ServiceStore, ServiceStoreRespone>()
+                .ForMember(dest => dest.ServiceName,
+                        otp => otp.MapFrom(src => src.Service != null ? src.Service.ServiceName : string.Empty))
+                 .ForMember(dest => dest.ServicePrice,
+                        otp => otp.MapFrom(src => src.ServicePrice != null ? src.ServicePrice.Price : 0))
+                  .ForMember(dest => dest.StoreName,
+                        otp => otp.MapFrom(src => src.Store != null ? src.Store.StoreName : string.Empty))
+                  .ReverseMap();
+
+            CreateMap<CategoryStore, CategoryStoreRespone>()
+                .ForMember(dest => dest.CategoryName,
+                        otp => otp.MapFrom(src => src.Category != null ? src.Category.CategoryName : string.Empty))
+                  .ForMember(dest => dest.StoreName,
+                        otp => otp.MapFrom(src => src.Store != null ? src.Store.StoreName : string.Empty))
+                  .ReverseMap();
+
             CreateMap<Store, StoreRequest>().ReverseMap();
             CreateMap<ServiceDB, ServiceRespone>().ReverseMap();
 			CreateMap<Category, CategoryRespone>().ReverseMap();
