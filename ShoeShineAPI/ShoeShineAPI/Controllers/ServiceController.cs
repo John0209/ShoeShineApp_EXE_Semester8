@@ -23,11 +23,16 @@ namespace ShoeShineAPI.Controllers
 			_serviceStore = serviceStore;
 		}
 
-		[HttpGet("{storeId}")]
+        /// <summary>
+        /// Get service by store ID
+        /// </summary>
+        /// <param name="storeId">The ID of the store</param>
+        /// <remarks>Lấy những service mà store đó đang có</remarks>
+        /// <returns>IActionResult containing services or error message</returns>
+
+        [HttpGet("{storeId}")]
         public async Task<IActionResult> GetServiceByStoreId(int storeId)
 		{
-			//var serviceStores= await _serviceStore.GetServiceStoreAsync();
-			//var services = await _service.GetCategoryByStoreId(serviceStores,storeId);
 			var result= await _service.GetServicesByStoreId(storeId);
 			if (result.Any())
 			{

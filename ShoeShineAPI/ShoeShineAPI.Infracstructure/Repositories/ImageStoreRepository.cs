@@ -1,4 +1,5 @@
-﻿using ShoeShineAPI.Core.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoeShineAPI.Core.IRepositories;
 using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Infracstructure.DatabaseConnect;
 using System;
@@ -14,5 +15,10 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		public ImageStoreRepository(DbContextClass context) : base(context)
 		{
 		}
-	}
+        public Task<List<ImageStore>> GetListImageByStoreId(int id)
+        {
+            return _dbContext.Set<ImageStore>().Where(x => x.StoreId == id).ToListAsync();
+        }
+
+    }
 }

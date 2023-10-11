@@ -9,5 +9,7 @@ namespace ShoeShineAPI.Service.Service.IService
     public interface IImageStoreService
     {
         public Task<bool> CraeteImageStore(int storeId, string url);
+
+        public  Task<(bool, string)> UpdateImage(int storeId, string[] url);
     }
 }

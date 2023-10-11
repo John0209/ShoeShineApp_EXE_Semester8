@@ -22,13 +22,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
 	c.SwaggerDoc("v1", new OpenApiInfo { Title = "shoeshine", Version = "v1" });
-    // document for api
-    //var programDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-    //var filePath = Path.Combine(programDirectory, "api-doc.xml");
-    //c.IncludeXmlComments(filePath); // Đường dẫn đến tệp YAML của bạn
+	// document for api
+	var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+	c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFileName));
+	//var programDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+	//var filePath = Path.Combine(programDirectory, "api-doc.xml");
+	//c.IncludeXmlComments(filePath); // Đường dẫn đến tệp YAML của bạn
 
-    // Cấu hình cho OAuth 2.0 (Bearer Token)
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+	// Cấu hình cho OAuth 2.0 (Bearer Token)
+	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
 		Description = "Please Enter The Token To Authenticate The Role",
 		Name = "Authorization",
@@ -107,8 +109,7 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-	c.SwaggerEndpoint("/swagger/v1/swagger.json", "shoeshine");
-    c.SwaggerEndpoint("/swagger/v1/swagger.yaml", "shoeshine");
+	c.SwaggerEndpoint("/swagger/v1/swagger.json", "shoeshine v1");
     c.RoutePrefix = string.Empty;
 
 });

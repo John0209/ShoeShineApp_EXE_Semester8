@@ -1,0 +1,13 @@
+# swagger-config.yml
+
+info:
+  title: My API
+  version: 1.0.0
+
+# Enable schema
+schema:
+  enabled: true
+
+# Disable example
+example:
+  enabled: false

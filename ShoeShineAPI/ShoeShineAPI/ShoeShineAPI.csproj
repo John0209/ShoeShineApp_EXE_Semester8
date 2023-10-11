@@ -4,15 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <!--Document-->
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <NoWarn>$(NoWarn);1591</NoWarn>
+	  <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	  <!--Document-->
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Document\api-doc.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Document\api-doc.xml" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />

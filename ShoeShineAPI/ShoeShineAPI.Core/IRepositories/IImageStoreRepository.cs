@@ -9,5 +9,7 @@ namespace ShoeShineAPI.Core.IRepositories
 {
 	public interface IImageStoreRepository : IGenericRepository<ImageStore>
 	{
-	}
+        public Task<List<ImageStore>> GetListImageByStoreId(int id);
+
+    }
 }
