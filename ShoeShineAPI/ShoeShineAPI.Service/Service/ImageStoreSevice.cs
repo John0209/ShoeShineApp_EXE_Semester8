@@ -34,5 +34,42 @@ namespace ShoeShineAPI.Service.Service
         {
             throw new NotImplementedException();
         }
+        public async Task<(bool,string)> UpdateImage(int storeId, string[] url)
+        {
+            if(url.Length >0 && storeId >0)
+            {
+                var image = await _unit.ImageStoreRepository.GetListImageByStoreId(storeId);
+                if (image.Any())
+                {
+                    int i = 0;
+                    foreach (var imageUpdate in url)
+                    {
+                        if (image.LastIndexOf(image.LastOrDefault()) < i) 
+                        {
+                           if(!await AddImage(storeId, imageUpdate)) return (false, "Add Image Fail ");
+                        }
+                        else
+                        {
+                            image[i].ImageURL = imageUpdate;
+                            _unit.ImageStoreRepository.Update(image[i]);
+                            if(_unit.Save()>0) i++;
+                            else return (false, "Update Image Fail at ImageId=" + image[i].ImageStoreId);
+                        }
+                    }
+                    return (true, "Update Store Scuccess");
+                }
+            }
+            return (false, "Update Image Fail");
+        }
+
+        private async Task<bool> AddImage(int storeId, string imageUpdate)
+        {
+           ImageStore image= new ImageStore();
+            image.StoreId = storeId;
+            image.ImageURL= imageUpdate;
+            await _unit.ImageStoreRepository.Add(image);
+            if (_unit.Save() > 0) return true;
+            return false;
+        }
     }
 }

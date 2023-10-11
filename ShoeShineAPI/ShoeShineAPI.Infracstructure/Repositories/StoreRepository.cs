@@ -43,8 +43,14 @@ namespace ShoeShineAPI.Infracstructure.Repositories
                 existingStore.StoreDescription = entity.StoreDescription;
                 existingStore.StorePhone = entity.StorePhone;
                 existingStore.StoreEmal = entity.StoreEmal;
-                existingStore.IsStoreStatus = entity.IsStoreStatus;
             }
+        }
+        public override Task<Store?> GetById(int id)
+        {
+            return  _dbContext.Set<Store>().Where(x=> x.StoreId==id)
+                .Include(s => s.Images)
+                .Include(s => s.Ratings)
+                .FirstOrDefaultAsync();
         }
     }
 }

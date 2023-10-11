@@ -12,9 +12,11 @@ namespace ShoeShineAPI.Core.DTOs
 		public string StoreName { get; set; } = string.Empty;
 		public string StoreAddress { get; set; } = string.Empty;
 		public string StoreDescription { get; set; } = string.Empty;
+        public string StorePhone { get; set; } = string.Empty;
+        public string StoreEmal { get; set; } = string.Empty;
         public DateTime StoreRegisterDate { get; set; }
         public bool IsStoreStatus { get; set; } = true;
-        public string ImageUrl { get; set; } = string.Empty;
+        public List<string> ImageUrl { get; set; } = new List<string>();
         public int RatingScale { get; set; }
     }
 }

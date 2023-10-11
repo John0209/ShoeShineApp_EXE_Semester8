@@ -41,7 +41,7 @@ namespace ShoeShineAPI.Service.Service
 		}
         public async Task<(bool,string)> RegisterStoreAsync(Store store,StoreRequest request)
         {
-            if (await CheckStoreEmailExistsAsync(store.StoreEmal))
+            if (await CheckStoreEmailExistsAsync(store.StoreEmal,0))
             {
                 return (false, "StoreEmail already exists");
             }
@@ -70,18 +70,13 @@ namespace ShoeShineAPI.Service.Service
             return (false, "Create Store Fail");
         }
         
-        public async Task<bool> CheckStoreEmailExistsAsync(string storeEmail)
+        public async Task<bool> CheckStoreEmailExistsAsync(string storeEmail,int storeId)
         {
 
             var stores = await GetAllDataAsync(); 
-            return stores.Any(s => s.StoreEmal == storeEmail);
+            return stores.Any(s => s.StoreEmal == storeEmail && s.StoreId!=storeId);
         }
 
-        public async Task<Store?> GetStoreById(int id)
-        {
-            var store = await _unit.StoreRepository.GetById(id);
-            return store;
-        }
 
         public async Task<IEnumerable<Store>> GetStoreByName(string storeName)
         {
@@ -89,12 +84,7 @@ namespace ShoeShineAPI.Service.Service
             return stores;
         }
 
-        public void UpdateStore(Store store)
-        {
-            _unit.StoreRepository.Update(store);
-            _unit.Save();
-        }
-
+        
         public async Task RemoveAllStores()
         {
             var stores = await _unit.StoreRepository.GetAll();
@@ -109,5 +99,29 @@ namespace ShoeShineAPI.Service.Service
                 _unit.Save();
             }
         }
+        public async Task<(bool,string)> UpdateStore(Store request, string[] url)
+        {
+            if(await CheckStoreEmailExistsAsync(request.StoreEmal,request.StoreId)) return (false, "Email is exist");
+            if (request != null)
+            {
+                _unit.StoreRepository.Update(request);
+                if(_unit.Save()>0)
+                {
+                    if (url.Length > 0)
+                    {
+                        var respone = await _image.UpdateImage(request.StoreId, url);
+                        if (!respone.Item1) return respone;
+                        return respone;
+                    }
+                    return (true, "Update Store Success");
+                }
+            }
+            return (false,"Update Store Fail Because Nothing To Change");
+        }
+        public async Task<Store?> GetStoreById(int storeId)
+        {
+            return await _unit.StoreRepository.GetById(storeId);
+        }
+
     }
 }

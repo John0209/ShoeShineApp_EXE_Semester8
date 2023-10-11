@@ -13,10 +13,10 @@ namespace ShoeShineAPI.Service.Service.IService
 	{
 		public Task<IEnumerable<Store>> GetStoresAsync();
         public Task<(bool, string)> RegisterStoreAsync(Store store, StoreRequest request);
-        Task<bool> CheckStoreEmailExistsAsync(string storeEmail);
-        Task<Store?> GetStoreById(int id);
+        Task<bool> CheckStoreEmailExistsAsync(string storeEmail, int storeId);
         Task<IEnumerable<Store>> GetStoreByName(string storeName);
-        void UpdateStore(Store store);
+        public Task<(bool, string)> UpdateStore(Store request, string[] url);
         Task RemoveAllStores();
+        public Task<Store?> GetStoreById(int storeId);
     }
 }
