@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShoeShineAPI.Core.EntityModel;
 using ShoeShineAPI.Core.RequestModel;
 using ShoeShineAPI.Core.ResponeModel;
+using ShoeShineAPI.Enum;
 using ShoeShineAPI.Service.Service.IService;
 
 namespace ShoeShineAPI.Controllers
@@ -30,47 +31,45 @@ namespace ShoeShineAPI.Controllers
                 var orderRespone = _map.Map<IEnumerable<OrderRespone>>(orders);
                 return Ok(orderRespone);
             }
-            return BadRequest("Order is empty!");
+            return NotFound("List of Order is Empty");
         }
         [HttpPost()]
         public async Task<IActionResult> CreateOrder(OrderRequest request)
         {
             var _order = _map.Map<Order>(request);
             var respone = await this._order.CreateOrder(_order, request);
-            if (respone) return Ok("Create Order Success");
-            return BadRequest("Create Order Fail");
+            if (respone) return Ok("Order Created Successfully");
+            return BadRequest("Order Creation Failed");
         }
-
-        [HttpPatch("shipping/{orderCode}")]
-        public async Task<IActionResult> UpdateShippingStatus(string orderCode)
+        /// <summary>
+        /// Update Order Status
+        /// </summary>
+        /// <param name="orderCode"></param>
+        /// <param name="status">1.Confirm, 2.Shipping, 3.Received, 4.Cancel</param>
+        /// <returns></returns>
+        [HttpPatch("{orderCode}")]
+        public async Task<IActionResult> UpdateOrderStatusToReceived(string orderCode,EnumClass.OrderStatus status)
         {
-            if (await _order.UpdateOrderShippingStatus(orderCode))
+            bool result = true;
+            switch ((int)status)
             {
-                return Ok("Order has updated status Confirm to Shipping successfully.");
+                case 1:
+                    break;
+                case 2:
+                    result= await _order.UpdateOrderStatusToReceived(orderCode);
+                    break;
+                case 3:
+                    result = await _order.UpdateOrderShippingStatus(orderCode);
+                    break;
+                case 4:
+                    result= await _order.CancelOrder(orderCode);
+                    break;
             }
-
-            return BadRequest("Failed to update order shipping status.");
-        }
-        [HttpPatch("received/{orderCode}")]
-        public async Task<IActionResult> UpdateOrderStatusToReceived( string orderCode)
-        {
-            var success = await _order.UpdateOrderStatusToReceived(orderCode);
-            if (success)
+            if (result)
             {
-                return Ok("Order status updated to 'Received' successfully.");
+                return Ok("Order Status Updated To "+status+" Successfully");
             }
-            return BadRequest("Failed to update order status.");
-        }
-
-        [HttpPatch("cancel/{orderCode}")]
-        public async Task<IActionResult> CancelOrder(string orderCode)
-        {
-            var success = await _order.CancelOrder(orderCode);
-            if (success)
-            {
-                return Ok("Order has been canceled successfully.");
-            }
-            return BadRequest("Failed to cancel the order.");
+            return BadRequest("Failed to update order status "+status);
         }
         [HttpDelete]
         public async Task<IActionResult> RemoveAllOrders()

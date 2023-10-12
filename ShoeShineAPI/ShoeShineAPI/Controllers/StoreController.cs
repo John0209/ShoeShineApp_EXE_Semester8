@@ -10,7 +10,7 @@ using ShoeShineAPI.Service.Service.IService;
 
 namespace ShoeShineAPI.Controllers
 {
-	[Route("api/store")]
+	[Route("api/stores")]
 	[ApiController]
 	public class StoreController : ControllerBase
 	{
@@ -33,22 +33,7 @@ namespace ShoeShineAPI.Controllers
 			}
 			return NotFound("StoreEntity Data Is Empty");
 		}
-		/// <summary>
-		/// Get Store By Id
-		/// </summary>
-		/// <param name="storeId"></param>
-		/// <returns></returns>
-		[HttpGet("{storeId}")]
-        public async Task<IActionResult> GetById(int storeId)
-        {
-            var store = await _store.GetStoreById(storeId);
-			if (store != null)
-            {
-                var storesMapper = _map.Map<StoreRespone>(store);
-                return Ok(storesMapper);
-            }
-            return NotFound("StoreEntity Data Is Empty");
-        }
+		
         [HttpPost()]
         public async Task<IActionResult> RegisterStore([FromBody] StoreRequest request)
         {
@@ -61,22 +46,38 @@ namespace ShoeShineAPI.Controllers
 			}
 			return Ok(result.Item2);
         }
-		/// <summary>
-		/// Get Store By Name
-		/// </summary>
-		/// <param name="storeName"></param>
-		/// <returns></returns>
-		//[HttpGet("{storeName}")]
-		//public async Task<IActionResult> GetStoresByName(string storeName)
-		//{
-		//	var stores = await _store.GetStoreByName(storeName);
-		//	if(stores.Any())
-		//	{
-  //              var storesMapper = _map.Map<IEnumerable<StoreRespone>>(stores);
-  //              return Ok(storesMapper);
-  //          }
-		//	return NotFound("Store Data is empty!");
-		//}
+        /// <summary>
+        /// Get Store By Id
+        /// </summary>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        [HttpGet("{storeId}")]
+        public async Task<IActionResult> GetById(int storeId)
+        {
+            var store = await _store.GetStoreById(storeId);
+            if (store != null)
+            {
+                var storesMapper = _map.Map<StoreRespone>(store);
+                return Ok(storesMapper);
+            }
+            return NotFound("StoreEntity Data Is Empty");
+        }
+        /// <summary>
+        /// Search Store By Name
+        /// </summary>
+        /// <param name="storeName"></param>
+        /// <returns></returns>
+        [HttpGet("search/{storeName}")]
+		public async Task<IActionResult> GetStoresByName(string storeName)
+		{
+			var stores = await _store.GetStoreByName(storeName);
+			if (stores.Any())
+			{
+				var storesMapper = _map.Map<IEnumerable<StoreRespone>>(stores);
+				return Ok(storesMapper);
+			}
+			return NotFound(storeName+" Not Found");
+		}
 
 		[HttpDelete]
 		public async Task<IActionResult> RemoveAllStores()
