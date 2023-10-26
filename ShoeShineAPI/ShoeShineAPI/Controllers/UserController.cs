@@ -34,7 +34,18 @@ namespace ShoeShineAPI.Controllers
 			_memoryCache = memoryCache;
 			_role = role;
 		}
-
+        /// <summary>
+        /// Add Role
+        /// </summary>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
+        [HttpPost("role")]
+        public IActionResult AddRole(string roleName)
+        {
+            var result= _role.AddRole(roleName);
+            if (result) return Ok("Add Role Successfully");
+            return BadRequest("Add Role Failed");
+        }
 		[HttpPost("login")]
         public async Task<IActionResult> Login(string email, string password)
         {
@@ -47,15 +58,20 @@ namespace ShoeShineAPI.Controllers
             }
             return BadRequest("Login failed");
         }
-
-        [HttpGet("get-new-guid")]
-        public IActionResult GetGuid()
+        /// <summary>
+        /// Recover password by email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpGet("recover")]
+        public async Task<IActionResult> RecoverPass(string email)
         {
-            var guid = Guid.NewGuid();
-            return Ok(guid);
+            var result =await _user.RecoverPassword(email);
+            if (result) return Ok("Recover Password Successfully");
+            return BadRequest("Email don't exist");
         }
        
-		[Authorize(Roles = EnumClass.RoleNames.Admin)]
+	//	[Authorize(Roles = EnumClass.RoleNames.Admin)]
 		[HttpGet()]
         public async Task<IActionResult> GetAll()
         {
@@ -70,11 +86,16 @@ namespace ShoeShineAPI.Controllers
             }
             return BadRequest("UserEntity Data Is Empty");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="registrationDTO"></param>
+        /// <param name="role">1. Admin, 2. User, 3. Store</param>
+        /// <returns></returns>
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegistrationRespone registrationDTO)
+        public async Task<IActionResult> Register([FromBody] RegistrationRespone registrationDTO, EnumClass.RoleEnum role)
         {
-            bool registrationResult = await _user.RegisterUser(registrationDTO);
+            bool registrationResult = await _user.RegisterUser(registrationDTO,role);
             if (registrationResult)
             {
                 return Ok("Register Successfully");
@@ -118,8 +139,13 @@ namespace ShoeShineAPI.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-
-        [HttpPut("update/{userId}")]
+        /// <summary>
+        /// Update User
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="updateProfile"></param>
+        /// <returns></returns>
+        [HttpPut("{userId}")]
         public async Task<IActionResult> UpdateUserProfile(Guid userId, UpdateProfileRespone updateProfile)
         {
             var validationResult = await _user.UpdateUserProfile(userId, updateProfile);
@@ -133,8 +159,13 @@ namespace ShoeShineAPI.Controllers
                 return BadRequest(validationResult.ErrorMessage);
             }
         }
-
-        [HttpPut("{userId}/update-password")]
+        /// <summary>
+        /// Update Password of User
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="changePass"></param>
+        /// <returns></returns>
+        [HttpPut("password/{userId}")]
         public async Task<IActionResult> UpdatePassword(Guid userId, ChangePassRespone changePass)
         {
             try
@@ -155,14 +186,21 @@ namespace ShoeShineAPI.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-
+        /// <summary>
+        /// Delete all user
+        /// </summary>
+        /// <returns></returns>
         [HttpDelete]
         public async Task<IActionResult> RemoveAllUsers()
         {
             await _user.RemoveAllUsers();
             return NoContent();
         }
-
+        /// <summary>
+        /// Delete user by id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [HttpPatch("{userId}")]
         public async Task<IActionResult> DeleteUserById(Guid userId)
         {

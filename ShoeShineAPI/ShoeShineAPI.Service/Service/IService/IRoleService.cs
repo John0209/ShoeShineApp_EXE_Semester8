@@ -11,5 +11,7 @@ namespace ShoeShineAPI.Service.Service.IService
 	{
 		public Task<Role> GetRoleById(int roleId);
 		public Task<IEnumerable<Role>> GetRolesAsync();
-	}
+		public bool AddRole(string roleName);
+
+    }
 }

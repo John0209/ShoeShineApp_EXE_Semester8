@@ -19,6 +19,7 @@ namespace ShoeShineAPI.Core.DTOs
         public string UserPassword { get; set; }
         [Required(ErrorMessage = "Confirm Password is required")]
         public string ConfirmPassword { get; set; }
+
     }
 
 }

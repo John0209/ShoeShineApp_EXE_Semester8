@@ -22,12 +22,15 @@ namespace ShoeShineAPI.Service.Service
     {
         IUnitRepository _unit;
         IOrderService _order;
-
-        public PaymentService(IUnitRepository unit, IOrderService order)
+        IUserService _user;
+        
+        public PaymentService(IUnitRepository unit, IOrderService order, IUserService user)
         {
-            _unit = unit;   
+            _unit = unit;
             _order = order;
+            _user = user;
         }
+
         public async Task<bool> CreateTransaction(MomoResultRequest request)
         {
           // Update status order sang confirm
@@ -69,7 +72,7 @@ namespace ShoeShineAPI.Service.Service
                 request.requestId= order.OrderCode;
                 request.amount =(long) order.TotalPrice;
                 request.extraData= order.OrderDate.ToString();
-                request.orderId ="SSN-"+order.OrderId;
+                request.orderId =_user.GenerateRandomString(4)+"-"+order.OrderId;
                 return (true,request);
             }
             return (false, request);

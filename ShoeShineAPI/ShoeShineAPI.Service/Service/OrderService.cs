@@ -1,5 +1,6 @@
 ﻿using ShoeShineAPI.Core.EntityModel;
 using ShoeShineAPI.Core.IRepositories;
+using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Core.RequestModel;
 using ShoeShineAPI.Service.Inheritance_Class;
 using ShoeShineAPI.Service.Service.IService;
@@ -132,5 +133,16 @@ namespace ShoeShineAPI.Service.Service
                 _unit.Save();
             }
         }
+        public bool AddPaymentMethod(string nameMethod)
+        {
+            var pay = new PaymentMethod();
+            pay.MethodName = nameMethod;
+            pay.IsStatusMethod = true;
+            _unit.PaymentMethodRepository.Add(pay);
+            var result = _unit.Save();
+            if (result > 0) return true;
+            return false;
+        }
+
     }
 }

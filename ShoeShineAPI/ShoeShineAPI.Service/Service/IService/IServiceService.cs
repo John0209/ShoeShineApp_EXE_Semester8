@@ -12,7 +12,7 @@ namespace ShoeShineAPI.Service.Service.IService
 	{
 		//public Task<IEnumerable<ServiceDB>> GetCategoryByStoreId(IEnumerable<ServiceStore> serviceStores, int storeId);
 		public  Task<List<ServiceStore>> GetServicesByStoreId(int storeId);
-
+		public bool AddService(string serviceName);
         public Task<IEnumerable<ServiceDB>> GetServicesAsync();
 		public Task RemoveAllServices();
 	}

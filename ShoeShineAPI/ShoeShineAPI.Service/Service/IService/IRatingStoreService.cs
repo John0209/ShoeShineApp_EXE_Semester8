@@ -8,5 +8,6 @@ namespace ShoeShineAPI.Service.Service.IService
 {
 	public interface IRatingStoreService
 	{
-	}
+        public bool AddRating(int rating);
+    }
 }

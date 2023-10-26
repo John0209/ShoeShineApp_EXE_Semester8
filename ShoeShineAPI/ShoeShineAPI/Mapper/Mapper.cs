@@ -83,7 +83,9 @@ namespace ShoeShineAPI.Mapper
             CreateMap<Store, StoreRequest>().ReverseMap();
             CreateMap<ServiceDB, ServiceRespone>().ReverseMap();
 			CreateMap<Category, CategoryRespone>().ReverseMap();
-			CreateMap<User, UserRespone>().ReverseMap();
+			CreateMap<User, UserRespone>().
+                ForMember(dest => dest.UserRole,
+                otp => otp.MapFrom(src => src.Role != null ? src.Role.RoleName : string.Empty)).ReverseMap();
 			#endregion Mapper-Respone
 			//---------------------------------------//
 			#region Mapper-Request

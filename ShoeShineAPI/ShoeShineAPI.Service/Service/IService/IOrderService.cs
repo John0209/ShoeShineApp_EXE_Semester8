@@ -20,5 +20,6 @@ namespace ShoeShineAPI.Service.Service.IService
         Task<bool> UpdateOrderStatusToReceived(string orderCode);
         Task<bool> CancelOrder(string orderCode);
         public Task RemoveAllOrders();
+        public bool AddPaymentMethod(string nameMethod);
     }
 }

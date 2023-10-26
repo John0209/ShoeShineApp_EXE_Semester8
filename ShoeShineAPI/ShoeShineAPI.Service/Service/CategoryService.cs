@@ -40,7 +40,16 @@ namespace ShoeShineAPI.Service.Service
 		//	else
 		//		return Enumerable.Empty<Category>();
 		//}
-
+		public bool AddCategory(string categoryName)
+		{
+			var category = new Category();
+			category.CategoryName=categoryName;
+			category.IsCategoryStatus = true;
+			_unit.CategoryRepository.Add(category);
+			var result = _unit.Save();
+			if (result > 0) return true;
+			return false;
+		}
 		protected override async Task<IEnumerable<Category>> GetAllDataAsync()
 		{
 			return await _unit.CategoryRepository.GetAll();

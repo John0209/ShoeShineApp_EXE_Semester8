@@ -23,7 +23,16 @@ public class ServiceService : CommonAbstract<Core.Model.Service>, IServiceServic
         _storeService = storeService;
     }
 
-
+    public bool AddService(string serviceName)
+    {
+        var service = new Core.Model.Service();
+        service.ServiceName = serviceName;
+        service.IsServiceStatus = true;
+        _unit.ServiceRepository.Add(service);
+        var result = _unit.Save();
+        if (result > 0) return true;
+        return false;
+    }
 
     //public async Task<IEnumerable<Core.Model.Service>> GetCategoryByStoreId(IEnumerable<ServiceStore> serviceStores, int storeId)
     //{

@@ -1,4 +1,5 @@
-﻿using ShoeShineAPI.Core.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoeShineAPI.Core.IRepositories;
 using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Infracstructure.DatabaseConnect;
 using System;
@@ -14,5 +15,9 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 		public UserRepository(DbContextClass context) : base(context)
 		{
 		}
-	}
+        public override async Task<IEnumerable<User>> GetAll()
+        {
+            return await _dbContext.User.Include(x=> x.Role).ToListAsync();
+        }
+    }
 }

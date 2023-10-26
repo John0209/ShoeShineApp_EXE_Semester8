@@ -36,5 +36,14 @@ namespace ShoeShineAPI.Service.Service
 		{
 			return _unit.RoleRepository.GetAll();
 		}
-	}
+        public bool AddRole(string roleName)
+        {
+            var role = new Core.Model.Role();
+            role.RoleName = roleName;
+            _unit.RoleRepository.Add(role);
+            var result = _unit.Save();
+            if (result > 0) return true;
+            return false;
+        }
+    }
 }

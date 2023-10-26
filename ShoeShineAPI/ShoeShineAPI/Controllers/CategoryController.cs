@@ -8,7 +8,7 @@ using ShoeShineAPI.Service.Service.IService;
 
 namespace ShoeShineAPI.Controllers
 {
-	[Route("api/categorys")]
+	[Route("api/categories")]
 	[ApiController]
 	public class CategoryController : Controller
 	{
@@ -46,6 +46,18 @@ namespace ShoeShineAPI.Controllers
 			}
 			return BadRequest("Category Data Is Empty");
 		}
+		/// <summary>
+		/// Add Category
+		/// </summary>
+		/// <param nameCategory="nameCategory"></param>
+		/// <returns></returns>
+		[HttpPost]
+        public IActionResult AddCategory(string nameCategory)
+        {
+			var result = _category.AddCategory(nameCategory);
+			if (result) return Ok("Add Category Success");
+			return BadRequest("Add Category Fail");
+        }
         [HttpPost("/add-category-store")]
         public async Task<IActionResult> AddCategoryStore(CategoryStoreRequest request)
         {
@@ -60,6 +72,7 @@ namespace ShoeShineAPI.Controllers
             if (result) return Ok("Cancel Category Success");
             return Conflict("Cancel Category Fail");
         }
+		
 
     }
 }

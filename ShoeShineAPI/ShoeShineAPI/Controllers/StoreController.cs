@@ -16,13 +16,27 @@ namespace ShoeShineAPI.Controllers
 	{
 		IStoreService _store;
 		IMapper _map;
+		IRatingStoreService _rating;
 
-		public StoreController(IStoreService store, IMapper map)
-		{
-			_store = store;
-			_map = map;
-		}
-		[HttpGet()]
+        public StoreController(IStoreService store, IMapper map, IRatingStoreService rating)
+        {
+            _store = store;
+            _map = map;
+            _rating = rating;
+        }
+        /// <summary>
+        /// Add Rating
+        /// </summary>
+        /// <param name="score"></param>
+        /// <returns></returns>
+        [HttpPost("rating")]
+        public IActionResult AddRating(int score)
+        {
+            var result = _rating.AddRating(score);
+            if (result) return Ok("Add Rating Successfully");
+            return BadRequest("Add Rating Failed");
+        }
+        [HttpGet()]
 		public async Task<IActionResult> GetAll()
 		{
 			var stores = await _store.GetStoresAsync();

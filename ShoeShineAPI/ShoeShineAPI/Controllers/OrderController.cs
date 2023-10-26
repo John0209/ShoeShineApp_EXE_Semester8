@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoeShineAPI.Core.EntityModel;
+using ShoeShineAPI.Core.Model;
 using ShoeShineAPI.Core.RequestModel;
 using ShoeShineAPI.Core.ResponeModel;
 using ShoeShineAPI.Enum;
@@ -21,7 +22,18 @@ namespace ShoeShineAPI.Controllers
             _order = order;
             _map = map;
         }
-       
+        /// <summary>
+        /// Add Payment Method
+        /// </summary>
+        /// <param name="nameMethod"></param>
+        /// <returns></returns>
+        [HttpPost("payment")]
+        public IActionResult AddRating(string nameMethod)
+        {
+            var result = _order.AddPaymentMethod(nameMethod);
+            if (result) return Ok("Add Method Successfully");
+            return BadRequest("Add Method Failed");
+        }
         [HttpGet()]
         public async Task<IActionResult> GetOrders()
         {

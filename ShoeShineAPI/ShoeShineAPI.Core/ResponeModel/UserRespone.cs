@@ -18,6 +18,7 @@ namespace ShoeShineAPI.Core.DTOs
         public string UserGender { get; set; } = string.Empty;
         public DateTime UserBirthDay { get; set; }
         public DateTime UserRegisterDate { get; set; }
+		public string UserRole { get; set; } = string.Empty;
         public bool IsUserStatus { get; set; } = true;
 	}
 }

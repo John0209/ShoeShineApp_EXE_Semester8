@@ -59,7 +59,19 @@ namespace ShoeShineAPI.Controllers
 			await _service.RemoveAllServices();
 			return NoContent();
 		}
-		[HttpPost("/add-service-store")]
+		/// <summary>
+		/// Add Service
+		/// </summary>
+		/// <param name="nameService"></param>
+		/// <returns></returns>
+        [HttpPost]
+        public IActionResult AddService(string nameService)
+        {
+            var result = _service.AddService(nameService);
+            if (result) return Ok("Add Service Success");
+            return BadRequest("Add Service Fail");
+        }
+        [HttpPost("/add-service-store")]
         public async Task<IActionResult> AddServiceStore(ServiceStoreRequest request)
 		{
 			var result = await _serviceStore.AddServiceStore(request.StoreId, request.ServiceId,request.Price);

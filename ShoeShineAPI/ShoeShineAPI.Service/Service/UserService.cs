@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +15,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace ShoeShineAPI.Service.Service
 {
@@ -47,13 +50,13 @@ namespace ShoeShineAPI.Service.Service
             return null;
         }
 
-        public async Task<bool> RegisterUser(RegistrationRespone registrationDTO)
+        public async Task<bool> RegisterUser(RegistrationRespone registrationDTO, EnumClass.RoleEnum role)
         {
             if (await EmailExists(registrationDTO.UserEmail)) return false;
 
             if (registrationDTO.UserPassword != registrationDTO.ConfirmPassword)return false;
 
-            // G�n RoleId t? EnumClass.RoleEnum.Customer
+            // Gán RoleId t? EnumClass.RoleEnum.Customer
             var newUser = new User
             {
                 UserId = Guid.NewGuid(),
@@ -61,7 +64,7 @@ namespace ShoeShineAPI.Service.Service
                 UserEmail = registrationDTO.UserEmail,
                 UserPassword = registrationDTO.UserPassword,
                 //RoleId = (int)EnumClass.RoleEnum.Customer
-                RoleId = (int)EnumClass.RoleEnum.Admin,
+                RoleId =(int) role,
                 UserRegisterDate= DateTime.Now,
             };
             await _unit.UserRepository.Add(newUser);
@@ -178,5 +181,75 @@ namespace ShoeShineAPI.Service.Service
             }
             return false;
         }
+        private async Task<User?> CheckEmail(string email)
+        {
+            IEnumerable<User> users = await GetAllDataAsync();
+            return users.Where(x=> x.UserEmail == email).FirstOrDefault();
+        }
+        public async Task<bool> RecoverPassword(string email)
+        {
+            var m_user = await CheckEmail(email);
+            if (m_user != null)
+            {
+                // random password với độ dài 8 ký tự
+                int lengthOfRandomString = 8;
+                string randomPass = GenerateRandomString(lengthOfRandomString);
+                // set up send meail
+                string sendto = m_user.UserEmail;
+                string subject = "Recover Password of Account " + m_user.UserName;
+                string content = "Your New Password is " + randomPass;
+                //set new password
+                ChangePassRespone pass = new ChangePassRespone();
+                pass.OldPassword = m_user.UserPassword;
+                pass.NewPassword = randomPass;
+                //update password
+                await UpdatePassword(m_user.UserId,pass);
+                string _gmail = "nguyentuanvu020901@gmail.com";
+                string _pass = "fhnwtwqisekdqzcr";
+                try
+                {
+
+                    MailMessage mail = new MailMessage();
+                    SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                    //set property for email you want to send
+                    mail.From = new MailAddress(_gmail);
+                    mail.To.Add(sendto);
+                    mail.Subject = subject;
+                    mail.IsBodyHtml = true;
+                    mail.Body = content;
+                    mail.Priority = MailPriority.High;
+                    //set smtp port
+                    smtp.Port = 587;
+                    smtp.UseDefaultCredentials = false;
+                    //set gmail pass sender
+                    smtp.Credentials = new NetworkCredential(_gmail, _pass);
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+        public string GenerateRandomString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+            StringBuilder stringBuilder = new StringBuilder(length);
+
+            for (int i = 0; i < length; i++)
+            {
+                stringBuilder.Append(chars[random.Next(chars.Length)]);
+            }
+
+            return stringBuilder.ToString();
+        }
+
     }
 }

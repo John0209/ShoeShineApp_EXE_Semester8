@@ -14,5 +14,7 @@ namespace ShoeShineAPI.Service.Service.IService
 
         public Task<IEnumerable<Category>> GetCategoriesAsync();
 		public Task RemoveAllCategories();
-	}
+		public bool AddCategory(string categoryName);
+
+    }
 }
