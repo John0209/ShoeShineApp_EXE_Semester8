@@ -27,10 +27,14 @@
        // 0. await payment, 1. confirm, 2. shipping, 3. receive, 4. cancel
         public enum OrderStatus
         {
-            Confirm = 1,
-            Shipping = 2,
-            Receive = 3,
-            Cancel = 4
+            // 0 > 1 > 2 > 3 > (4 > 2) > 5 
+            // !(0 > 6), (2 > 6)
+            Confirm = 1, // shop click      
+            Shipping = 2,// shipper click
+            Receive = 3,// shop click  
+           // Washing =4,  // shop click
+          //  Successful=5,// shipper click
+            Cancel = 4   // user, shop, shippe click
         }
         public enum Compare
         {

@@ -72,7 +72,7 @@ namespace ShoeShineAPI.Service.Service
         }
         public async Task<bool> UpdateOrderStatusToReceived(string orderCode)
         {
-            // Check if the order is in the "Shipped-2" status, after update status "Received-3"
+            // Check if the order is in the "Shipped-2" status, after update status "Receive-3"
             return await UpdateStatus(orderCode, 2, 3);
         }
         public async Task<bool> CancelOrder(string orderCode)

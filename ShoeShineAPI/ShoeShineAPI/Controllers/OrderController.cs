@@ -57,7 +57,7 @@ namespace ShoeShineAPI.Controllers
         /// Update Order Status
         /// </summary>
         /// <param name="orderCode"></param>
-        /// <param name="status">1.Confirm, 2.Shipping, 3.Received, 4.Cancel</param>
+        /// <param name="status">1.Confirm, 2.Shipping, 3.Receive, 4.Cancel</param>
         /// <returns></returns>
         [HttpPatch("{orderCode}")]
         public async Task<IActionResult> UpdateOrderStatusToReceived(string orderCode,EnumClass.OrderStatus status)
@@ -66,11 +66,12 @@ namespace ShoeShineAPI.Controllers
             switch ((int)status)
             {
                 case 1:
-                    break;
-                case 2:
-                    result= await _order.UpdateOrderStatusToReceived(orderCode);
+                    result= await _order.UpdateOrderAfterPaymentSuccess(orderCode);
                     break;
                 case 3:
+                    result= await _order.UpdateOrderStatusToReceived(orderCode);
+                    break;
+                case 2:
                     result = await _order.UpdateOrderShippingStatus(orderCode);
                     break;
                 case 4:
