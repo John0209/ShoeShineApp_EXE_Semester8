@@ -35,7 +35,8 @@ namespace ShoeShineAPI.Core.RequestModel.PaymentRequest
         public string signature { get; set; } = "";
         [JsonIgnore]
         public string lang { get; set; } = "vi";
-       
-       
+        [JsonIgnore]
+        public string transactionType { get; set; } = "";
+
     }
 }

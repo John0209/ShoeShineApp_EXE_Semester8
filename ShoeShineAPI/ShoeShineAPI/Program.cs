@@ -10,6 +10,8 @@ using ShoeShineAPI.Gateway.Config;
 using ShoeShineAPI.Gateway.IConfig;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Hangfire;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -98,6 +100,13 @@ builder.Services.AddAuthentication(x =>
 		ValidateAudience = false
 	};
 });
+// Add hangfire
+builder.Services.AddHangfire(cf =>
+				cf.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+				.UseSimpleAssemblyNameTypeSerializer()
+				.UseRecommendedSerializerSettings()
+				.UseSqlServerStorage(builder.Configuration.GetConnectionString("ShoeShine")));
+builder.Services.AddHangfireServer();
 
 var app = builder.Build();
 
@@ -114,6 +123,9 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 
 });
+
+
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 
@@ -121,4 +133,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseHangfireDashboard();
+app.MapHangfireDashboard();
+//BackgroundJob.Schedule<OrderService>(job => job.CheckOrderUnpaid(), TimeSpan.FromSeconds(30));
+
+RecurringJob.AddOrUpdate<OrderService>(x => x.CheckOrderUnpaid(), Cron.MinuteInterval(1));
 app.Run();
