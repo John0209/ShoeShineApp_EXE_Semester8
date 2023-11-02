@@ -143,6 +143,7 @@ namespace ShoeShineAPI.Service.Service
             if (result > 0) return true;
             return false;
         }
+        //function auto check
         public async Task<bool> CheckOrderUnpaid()
         {
             var order = await GetOrderStatusPayment();
@@ -150,7 +151,7 @@ namespace ShoeShineAPI.Service.Service
             {
                 var minuteCreated = order.OrderDate.Minute;
                 var minuteCurrent = DateTime.Now.Minute;
-                if ((minuteCurrent - minuteCreated) >= 1)
+                if ((minuteCurrent - minuteCreated) >= 5)
                 {
                     await CancelOrder(order.OrderCode);
                     return true;
