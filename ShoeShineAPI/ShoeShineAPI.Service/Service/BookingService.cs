@@ -22,7 +22,7 @@ namespace ShoeShineAPI.Service.Service
         public async Task<bool> CreateBooking(Booking booking, int[]? categoryIdArray)
         {
             var checkStatus = await GetBookingJustCreate();
-            // xem thử có booking nào ở status create không,nếu có thì phải tạo orderdetail,không thể tạo thêm booking
+            // xem thử có bookingId nào ở status create không,nếu có thì phải tạo orderdetail,không thể tạo thêm bookingId
             if (checkStatus == 0)
             {
                 await _unit.BookingRepository.Add(booking);
@@ -90,6 +90,17 @@ namespace ShoeShineAPI.Service.Service
                 _unit.BookingRepository.RemoveRange(bookings);
                 _unit.Save();
             }
+        }
+        //function auto check
+        public async Task<bool> CheckBookingUnCreate()
+        {
+            var bookingId = await GetBookingJustCreate();
+            if (bookingId >0)
+            {
+                    await UpdateStatusBooking(bookingId);
+                    return true;
+            }
+            return false;
         }
     }
 }

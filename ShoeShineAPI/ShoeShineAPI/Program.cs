@@ -137,5 +137,6 @@ app.UseHangfireDashboard();
 app.MapHangfireDashboard();
 //BackgroundJob.Schedule<OrderService>(job => job.CheckOrderUnpaid(), TimeSpan.FromSeconds(30));
 RecurringJob.AddOrUpdate<OrderService>(x => x.CheckOrderUnpaid(), Cron.MinuteInterval(5));
+RecurringJob.AddOrUpdate<BookingService>(x => x.CheckBookingUnCreate(), Cron.MinuteInterval(1));
 
 app.Run();
