@@ -250,6 +250,13 @@ namespace ShoeShineAPI.Service.Service
 
             return stringBuilder.ToString();
         }
+        public async Task updateRole(Guid userId)
+        {
+            var user = await _unit.UserRepository.GetById(userId);
+            user.RoleId=2;
+            _unit.UserRepository.Update(user);
+            _unit.Save();
+        }
 
     }
 }

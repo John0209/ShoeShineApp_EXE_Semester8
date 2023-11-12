@@ -11,6 +11,6 @@ namespace ShoeShineAPI.Core.IRepositories
 	{
         public List<int> GetServiceStoreId(int storeId);
         public Task<ServiceStore?> CheckServiceStoreExist(int storeId, int serviceId);
-
+        public Task<ServiceStore?> GetByServiceId(int serviceId, int storeId);
     }
 }

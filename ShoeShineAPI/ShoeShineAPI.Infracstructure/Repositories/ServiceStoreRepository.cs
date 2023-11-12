@@ -31,5 +31,10 @@ namespace ShoeShineAPI.Infracstructure.Repositories
 				.FirstOrDefaultAsync();
         }
 
-	}
+        public Task<ServiceStore?> GetByServiceId(int serviceId, int storeId)
+        {
+            return _dbContext.Set<ServiceStore>().Where(x => x.ServiceId == serviceId && x.StoreId==storeId)
+                             .Include(x => x.Service).Include(x => x.Store).Include(x => x.ServicePrice).FirstOrDefaultAsync();
+        }
+    }
 }

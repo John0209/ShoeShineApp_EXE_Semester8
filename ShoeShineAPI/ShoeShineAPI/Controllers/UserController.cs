@@ -208,5 +208,12 @@ namespace ShoeShineAPI.Controllers
             if (result) return Ok("Delete User successfully!");
             return NotFound("User not found");
         }
+        [HttpPatch("role/{userId}")]
+        public async Task<IActionResult> UpdateRole(Guid userId)
+        {
+            await _user.updateRole(userId);
+            return Ok("Update Role User successfully!");
+        }
+
     }
 }

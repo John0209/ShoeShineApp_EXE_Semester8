@@ -35,7 +35,7 @@ namespace ShoeShineAPI.Controllers
         public async Task<IActionResult> UpdateBooking()
         {
             var booking = await _booking.GetBookingJustCreate();
-            if (booking >0)
+            if (booking > 0)
             {
                 if (await _booking.UpdateStatusBooking(booking)) return Ok("Update Status Success");
             }
@@ -45,7 +45,7 @@ namespace ShoeShineAPI.Controllers
         public async Task<IActionResult> CreateBooking(BookingRequest request)
         {
             var booking = _map.Map<Booking>(request);
-            var result = await _booking.CreateBooking(booking,request.CategoryIdArray);
+            var result = await _booking.CreateBooking(booking, request.CategoryIdArray);
             if (result) return Ok("Create Booking Success");
             return BadRequest("Create Booking Fail");
         }
@@ -55,6 +55,18 @@ namespace ShoeShineAPI.Controllers
         {
             await _booking.RemoveAllBookings();
             return NoContent();
+        }
+        /// <summary>
+        /// Get Cart Information
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost("cart")]
+        public async Task<IActionResult> GetCartInformation(BookingRequest request)
+        {
+            var result= await _booking.GetCartInformation(request);
+            if(result.Any()) return Ok(result);
+            return BadRequest();
         }
     }
 }

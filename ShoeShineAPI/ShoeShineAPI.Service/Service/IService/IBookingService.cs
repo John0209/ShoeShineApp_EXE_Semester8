@@ -1,4 +1,6 @@
 ﻿using ShoeShineAPI.Core.EntityModel;
+using ShoeShineAPI.Core.RequestModel;
+using ShoeShineAPI.Core.ResponeModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +17,6 @@ namespace ShoeShineAPI.Service.Service.IService
         public Task<Booking?> GetBookingById(int bookingId);
         public Task<bool> UpdateStatusBooking(int bookingId);
         public Task RemoveAllBookings();
+        public Task<List<CartResponse>> GetCartInformation(BookingRequest request);
     }
 }

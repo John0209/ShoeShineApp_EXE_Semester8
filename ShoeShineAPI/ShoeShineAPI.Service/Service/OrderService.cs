@@ -17,18 +17,21 @@ namespace ShoeShineAPI.Service.Service
     {
         IUnitRepository _unit;
         IOrderDetailService _orderDetail;
+        IBookingRepository _booking;
 
-        public OrderService(IUnitRepository unit, IOrderDetailService orderDetail)
+        public OrderService(IUnitRepository unit, IOrderDetailService orderDetail, IBookingRepository booking)
         {
             _unit = unit;
             _orderDetail = orderDetail;
+            _booking = booking;
         }
 
         public async Task<bool> CreateOrder(Order order, OrderRequest request)
         {
             var checkOrder = await GetOrderStatusPayment();
+            var checkBooking = await _booking.GetBookingJustCreate();
             // check xem có order nào ở status payment không, nếu có thì phải thanh toán xong mới được tạo típ order
-            if (checkOrder == null)
+            if (checkOrder == null&&checkBooking>0)
             {
                 var orders = await GetAllDataAsync();
                 order.OrderCode = GenerateOrderCode(orders);

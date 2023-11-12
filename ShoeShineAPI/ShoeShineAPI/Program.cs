@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Hangfire;
 using Microsoft.Extensions.Configuration;
+using Serilog;
+using Serilog.Formatting.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -100,9 +102,29 @@ builder.Services.AddHangfire(cf =>
 				.UseRecommendedSerializerSettings()
 				.UseSqlServerStorage(builder.Configuration.GetConnectionString("ShoeShine")));
 builder.Services.AddHangfireServer();
+//Add cors
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+//Logging
+//builder.Host.UseSerilog((ctx, config) =>
+//{
+//	config.WriteTo.Console().MinimumLevel.Information();
+//	config.WriteTo.File(
+//		path: AppDomain.CurrentDomain.BaseDirectory + "/logs/log.txt",
+//		rollingInterval: RollingInterval.Day,
+//		rollOnFileSizeLimit: true,
+//		formatter: new JsonFormatter()).MinimumLevel.Information();
+//});
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -117,19 +139,16 @@ app.UseSwaggerUI(c =>
 
 });
 
-
-
+//app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
+app.UseCors();
 app.UseAuthentication();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
+//useHangfire
 app.UseHangfireDashboard();
 app.MapHangfireDashboard();
-//BackgroundJob.Schedule<OrderService>(job => job.CheckOrderUnpaid(), TimeSpan.FromSeconds(30));
 RecurringJob.AddOrUpdate<OrderService>(x => x.CheckOrderUnpaid(), Cron.MinuteInterval(5));
-RecurringJob.AddOrUpdate<BookingService>(x => x.CheckBookingUnCreate(), Cron.MinuteInterval(1));
+RecurringJob.AddOrUpdate<BookingService>(x => x.CheckBookingUnCreate(), Cron.MinuteInterval(3));
 
 app.Run();

@@ -1,5 +1,7 @@
 ﻿using ShoeShineAPI.Core.EntityModel;
 using ShoeShineAPI.Core.IRepositories;
+using ShoeShineAPI.Core.RequestModel;
+using ShoeShineAPI.Core.ResponeModel;
 using ShoeShineAPI.Service.Inheritance_Class;
 using ShoeShineAPI.Service.Service.IService;
 using System;
@@ -13,7 +15,7 @@ namespace ShoeShineAPI.Service.Service
     public class BookingService : CommonAbstract<Booking>, IBookingService
     {
         IUnitRepository _unit;
-
+        
         public BookingService(IUnitRepository unit)
         {
             _unit = unit;
@@ -101,6 +103,28 @@ namespace ShoeShineAPI.Service.Service
                     return true;
             }
             return false;
+        }
+        public async Task<List<CartResponse>> GetCartInformation(BookingRequest request)
+        {
+            var list= new List<CartResponse>();
+            var service=await _unit.ServiceStoreRepository.GetByServiceId(request.ServiceId,request.StoreId);
+            int number = 1;
+            if(service != null)
+            {
+                foreach (var x in request.CategoryIdArray)
+                {
+                    var category = await _unit.CategoryRepository.GetById(x);
+                    var cart = new CartResponse();
+                    // add field vào cartresponse
+                    cart.Id = number;
+                    cart.NameService = service.Service.ServiceName;
+                    cart.PriceService = service.ServicePrice.Price;
+                    cart.NameCategory = category.CategoryName;
+                    list.Add(cart);
+                    number++;
+                }
+            }
+            return list;
         }
     }
 }

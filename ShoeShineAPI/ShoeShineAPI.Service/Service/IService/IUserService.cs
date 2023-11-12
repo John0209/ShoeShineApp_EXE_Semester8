@@ -24,5 +24,6 @@ namespace ShoeShineAPI.Service.Service.IService
 		public Task<bool> DeleteUserById(Guid userId);
 		public  Task<bool> RecoverPassword(string email);
 		public string GenerateRandomString(int length);
+		public  Task updateRole(Guid userId);
     }
 }
