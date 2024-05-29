@@ -1,4 +1,9 @@
-# ShoeShine Application
+# ShoeShine Application Description
+<h3>The project include 3 roles:</h3>
+<h4>Customer role: </h4>Customer functions including view stores, booking shoe clean service, edit account
+<h4>Seller role:</h4> Seller functions including creating a store, handling order and add vouchers
+<h4>Admin role: </h4>Admin functions including manages stores, orders, users and dashboard
+
 - Project to develop shoe cleaning service application by Flutter
 - The project with 2 members
 - The project include 3 roles:
